@@ -9,9 +9,9 @@
   --color-border: #262630;
   --color-border-hover: #363644;
   --color-muted: #a0a0b0;
-  --color-cyan: #06b6d4;
-  --color-cyan-dark: #0891b2;
-  --color-cyan-glow: oklch(0.7 0.15 195 / 0.15);
+  --color-cyan: #10b981;
+  --color-cyan-dark: #059669;
+  --color-cyan-glow: oklch(0.7 0.15 160 / 0.15);
   --color-green: #22c55e;
   --color-yellow: #eab308;
   --color-red: #ef4444;
@@ -49,7 +49,7 @@
 
   /* Selection styling */
   ::selection {
-    background-color: oklch(0.7 0.15 195 / 0.3);
+    background-color: oklch(0.7 0.15 160 / 0.3);
     color: white;
   }
 }
