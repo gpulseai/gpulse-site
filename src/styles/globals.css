@@ -39,6 +39,7 @@
     font-family: var(--font-sans);
     min-height: 100vh;
     overflow-x: hidden;
+    background: linear-gradient(180deg, #0a0a0b 0%, #070710 50%, #0a0a0b 100%);
   }
 
   /* Ensure focus-visible outlines for accessibility */
@@ -51,5 +52,23 @@
   ::selection {
     background-color: oklch(0.7 0.15 160 / 0.3);
     color: white;
+  }
+}
+
+/* ── Section gradient utilities ── */
+@layer utilities {
+  .section-gradient-top {
+    position: relative;
+  }
+
+  .section-gradient-top::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--color-cyan) 50%, transparent);
+    opacity: 0.3;
   }
 }

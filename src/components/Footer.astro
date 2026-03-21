@@ -20,74 +20,96 @@ const legalLinks = [
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="bg-surface border-t border-border" role="contentinfo">
+<footer class="relative border-t border-border" role="contentinfo">
+  <!-- Gradient top border glow -->
+  <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan/40 to-transparent" aria-hidden="true"></div>
+
   <div class="mx-auto max-w-[1400px] px-6 py-16">
-    <!-- Link columns -->
-    <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+    <!-- Top row: Logo + tagline + link columns -->
+    <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-12">
       <!-- Brand column -->
-      <div>
-        <a href="/" class="text-xl font-bold font-mono text-cyan" aria-label="gpulse home">
+      <div class="max-w-sm">
+        <a href="/" class="text-2xl font-bold font-mono text-cyan" aria-label="gpulse home">
           gpulse
         </a>
-        <p class="mt-3 text-sm text-muted leading-relaxed max-w-xs">
+        <p class="mt-3 text-sm text-muted leading-relaxed">
           Real-time GPU monitoring with predictive OOM detection. One tool for Apple&nbsp;Silicon, NVIDIA, AMD, and Intel.
         </p>
+        <!-- Built with Rust badge -->
+        <div class="mt-4 flex items-center gap-2">
+          <span class="inline-flex items-center gap-1.5 rounded-full bg-surface border border-border px-3 py-1 text-xs text-muted">
+            <svg class="w-3 h-3 text-[#dea584]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M23.834 8.101a13.912 13.912 0 0 1-13.643 11.72 10.105 10.105 0 0 1-1.994-.12 6.111 6.111 0 0 1-5.082-5.761 5.934 5.934 0 0 1 11.867-.084c.025.983-.401 1.846-1.277 1.871-.936 0-1.374-.668-1.374-1.567v-2.5a1.531 1.531 0 0 0-1.52-1.533H8.715a3.648 3.648 0 1 0 2.695 6.08l.073-.084.073.084a2.413 2.413 0 0 0 2.437.918 2.882 2.882 0 0 0 2.127-2.752v-.07a7.801 7.801 0 0 0-7.592-8.001 7.801 7.801 0 0 0-8.009 7.593 8.066 8.066 0 0 0 6.668 8.083 8.104 8.104 0 0 0 .899.06 13.912 13.912 0 0 0 13.868-13.832z"/>
+            </svg>
+            Built with Rust
+          </span>
+        </div>
       </div>
 
-      <!-- Product -->
-      <div>
-        <h3 class="text-sm font-semibold uppercase tracking-wider text-white">Product</h3>
-        <ul class="mt-4 space-y-3" role="list">
-          {productLinks.map((link) => (
-            <li>
-              <a
-                href={link.href}
-                class="text-sm text-muted transition-colors hover:text-white"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <!-- Link columns -->
+      <div class="grid grid-cols-2 gap-10 sm:grid-cols-3">
+        <!-- Product -->
+        <div>
+          <h3 class="text-sm font-semibold uppercase tracking-wider text-white">Product</h3>
+          <ul class="mt-4 space-y-3" role="list">
+            {productLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-sm text-muted transition-colors duration-200 hover:text-white"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-      <!-- Resources -->
-      <div>
-        <h3 class="text-sm font-semibold uppercase tracking-wider text-white">Resources</h3>
-        <ul class="mt-4 space-y-3" role="list">
-          {resourceLinks.map((link) => (
-            <li>
-              <a
-                href={link.href}
-                class="text-sm text-muted transition-colors hover:text-white"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+        <!-- Resources -->
+        <div>
+          <h3 class="text-sm font-semibold uppercase tracking-wider text-white">Resources</h3>
+          <ul class="mt-4 space-y-3" role="list">
+            {resourceLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-sm text-muted transition-colors duration-200 hover:text-white"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-      <!-- Legal -->
-      <div>
-        <h3 class="text-sm font-semibold uppercase tracking-wider text-white">Legal</h3>
-        <ul class="mt-4 space-y-3" role="list">
-          {legalLinks.map((link) => (
-            <li>
-              <a
-                href={link.href}
-                class="text-sm text-muted transition-colors hover:text-white"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <!-- Legal -->
+        <div>
+          <h3 class="text-sm font-semibold uppercase tracking-wider text-white">Legal</h3>
+          <ul class="mt-4 space-y-3" role="list">
+            {legalLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-sm text-muted transition-colors duration-200 hover:text-white"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
 
+    <!-- Social proof line -->
+    <div class="mt-12 text-center">
+      <p class="text-sm text-muted/60 italic">
+        Monitoring GPUs on Mac Studio, NVIDIA DGX, and everything in between.
+      </p>
+    </div>
+
     <!-- Bottom bar -->
-    <div class="mt-16 flex flex-col items-center justify-between gap-6 border-t border-border pt-8 sm:flex-row">
+    <div class="mt-8 flex flex-col items-center justify-between gap-6 border-t border-border pt-8 sm:flex-row">
       <p class="text-sm text-muted">
         &copy; {currentYear} gpulse. All rights reserved.
       </p>
@@ -99,7 +121,7 @@ const currentYear = new Date().getFullYear();
           href="https://github.com/kkirubakaran/gpulse"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-muted transition-colors hover:text-white"
+          class="text-muted transition-colors duration-200 hover:text-white"
           aria-label="gpulse on GitHub"
         >
           <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -116,7 +138,7 @@ const currentYear = new Date().getFullYear();
           href="https://x.com/gpulse_ai"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-muted transition-colors hover:text-white"
+          class="text-muted transition-colors duration-200 hover:text-white"
           aria-label="gpulse on X (Twitter)"
         >
           <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -127,7 +149,7 @@ const currentYear = new Date().getFullYear();
         <!-- Email -->
         <a
           href="mailto:info@gpulse.ai"
-          class="text-muted transition-colors hover:text-white"
+          class="text-muted transition-colors duration-200 hover:text-white"
           aria-label="Email gpulse"
         >
           <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">

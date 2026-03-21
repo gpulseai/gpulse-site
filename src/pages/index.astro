@@ -122,7 +122,7 @@ import { Card } from '../components/ui/Card';
   </section>
 
   <!-- ─── Screenshot Showcase Section ─── -->
-  <section class="py-24 md:py-32 bg-surface" aria-labelledby="views-heading">
+  <section class="py-24 md:py-32 bg-surface section-gradient-top" aria-labelledby="views-heading">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <SectionHeader
         eyebrow="VIEW MODES"
@@ -160,55 +160,90 @@ import { Card } from '../components/ui/Card';
   </section>
 
   <!-- ─── How It Works Section ─── -->
-  <section class="py-24 md:py-32" aria-labelledby="get-started-heading">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+  <section class="py-24 md:py-32 relative overflow-hidden" aria-labelledby="get-started-heading">
+    <!-- Subtle gradient bg -->
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-cyan/[0.02] to-transparent" aria-hidden="true"></div>
+
+    <div class="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <SectionHeader
         eyebrow="GET STARTED"
         title="Up and running in 30 seconds"
         subtitle="No configuration files. No dependencies. One command to install, one command to launch."
       />
 
-      <div class="mt-16 grid grid-cols-1 gap-12 md:grid-cols-3">
-        <!-- Step 1 -->
-        <div class="flex flex-col items-center text-center">
-          <div class="flex items-center justify-center w-12 h-12 rounded-full border-2 border-cyan text-cyan font-bold font-mono text-lg mb-6">
-            1
-          </div>
-          <h3 class="text-xl font-bold mb-4">Install</h3>
-          <Terminal
-            title="Terminal"
-            command="brew install kkirubakaran/gpulse/gpulse"
-            class="w-full"
-          />
-        </div>
+      <!-- Steps with connecting line -->
+      <div class="mt-16 relative">
+        <!-- Connecting line (hidden on mobile, visible on md+) -->
+        <div class="hidden md:block absolute top-[60px] left-[16.67%] right-[16.67%] h-px bg-gradient-to-r from-cyan/0 via-cyan/30 to-cyan/0" aria-hidden="true"></div>
 
-        <!-- Step 2 -->
-        <div class="flex flex-col items-center text-center">
-          <div class="flex items-center justify-center w-12 h-12 rounded-full border-2 border-cyan text-cyan font-bold font-mono text-lg mb-6">
-            2
+        <div class="grid grid-cols-1 gap-12 md:grid-cols-3">
+          <!-- Step 1 -->
+          <div class="relative flex flex-col items-center text-center">
+            <!-- Glowing number badge -->
+            <div class="relative mb-6">
+              <div class="flex items-center justify-center w-[120px] h-[120px] rounded-2xl border border-cyan/20 bg-surface">
+                <span class="text-5xl font-bold font-mono text-cyan">1</span>
+              </div>
+              <!-- Glow -->
+              <div class="absolute inset-0 rounded-2xl bg-cyan/5 blur-xl -z-10" aria-hidden="true"></div>
+            </div>
+            <h3 class="text-xl font-bold mb-4">Install</h3>
+            <p class="text-muted text-sm mb-6">One command via Homebrew. No dependencies.</p>
+            <Terminal
+              title="Terminal"
+              command="brew install kkirubakaran/gpulse/gpulse"
+              class="w-full"
+            />
           </div>
-          <h3 class="text-xl font-bold mb-4">Launch</h3>
-          <Terminal
-            title="Terminal"
-            command="gpulse dashboard"
-            class="w-full"
-          />
-        </div>
 
-        <!-- Step 3 -->
-        <div class="flex flex-col items-center text-center">
-          <div class="flex items-center justify-center w-12 h-12 rounded-full border-2 border-cyan text-cyan font-bold font-mono text-lg mb-6">
-            3
+          <!-- Step 2 -->
+          <div class="relative flex flex-col items-center text-center">
+            <div class="relative mb-6">
+              <div class="flex items-center justify-center w-[120px] h-[120px] rounded-2xl border border-cyan/20 bg-surface">
+                <span class="text-5xl font-bold font-mono text-cyan">2</span>
+              </div>
+              <div class="absolute inset-0 rounded-2xl bg-cyan/5 blur-xl -z-10" aria-hidden="true"></div>
+            </div>
+            <h3 class="text-xl font-bold mb-4">Launch</h3>
+            <p class="text-muted text-sm mb-6">Start the dashboard. That's it.</p>
+            <Terminal
+              title="Terminal"
+              command="gpulse dashboard"
+              class="w-full"
+            />
           </div>
-          <h3 class="text-xl font-bold mb-4">Monitor</h3>
-          <div class="w-full rounded-xl border border-border bg-surface p-6 text-left">
-            <p class="text-muted text-sm leading-relaxed">
-              Switch views: <kbd class="inline-block rounded border border-border bg-dark px-1.5 py-0.5 font-mono text-xs text-cyan">d</kbd> detail
-              <kbd class="inline-block rounded border border-border bg-dark px-1.5 py-0.5 font-mono text-xs text-cyan ml-2">P</kbd> predict
-              <kbd class="inline-block rounded border border-border bg-dark px-1.5 py-0.5 font-mono text-xs text-cyan ml-2">c</kbd> compare
-              <kbd class="inline-block rounded border border-border bg-dark px-1.5 py-0.5 font-mono text-xs text-cyan ml-2">t</kbd> theme
-              <kbd class="inline-block rounded border border-border bg-dark px-1.5 py-0.5 font-mono text-xs text-cyan ml-2">?</kbd> help
-            </p>
+
+          <!-- Step 3 -->
+          <div class="relative flex flex-col items-center text-center">
+            <div class="relative mb-6">
+              <div class="flex items-center justify-center w-[120px] h-[120px] rounded-2xl border border-cyan/20 bg-surface">
+                <span class="text-5xl font-bold font-mono text-cyan">3</span>
+              </div>
+              <div class="absolute inset-0 rounded-2xl bg-cyan/5 blur-xl -z-10" aria-hidden="true"></div>
+            </div>
+            <h3 class="text-xl font-bold mb-4">Monitor</h3>
+            <p class="text-muted text-sm mb-6">Navigate views with single keystrokes.</p>
+            <!-- Keybindings grid -->
+            <div class="w-full rounded-xl border border-border bg-dark/80 p-5">
+              <div class="grid grid-cols-2 gap-3 text-left">
+                <div class="flex items-center gap-2">
+                  <kbd class="inline-flex items-center justify-center w-7 h-7 rounded border border-border bg-surface font-mono text-xs text-cyan">d</kbd>
+                  <span class="text-muted text-xs">Detail</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <kbd class="inline-flex items-center justify-center w-7 h-7 rounded border border-border bg-surface font-mono text-xs text-cyan">P</kbd>
+                  <span class="text-muted text-xs">Predict</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <kbd class="inline-flex items-center justify-center w-7 h-7 rounded border border-border bg-surface font-mono text-xs text-cyan">c</kbd>
+                  <span class="text-muted text-xs">Compare</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <kbd class="inline-flex items-center justify-center w-7 h-7 rounded border border-border bg-surface font-mono text-xs text-cyan">t</kbd>
+                  <span class="text-muted text-xs">Theme</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -216,7 +251,7 @@ import { Card } from '../components/ui/Card';
   </section>
 
   <!-- ─── Pricing Section ─── -->
-  <section id="pricing" class="py-24 md:py-32 bg-surface" aria-labelledby="pricing-heading">
+  <section id="pricing" class="py-24 md:py-32 bg-surface section-gradient-top" aria-labelledby="pricing-heading">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <SectionHeader
         eyebrow="PRICING"
@@ -429,7 +464,7 @@ import { Card } from '../components/ui/Card';
   </section>
 
   <!-- ─── Final CTA Section ─── -->
-  <section id="download" class="py-24 md:py-32 bg-surface" aria-labelledby="cta-heading">
+  <section id="download" class="py-24 md:py-32 bg-surface section-gradient-top" aria-labelledby="cta-heading">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
       <h2 id="cta-heading" class="text-4xl md:text-5xl font-bold tracking-tight">
         Stop guessing. Start monitoring.

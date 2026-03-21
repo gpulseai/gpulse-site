@@ -3,24 +3,30 @@ const navLinks = [
   { href: '#features', label: 'Features' },
   { href: '/docs', label: 'Docs' },
   { href: '#pricing', label: 'Pricing' },
+  { href: '/changelog', label: 'Changelog' },
 ];
 ---
 
 <header
-  class="fixed top-0 left-0 right-0 z-50 border-b border-border bg-dark/80 backdrop-blur-xl"
+  class="fixed top-0 left-0 right-0 z-50 bg-dark/60 backdrop-blur-xl"
   role="banner"
 >
+  <!-- Gradient border-bottom glow -->
+  <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan/30 to-transparent" aria-hidden="true"></div>
+
   <nav
     class="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4"
     aria-label="Main navigation"
   >
-    <!-- Logo -->
+    <!-- Logo with glow -->
     <a
       href="/"
-      class="text-xl font-bold font-mono text-cyan transition-colors hover:text-cyan-dark"
+      class="text-xl font-bold font-mono text-cyan transition-colors hover:text-cyan-dark relative"
       aria-label="gpulse home"
     >
-      gpulse
+      <span class="relative z-10">gpulse</span>
+      <!-- Subtle glow behind logo -->
+      <span class="absolute inset-0 blur-lg bg-cyan/20 -z-10 rounded-full" aria-hidden="true"></span>
     </a>
 
     <!-- Desktop links -->
@@ -29,7 +35,7 @@ const navLinks = [
         <li>
           <a
             href={link.href}
-            class="text-sm font-medium text-muted transition-colors hover:text-white"
+            class="text-sm font-medium text-muted transition-colors duration-200 hover:text-white"
           >
             {link.label}
           </a>
@@ -41,7 +47,7 @@ const navLinks = [
     <div class="hidden md:block">
       <a
         href="#download"
-        class="inline-flex items-center rounded-lg bg-cyan px-4 py-2 text-sm font-semibold text-dark transition-colors hover:bg-cyan-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
+        class="inline-flex items-center rounded-lg bg-cyan px-4 py-2 text-sm font-semibold text-dark transition-colors duration-200 hover:bg-cyan-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
       >
         Download
       </a>
@@ -83,10 +89,11 @@ const navLinks = [
     </button>
   </nav>
 
-  <!-- Mobile menu -->
+  <!-- Mobile menu with slide-down animation -->
   <div
     id="mobile-menu"
-    class="md:hidden hidden border-t border-border bg-dark/95 backdrop-blur-xl"
+    class="md:hidden border-t border-border bg-dark/95 backdrop-blur-xl overflow-hidden transition-all duration-300 ease-out"
+    style="max-height: 0; opacity: 0;"
     role="navigation"
     aria-label="Mobile navigation"
   >
@@ -123,16 +130,26 @@ const navLinks = [
     menuButton.addEventListener('click', () => {
       const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
       menuButton.setAttribute('aria-expanded', String(!isExpanded));
-      mobileMenu.classList.toggle('hidden');
       hamburgerIcon.classList.toggle('hidden');
       closeIcon.classList.toggle('hidden');
+
+      if (!isExpanded) {
+        // Open: slide down with opacity
+        mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+        mobileMenu.style.opacity = '1';
+      } else {
+        // Close: slide up with opacity
+        mobileMenu.style.maxHeight = '0';
+        mobileMenu.style.opacity = '0';
+      }
     });
 
     // Close menu when clicking a link
     mobileMenu.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
         menuButton.setAttribute('aria-expanded', 'false');
-        mobileMenu.classList.add('hidden');
+        mobileMenu.style.maxHeight = '0';
+        mobileMenu.style.opacity = '0';
         hamburgerIcon.classList.remove('hidden');
         closeIcon.classList.add('hidden');
       });
