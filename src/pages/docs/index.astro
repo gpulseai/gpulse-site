@@ -1,0 +1,163 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+  title="Documentation — gpulse"
+  description="Complete documentation for gpulse GPU monitoring tool. Learn about views, leak detection, themes, keyboard shortcuts, and configuration."
+>
+  <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Documentation</h1>
+  <p class="mt-4 text-lg text-muted leading-relaxed">
+    Everything you need to know about gpulse — from first install to advanced leak detection.
+  </p>
+
+  <!-- Getting Started -->
+  <div class="mt-12">
+    <a
+      href="/docs/getting-started"
+      class="group block rounded-2xl border border-border bg-surface p-6 transition-all duration-200 hover:border-cyan/30 hover:shadow-[0_0_30px_-5px_rgba(16,185,129,0.15)]"
+    >
+      <div class="flex items-start gap-4">
+        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cyan/10">
+          <svg class="h-5 w-5 text-cyan" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.841m2.699-5.959a6.001 6.001 0 00-.599-.299" />
+          </svg>
+        </div>
+        <div>
+          <h2 class="text-lg font-bold group-hover:text-cyan transition-colors">Getting Started</h2>
+          <p class="mt-1 text-sm text-muted">Install gpulse, launch the dashboard, and understand the basics in under five minutes.</p>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <!-- Views Section -->
+  <h2 class="mt-12 text-xl font-bold">Views</h2>
+  <p class="mt-2 text-sm text-muted">Seven purpose-built monitoring modes, each a single keystroke away.</p>
+
+  <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <a
+      href="/docs/views/grid"
+      class="group rounded-xl border border-border bg-surface p-5 transition-all duration-200 hover:border-cyan/30"
+    >
+      <h3 class="font-semibold group-hover:text-cyan transition-colors">Grid View</h3>
+      <p class="mt-1 text-sm text-muted">Default multi-GPU tile layout with all key metrics at a glance.</p>
+      <span class="mt-2 inline-flex items-center gap-1 text-xs text-muted/60">
+        <kbd class="rounded border border-border bg-dark px-1.5 py-0.5 font-mono text-xs text-cyan">v</kbd>
+        default view
+      </span>
+    </a>
+
+    <a
+      href="/docs/views/detail"
+      class="group rounded-xl border border-border bg-surface p-5 transition-all duration-200 hover:border-cyan/30"
+    >
+      <h3 class="font-semibold group-hover:text-cyan transition-colors">Detail View</h3>
+      <p class="mt-1 text-sm text-muted">Deep dive into a single GPU with full process table and metrics.</p>
+      <span class="mt-2 inline-flex items-center gap-1 text-xs text-muted/60">
+        <kbd class="rounded border border-border bg-dark px-1.5 py-0.5 font-mono text-xs text-cyan">d</kbd>
+        to activate
+      </span>
+    </a>
+
+    <a
+      href="/docs/views/list"
+      class="group rounded-xl border border-border bg-surface p-5 transition-all duration-200 hover:border-cyan/30"
+    >
+      <h3 class="font-semibold group-hover:text-cyan transition-colors">List View</h3>
+      <p class="mt-1 text-sm text-muted">Compact table view for dense information at a glance.</p>
+      <span class="mt-2 inline-flex items-center gap-1 text-xs text-muted/60">
+        <kbd class="rounded border border-border bg-dark px-1.5 py-0.5 font-mono text-xs text-cyan">v</kbd>
+        cycle views
+      </span>
+    </a>
+
+    <a
+      href="/docs/views/predict"
+      class="group rounded-xl border border-border bg-surface p-5 transition-all duration-200 hover:border-cyan/30"
+    >
+      <h3 class="font-semibold group-hover:text-cyan transition-colors">Predict View</h3>
+      <p class="mt-1 text-sm text-muted">OOM prediction with leak detection algorithms and time-to-OOM estimates.</p>
+      <span class="mt-2 inline-flex items-center gap-1 text-xs text-muted/60">
+        <kbd class="rounded border border-border bg-dark px-1.5 py-0.5 font-mono text-xs text-cyan">P</kbd>
+        to activate
+      </span>
+    </a>
+
+    <a
+      href="/docs/views/compare"
+      class="group rounded-xl border border-border bg-surface p-5 transition-all duration-200 hover:border-cyan/30"
+    >
+      <h3 class="font-semibold group-hover:text-cyan transition-colors">Compare View</h3>
+      <p class="mt-1 text-sm text-muted">Side-by-side GPU comparison for spotting imbalances.</p>
+      <span class="mt-2 inline-flex items-center gap-1 text-xs text-muted/60">
+        <kbd class="rounded border border-border bg-dark px-1.5 py-0.5 font-mono text-xs text-cyan">c</kbd>
+        to activate
+      </span>
+    </a>
+
+    <a
+      href="/docs/views/topology"
+      class="group rounded-xl border border-border bg-surface p-5 transition-all duration-200 hover:border-cyan/30"
+    >
+      <h3 class="font-semibold group-hover:text-cyan transition-colors">Topology View</h3>
+      <p class="mt-1 text-sm text-muted">GPU interconnect diagram showing bus topology and links.</p>
+      <span class="mt-2 inline-flex items-center gap-1 text-xs text-muted/60">
+        <kbd class="rounded border border-border bg-dark px-1.5 py-0.5 font-mono text-xs text-cyan">g</kbd>
+        to activate
+      </span>
+    </a>
+  </div>
+
+  <!-- Features Section -->
+  <h2 class="mt-12 text-xl font-bold">Features</h2>
+  <p class="mt-2 text-sm text-muted">Core capabilities that make gpulse more than a simple monitor.</p>
+
+  <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <a
+      href="/docs/leak-detection"
+      class="group rounded-xl border border-border bg-surface p-5 transition-all duration-200 hover:border-cyan/30"
+    >
+      <h3 class="font-semibold group-hover:text-cyan transition-colors">Leak Detection</h3>
+      <p class="mt-1 text-sm text-muted">Three detection algorithms analyze memory growth patterns in real time, predicting OOM before it happens.</p>
+    </a>
+
+    <a
+      href="/docs/themes"
+      class="group rounded-xl border border-border bg-surface p-5 transition-all duration-200 hover:border-cyan/30"
+    >
+      <h3 class="font-semibold group-hover:text-cyan transition-colors">Themes</h3>
+      <p class="mt-1 text-sm text-muted">15 built-in color themes including accessibility-optimized colorblind-safe options.</p>
+    </a>
+  </div>
+
+  <!-- Reference Section -->
+  <h2 class="mt-12 text-xl font-bold">Reference</h2>
+  <p class="mt-2 text-sm text-muted">Quick-access tables and configuration details.</p>
+
+  <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <a
+      href="/docs/keyboard"
+      class="group rounded-xl border border-border bg-surface p-5 transition-all duration-200 hover:border-cyan/30"
+    >
+      <h3 class="font-semibold group-hover:text-cyan transition-colors">Keyboard Shortcuts</h3>
+      <p class="mt-1 text-sm text-muted">Complete keybinding reference for every view and action.</p>
+    </a>
+
+    <a
+      href="/docs/configuration"
+      class="group rounded-xl border border-border bg-surface p-5 transition-all duration-200 hover:border-cyan/30"
+    >
+      <h3 class="font-semibold group-hover:text-cyan transition-colors">Configuration</h3>
+      <p class="mt-1 text-sm text-muted">Config file location, TOML options, and environment variable overrides.</p>
+    </a>
+
+    <a
+      href="/docs/faq"
+      class="group rounded-xl border border-border bg-surface p-5 transition-all duration-200 hover:border-cyan/30"
+    >
+      <h3 class="font-semibold group-hover:text-cyan transition-colors">FAQ</h3>
+      <p class="mt-1 text-sm text-muted">Answers to frequently asked questions about gpulse.</p>
+    </a>
+  </div>
+</DocsLayout>

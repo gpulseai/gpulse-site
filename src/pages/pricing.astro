@@ -174,7 +174,10 @@ import { Card } from '../components/ui/Card';
         <!-- Enterprise Tier -->
         <Card client:load>
           <div class="flex flex-col h-full">
-            <h3 class="text-xl font-bold">Enterprise</h3>
+            <div class="flex items-center gap-3">
+              <h3 class="text-xl font-bold">Enterprise</h3>
+              <Badge variant="cyan" client:load>Coming Soon</Badge>
+            </div>
             <div class="mt-4 flex items-baseline gap-1">
               <span class="text-4xl font-extrabold">Custom</span>
             </div>

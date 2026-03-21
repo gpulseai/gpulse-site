@@ -1,0 +1,132 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import Screenshot from '../../../components/Screenshot.astro';
+---
+
+<DocsLayout
+  title="Grid View — gpulse"
+  description="Learn about gpulse Grid view: the default multi-GPU tile layout showing VRAM, utilization, temperature, power, and processes at a glance."
+>
+  <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Grid View</h1>
+  <p class="mt-4 text-lg text-muted leading-relaxed">
+    The default view when you launch gpulse. Shows every detected GPU as a tile with real-time metrics and a shared process table below.
+  </p>
+
+  <Screenshot
+    src="/screenshots/grid-4gpu.png"
+    alt="gpulse Grid view showing 4 NVIDIA GPUs with VRAM bars, utilization percentages, temperature, power, and a process table below"
+    caption="Grid view — 4 NVIDIA GPUs with real-time metrics and per-process attribution"
+    class="mt-8"
+    glow={false}
+  />
+
+  <h2 class="mt-12 text-2xl font-bold">What You See</h2>
+  <p class="mt-4 text-muted">
+    Each GPU tile displays:
+  </p>
+  <ul class="mt-4 space-y-2 text-muted list-disc pl-6">
+    <li><strong class="text-white">GPU Name and Index</strong> — model name (e.g., NVIDIA RTX 4090) with zero-based index</li>
+    <li><strong class="text-white">VRAM Usage Bar</strong> — visual bar with percentage and absolute usage (e.g., 12.4 / 24.0 GB)</li>
+    <li><strong class="text-white">GPU Utilization</strong> — percentage of compute cores currently active</li>
+    <li><strong class="text-white">Temperature</strong> — GPU die temperature in Celsius, color-coded by severity</li>
+    <li><strong class="text-white">Power Draw</strong> — current wattage versus the configured power limit</li>
+    <li><strong class="text-white">Status Indicator</strong> — color-coded badge: green (normal), yellow (warning), red (critical)</li>
+  </ul>
+
+  <p class="mt-4 text-muted">
+    Below the GPU tiles, a <strong class="text-white">process table</strong> lists every process using GPU resources. Columns include PID, process name, GPU index, VRAM allocation, GPU utilization, and CPU utilization.
+  </p>
+
+  <h2 class="mt-12 text-2xl font-bold">Layout</h2>
+  <p class="mt-4 text-muted">
+    Grid view automatically adapts to the number of detected GPUs:
+  </p>
+  <ul class="mt-4 space-y-2 text-muted list-disc pl-6">
+    <li><strong class="text-white">1 GPU</strong> — single tile with expanded metrics, similar to Detail view</li>
+    <li><strong class="text-white">2 GPUs</strong> — two tiles side by side</li>
+    <li><strong class="text-white">3-4 GPUs</strong> — 2x2 grid</li>
+    <li><strong class="text-white">5-8 GPUs</strong> — tiles arranged to fit the terminal width</li>
+  </ul>
+  <p class="mt-3 text-sm text-muted">
+    The layout is density-adaptive: a wider terminal shows more data per tile, while a narrow terminal hides secondary metrics to keep the view readable.
+  </p>
+
+  <h2 class="mt-12 text-2xl font-bold">Color Thresholds</h2>
+  <p class="mt-4 text-muted">
+    VRAM bars and temperature readings change color based on severity:
+  </p>
+
+  <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold">Metric</th>
+          <th class="px-4 py-3 text-left font-semibold text-green">Normal</th>
+          <th class="px-4 py-3 text-left font-semibold text-yellow">Warning</th>
+          <th class="px-4 py-3 text-left font-semibold text-red">Critical</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3 text-muted">VRAM Usage</td>
+          <td class="px-4 py-3 text-green">&lt; 70%</td>
+          <td class="px-4 py-3 text-yellow">70-90%</td>
+          <td class="px-4 py-3 text-red">&gt; 90%</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">Temperature</td>
+          <td class="px-4 py-3 text-green">&lt; 70C</td>
+          <td class="px-4 py-3 text-yellow">70-85C</td>
+          <td class="px-4 py-3 text-red">&gt; 85C</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="mt-12 text-2xl font-bold">Keyboard Shortcuts</h2>
+  <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold">Key</th>
+          <th class="px-4 py-3 text-left font-semibold">Action</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">Tab</kbd> / <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">Shift+Tab</kbd></td>
+          <td class="px-4 py-3 text-muted">Select next / previous GPU</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">1</kbd>-<kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">8</kbd></td>
+          <td class="px-4 py-3 text-muted">Jump to GPU by index</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">d</kbd></td>
+          <td class="px-4 py-3 text-muted">Open selected GPU in Detail view</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">s</kbd></td>
+          <td class="px-4 py-3 text-muted">Cycle sort column in process table</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">f</kbd></td>
+          <td class="px-4 py-3 text-muted">Filter processes by name</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">Enter</kbd></td>
+          <td class="px-4 py-3 text-muted">Show process details for selected row</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">K</kbd></td>
+          <td class="px-4 py-3 text-muted">Kill selected process (with confirmation)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="mt-12 text-2xl font-bold">When to Use Grid View</h2>
+  <p class="mt-4 text-muted">
+    Grid view is ideal for day-to-day monitoring of multi-GPU machines. Use it when you want a broad overview of all GPUs simultaneously. For a single GPU deep dive, switch to <a href="/docs/views/detail" class="text-cyan underline underline-offset-4 hover:text-cyan-dark transition-colors">Detail view</a>. For dense tabular data, try <a href="/docs/views/list" class="text-cyan underline underline-offset-4 hover:text-cyan-dark transition-colors">List view</a>.
+  </p>
+</DocsLayout>

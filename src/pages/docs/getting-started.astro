@@ -1,0 +1,247 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+import Screenshot from '../../components/Screenshot.astro';
+---
+
+<DocsLayout
+  title="Getting Started — gpulse"
+  description="Install gpulse and start monitoring your GPUs in under five minutes. Supports Apple Silicon, NVIDIA, AMD, and Intel."
+>
+  <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Getting Started</h1>
+  <p class="mt-4 text-lg text-muted leading-relaxed">
+    Get gpulse installed and monitoring your GPUs in under five minutes.
+  </p>
+
+  <!-- System Requirements -->
+  <h2 class="mt-12 text-2xl font-bold">System Requirements</h2>
+
+  <div class="mt-6 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold">Requirement</th>
+          <th class="px-4 py-3 text-left font-semibold">Minimum</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3 text-muted">Operating System</td>
+          <td class="px-4 py-3 text-muted">macOS 12 (Monterey) or later</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">Processor</td>
+          <td class="px-4 py-3 text-muted">Apple Silicon (M1/M2/M3/M4) or Intel Mac</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">Memory</td>
+          <td class="px-4 py-3 text-muted">4 GB RAM (8 GB recommended)</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">Terminal</td>
+          <td class="px-4 py-3 text-muted">Any terminal emulator (Terminal.app, iTerm2, Warp, Kitty, etc.)</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">Disk Space</td>
+          <td class="px-4 py-3 text-muted">~10 MB for the binary</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="mt-4 text-sm text-muted">
+    gpulse also supports NVIDIA (via NVML), AMD (via ROCm), and Intel (via Level Zero) GPUs when running on compatible hardware. Linux support is coming soon.
+  </p>
+
+  <!-- Installation -->
+  <h2 class="mt-12 text-2xl font-bold">Installation</h2>
+
+  <h3 class="mt-8 text-lg font-semibold">Option 1: Homebrew (Recommended)</h3>
+  <p class="mt-2 text-muted">The fastest way to install. One command, no dependencies.</p>
+  <div class="mt-4">
+    <CodeBlock code="brew install kkirubakaran/gpulse/gpulse" language="bash" />
+  </div>
+
+  <h3 class="mt-8 text-lg font-semibold">Option 2: Direct Download</h3>
+  <p class="mt-2 text-muted">Download the latest release binary directly.</p>
+  <div class="mt-4">
+    <CodeBlock code={`# Download latest release for macOS (Apple Silicon)
+curl -L https://github.com/kkirubakaran/gpulse/releases/latest/download/gpulse-darwin-arm64.tar.gz -o gpulse.tar.gz
+
+# Extract and install
+tar -xzf gpulse.tar.gz
+sudo mv gpulse /usr/local/bin/
+sudo chmod +x /usr/local/bin/gpulse`} language="bash" />
+  </div>
+
+  <h3 class="mt-8 text-lg font-semibold">Option 3: Manual Install</h3>
+  <p class="mt-2 text-muted">Download the binary from the <a href="https://github.com/kkirubakaran/gpulse/releases" class="text-cyan underline underline-offset-4 hover:text-cyan-dark transition-colors">releases page</a> and place it somewhere in your <code class="font-mono text-sm text-cyan bg-surface px-1.5 py-0.5 rounded">$PATH</code>.</p>
+
+  <h3 class="mt-8 text-lg font-semibold">Verify Installation</h3>
+  <div class="mt-4">
+    <CodeBlock code="gpulse --version" language="bash" />
+  </div>
+  <p class="mt-3 text-sm text-muted">
+    You should see the version number, build date, and target architecture printed to your terminal.
+  </p>
+
+  <!-- First Launch -->
+  <h2 class="mt-12 text-2xl font-bold">First Launch</h2>
+  <p class="mt-4 text-muted">
+    Launch the dashboard with a single command. No configuration files, no setup wizard, no account required.
+  </p>
+
+  <div class="mt-4">
+    <CodeBlock code="gpulse dashboard" language="bash" />
+  </div>
+
+  <p class="mt-4 text-muted">
+    gpulse will automatically detect your GPU hardware and display the Grid view — a tile layout showing every GPU with real-time metrics.
+  </p>
+
+  <Screenshot
+    src="/screenshots/grid-4gpu.png"
+    alt="gpulse Grid view showing 4 NVIDIA GPUs with VRAM usage bars, utilization percentages, temperature, power draw, and a process table"
+    caption="Grid view — the default display when you first launch gpulse"
+    class="mt-8"
+    glow={false}
+  />
+
+  <!-- Demo Mode -->
+  <h2 class="mt-12 text-2xl font-bold">Demo Mode</h2>
+  <p class="mt-4 text-muted">
+    Want to explore gpulse without real GPU hardware? Demo mode simulates GPUs with realistic workload data so you can try every view and feature.
+  </p>
+
+  <div class="mt-4">
+    <CodeBlock code="# Simulate 4 NVIDIA GPUs with realistic workloads
+gpulse dashboard --demo nvidia:4" language="bash" />
+  </div>
+
+  <p class="mt-3 text-sm text-muted">
+    You can also simulate different vendors: <code class="font-mono text-sm text-cyan bg-surface px-1.5 py-0.5 rounded">--demo apple:1</code>, <code class="font-mono text-sm text-cyan bg-surface px-1.5 py-0.5 rounded">--demo amd:2</code>, or mix them: <code class="font-mono text-sm text-cyan bg-surface px-1.5 py-0.5 rounded">--demo nvidia:2,apple:1</code>.
+  </p>
+
+  <!-- Navigating Views -->
+  <h2 class="mt-12 text-2xl font-bold">Navigating Views</h2>
+  <p class="mt-4 text-muted">
+    gpulse has seven view modes, each a single keystroke away. You never need to leave the terminal.
+  </p>
+
+  <div class="mt-6 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold">Key</th>
+          <th class="px-4 py-3 text-left font-semibold">View</th>
+          <th class="px-4 py-3 text-left font-semibold">Purpose</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">v</kbd></td>
+          <td class="px-4 py-3 text-muted">Cycle Views</td>
+          <td class="px-4 py-3 text-muted">Rotate through Grid, List, and other views</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">d</kbd></td>
+          <td class="px-4 py-3 text-muted">Detail</td>
+          <td class="px-4 py-3 text-muted">Deep dive into the selected GPU</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">c</kbd></td>
+          <td class="px-4 py-3 text-muted">Compare</td>
+          <td class="px-4 py-3 text-muted">Side-by-side GPU comparison</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">g</kbd></td>
+          <td class="px-4 py-3 text-muted">Topology</td>
+          <td class="px-4 py-3 text-muted">GPU interconnect diagram</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">P</kbd></td>
+          <td class="px-4 py-3 text-muted">Predict</td>
+          <td class="px-4 py-3 text-muted">OOM prediction and leak detection</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">F</kbd></td>
+          <td class="px-4 py-3 text-muted">Fleet</td>
+          <td class="px-4 py-3 text-muted">Multi-machine monitoring (Pro)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Understanding the Display -->
+  <h2 class="mt-12 text-2xl font-bold">Understanding the Display</h2>
+  <p class="mt-4 text-muted">
+    Every view shows a combination of the following GPU metrics. Here is what each one means:
+  </p>
+
+  <div class="mt-6 space-y-4">
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">VRAM Usage</h3>
+      <p class="mt-1 text-sm text-muted">
+        How much video memory is currently allocated versus total available. Displayed as a bar graph with percentage and absolute values (e.g., <code class="font-mono text-xs text-cyan bg-dark px-1 py-0.5 rounded">12.4 / 24.0 GB</code>). Color shifts from green to yellow to red as usage increases.
+      </p>
+    </div>
+
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">GPU Utilization</h3>
+      <p class="mt-1 text-sm text-muted">
+        Percentage of the GPU compute cores actively processing work. 0% means idle; 100% means every core is busy. Sustained 100% is normal during training — but if paired with rising VRAM, investigate.
+      </p>
+    </div>
+
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">Temperature</h3>
+      <p class="mt-1 text-sm text-muted">
+        GPU die temperature in degrees Celsius. Typical ranges: idle 30-45C, load 60-85C. Above 90C may indicate thermal throttling. gpulse highlights temperatures with color thresholds.
+      </p>
+    </div>
+
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">Power Draw</h3>
+      <p class="mt-1 text-sm text-muted">
+        Current power consumption in watts versus the power limit. Helps identify whether your GPU is power-limited or running below capacity.
+      </p>
+    </div>
+
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">Process Table</h3>
+      <p class="mt-1 text-sm text-muted">
+        Lists every process using the GPU, sorted by memory. Shows PID, process name, GPU memory allocated, CPU utilization, and GPU utilization. Press <kbd class="rounded border border-border bg-dark px-1.5 py-0.5 font-mono text-xs text-cyan">s</kbd> to change sort column, <kbd class="rounded border border-border bg-dark px-1.5 py-0.5 font-mono text-xs text-cyan">f</kbd> to filter.
+      </p>
+    </div>
+  </div>
+
+  <!-- Getting Help -->
+  <h2 class="mt-12 text-2xl font-bold">Getting Help</h2>
+  <p class="mt-4 text-muted">
+    Press <kbd class="rounded border border-border bg-surface px-2 py-1 font-mono text-sm text-cyan">?</kbd> at any time to open the built-in help overlay. It shows all available keyboard shortcuts for your current view.
+  </p>
+  <p class="mt-3 text-muted">
+    You can also open the command palette with <kbd class="rounded border border-border bg-surface px-2 py-1 font-mono text-sm text-cyan">:</kbd> to search for commands by name.
+  </p>
+
+  <!-- Next Steps -->
+  <h2 class="mt-12 text-2xl font-bold">Next Steps</h2>
+  <ul class="mt-4 space-y-3">
+    <li class="flex items-start gap-3 text-muted">
+      <svg class="w-5 h-5 text-cyan shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+      <span>Explore <a href="/docs/views/grid" class="text-cyan underline underline-offset-4 hover:text-cyan-dark transition-colors">View Modes</a> to learn what each display offers</span>
+    </li>
+    <li class="flex items-start gap-3 text-muted">
+      <svg class="w-5 h-5 text-cyan shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+      <span>Set up <a href="/docs/leak-detection" class="text-cyan underline underline-offset-4 hover:text-cyan-dark transition-colors">Leak Detection</a> to get OOM predictions</span>
+    </li>
+    <li class="flex items-start gap-3 text-muted">
+      <svg class="w-5 h-5 text-cyan shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+      <span>Browse <a href="/docs/keyboard" class="text-cyan underline underline-offset-4 hover:text-cyan-dark transition-colors">Keyboard Shortcuts</a> for the full keybinding reference</span>
+    </li>
+    <li class="flex items-start gap-3 text-muted">
+      <svg class="w-5 h-5 text-cyan shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+      <span>Customize with <a href="/docs/themes" class="text-cyan underline underline-offset-4 hover:text-cyan-dark transition-colors">Themes</a> — 15 built-in color schemes</span>
+    </li>
+  </ul>
+</DocsLayout>

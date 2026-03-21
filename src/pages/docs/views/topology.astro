@@ -1,0 +1,101 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import Screenshot from '../../../components/Screenshot.astro';
+---
+
+<DocsLayout
+  title="Topology View — gpulse"
+  description="Learn about gpulse Topology view: a visual diagram of GPU interconnects, PCIe topology, and NVLink connections."
+>
+  <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Topology View</h1>
+  <p class="mt-4 text-lg text-muted leading-relaxed">
+    A visual diagram of your GPU interconnect topology, showing how GPUs are connected via PCIe, NVLink, or the unified memory architecture on Apple Silicon.
+  </p>
+  <p class="mt-2 text-muted">
+    Press <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-sm text-cyan">g</kbd> from any view to enter Topology mode.
+  </p>
+
+  <Screenshot
+    src="/screenshots/topology.png"
+    alt="gpulse Topology view showing GPU interconnect diagram with PCIe bus connections"
+    caption="Topology view — GPU interconnect diagram showing bus topology"
+    class="mt-8"
+    glow={false}
+  />
+
+  <h2 class="mt-12 text-2xl font-bold">What You See</h2>
+  <p class="mt-4 text-muted">
+    Topology view renders a tree or graph diagram showing:
+  </p>
+
+  <ul class="mt-4 space-y-2 text-muted list-disc pl-6">
+    <li><strong class="text-white">GPU Nodes</strong> — each GPU represented as a box with its index, model name, and current VRAM usage</li>
+    <li><strong class="text-white">Bus Connections</strong> — lines between GPUs showing the interconnect type (PCIe, NVLink, NVSwitch, Apple Unified Memory)</li>
+    <li><strong class="text-white">PCIe Root Complex</strong> — the CPU or IOH node that GPUs connect through</li>
+    <li><strong class="text-white">Link Bandwidth</strong> — theoretical bandwidth of each link (e.g., PCIe 4.0 x16 = 32 GB/s)</li>
+    <li><strong class="text-white">NUMA Node</strong> — which CPU socket each GPU is closest to (on multi-socket systems)</li>
+  </ul>
+
+  <h2 class="mt-12 text-2xl font-bold">Interconnect Types</h2>
+  <div class="mt-6 space-y-4">
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">PCIe</h3>
+      <p class="mt-1 text-sm text-muted">
+        Standard bus for connecting GPUs. Common configurations: PCIe 3.0 x16 (16 GB/s), PCIe 4.0 x16 (32 GB/s), PCIe 5.0 x16 (64 GB/s). P2P transfers between GPUs on the same root complex are faster than those crossing CPU sockets.
+      </p>
+    </div>
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">NVLink</h3>
+      <p class="mt-1 text-sm text-muted">
+        NVIDIA's high-bandwidth GPU-to-GPU link. NVLink 3.0 provides 600 GB/s bidirectional per link. Used in DGX systems, A100, H100, and other data center GPUs. Enables much faster multi-GPU communication than PCIe.
+      </p>
+    </div>
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">Apple Unified Memory</h3>
+      <p class="mt-1 text-sm text-muted">
+        On Apple Silicon, the GPU and CPU share the same memory pool. There is no discrete GPU bus — the "interconnect" is the unified memory architecture itself, with bandwidth determined by the SoC (e.g., M4 Max = 546 GB/s).
+      </p>
+    </div>
+  </div>
+
+  <h2 class="mt-12 text-2xl font-bold">Why Topology Matters</h2>
+  <p class="mt-4 text-muted">
+    Understanding GPU topology is critical for:
+  </p>
+  <ul class="mt-3 space-y-2 text-muted list-disc pl-6">
+    <li><strong class="text-white">Multi-GPU Training</strong> — frameworks like PyTorch and DeepSpeed can optimize communication patterns based on topology. GPUs connected via NVLink should be grouped together.</li>
+    <li><strong class="text-white">NUMA Awareness</strong> — for best performance, allocate CPU memory on the same NUMA node as the GPU. Topology view shows which socket each GPU belongs to.</li>
+    <li><strong class="text-white">Debugging Slow All-Reduce</strong> — if gradient synchronization is slow, check whether your GPUs are on separate root complexes or crossing QPI links.</li>
+  </ul>
+
+  <h2 class="mt-12 text-2xl font-bold">Keyboard Shortcuts</h2>
+  <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold">Key</th>
+          <th class="px-4 py-3 text-left font-semibold">Action</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">Tab</kbd> / <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">Shift+Tab</kbd></td>
+          <td class="px-4 py-3 text-muted">Select next / previous GPU node</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">d</kbd></td>
+          <td class="px-4 py-3 text-muted">Open selected GPU in Detail view</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">v</kbd></td>
+          <td class="px-4 py-3 text-muted">Return to Grid view</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="mt-12 text-2xl font-bold">When to Use Topology View</h2>
+  <p class="mt-4 text-muted">
+    Use Topology view when setting up a new multi-GPU machine, debugging communication bottlenecks in distributed training, or verifying hardware configuration after changes. It is read-only and does not require any active workload.
+  </p>
+</DocsLayout>

@@ -1,0 +1,125 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import Screenshot from '../../../components/Screenshot.astro';
+---
+
+<DocsLayout
+  title="Detail View — gpulse"
+  description="Learn about gpulse Detail view: a deep dive into a single GPU showing full metrics, memory history graph, and complete process table."
+>
+  <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Detail View</h1>
+  <p class="mt-4 text-lg text-muted leading-relaxed">
+    A focused deep dive into a single GPU. Shows full metrics, a memory usage history graph, and a complete process table with extended columns.
+  </p>
+  <p class="mt-2 text-muted">
+    Press <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-sm text-cyan">d</kbd> from any view to enter Detail mode for the currently selected GPU.
+  </p>
+
+  <Screenshot
+    src="/screenshots/detail-gpu0-critical.png"
+    alt="gpulse Detail view showing GPU 0 NVIDIA RTX 4090 in critical state with 17.5 of 24 GB VRAM used, full process table"
+    caption="Detail view — GPU 0 in critical state with high VRAM usage and full process attribution"
+    class="mt-8"
+    glow={false}
+  />
+
+  <h2 class="mt-12 text-2xl font-bold">What You See</h2>
+  <p class="mt-4 text-muted">
+    Detail view dedicates the full terminal to one GPU, giving you more space for:
+  </p>
+
+  <ul class="mt-4 space-y-2 text-muted list-disc pl-6">
+    <li><strong class="text-white">GPU Header</strong> — model name, driver version, CUDA version, vendor, architecture</li>
+    <li><strong class="text-white">VRAM Bar</strong> — large visual bar with exact usage in GB and percentage</li>
+    <li><strong class="text-white">Metrics Panel</strong> — GPU utilization, memory bandwidth utilization, temperature, fan speed, power draw, clock speeds (core + memory)</li>
+    <li><strong class="text-white">Memory History Graph</strong> — sparkline or mini chart showing VRAM usage over time</li>
+    <li><strong class="text-white">Process Table</strong> — full-width table with PID, name, type, GPU memory, GPU utilization, CPU utilization, uptime</li>
+  </ul>
+
+  <Screenshot
+    src="/screenshots/detail-gpu1.png"
+    alt="gpulse Detail view for GPU 1 with normal usage levels"
+    caption="Detail view — GPU 1 under normal operating conditions"
+    class="mt-8"
+    glow={false}
+  />
+
+  <h2 class="mt-12 text-2xl font-bold">Metrics Explained</h2>
+  <div class="mt-6 space-y-4">
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">Memory Bandwidth Utilization</h3>
+      <p class="mt-1 text-sm text-muted">
+        Percentage of the GPU's memory bus capacity being used. High bandwidth utilization alongside high compute utilization may indicate a memory-bound workload.
+      </p>
+    </div>
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">Fan Speed</h3>
+      <p class="mt-1 text-sm text-muted">
+        Current fan speed as a percentage of maximum RPM. Only available on discrete GPUs with active cooling (not applicable to Apple Silicon).
+      </p>
+    </div>
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">Clock Speeds</h3>
+      <p class="mt-1 text-sm text-muted">
+        Current core clock and memory clock in MHz. Lower-than-expected clocks may indicate thermal throttling or power limits being hit.
+      </p>
+    </div>
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">Process Type</h3>
+      <p class="mt-1 text-sm text-muted">
+        Whether the process is using the GPU for compute (C), graphics (G), or both (C+G). Training workloads typically show as compute-only.
+      </p>
+    </div>
+  </div>
+
+  <h2 class="mt-12 text-2xl font-bold">Keyboard Shortcuts</h2>
+  <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold">Key</th>
+          <th class="px-4 py-3 text-left font-semibold">Action</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">Tab</kbd> / <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">Shift+Tab</kbd></td>
+          <td class="px-4 py-3 text-muted">Switch to next / previous GPU</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">1</kbd>-<kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">8</kbd></td>
+          <td class="px-4 py-3 text-muted">Jump to GPU by index</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">s</kbd></td>
+          <td class="px-4 py-3 text-muted">Cycle sort column in process table</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">f</kbd></td>
+          <td class="px-4 py-3 text-muted">Filter processes</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">Enter</kbd></td>
+          <td class="px-4 py-3 text-muted">Open process details modal</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">K</kbd></td>
+          <td class="px-4 py-3 text-muted">Kill selected process</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">v</kbd></td>
+          <td class="px-4 py-3 text-muted">Return to Grid view</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">Esc</kbd></td>
+          <td class="px-4 py-3 text-muted">Close process details modal / return to previous view</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="mt-12 text-2xl font-bold">When to Use Detail View</h2>
+  <p class="mt-4 text-muted">
+    Use Detail view when you need to investigate a specific GPU — for example, when Grid view shows a critical memory warning and you want to see exactly which processes are consuming VRAM. It is also useful for monitoring a single-GPU machine where the Grid layout is unnecessary.
+  </p>
+</DocsLayout>

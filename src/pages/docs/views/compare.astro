@@ -1,0 +1,91 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import Screenshot from '../../../components/Screenshot.astro';
+---
+
+<DocsLayout
+  title="Compare View — gpulse"
+  description="Learn about gpulse Compare view: side-by-side GPU comparison for spotting imbalances in memory, utilization, temperature, and power."
+>
+  <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Compare View</h1>
+  <p class="mt-4 text-lg text-muted leading-relaxed">
+    Side-by-side GPU comparison for quickly spotting imbalances in memory, utilization, temperature, or power draw across your GPUs.
+  </p>
+  <p class="mt-2 text-muted">
+    Press <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-sm text-cyan">c</kbd> from any view to enter Compare mode.
+  </p>
+
+  <Screenshot
+    src="/screenshots/compare-4gpu.png"
+    alt="gpulse Compare view showing 4 GPUs in a 2x2 grid with memory bars, utilization percentages, temperature and power side by side"
+    caption="Compare view — 4 GPUs side by side for quick imbalance detection"
+    class="mt-8"
+    glow={false}
+  />
+
+  <h2 class="mt-12 text-2xl font-bold">What You See</h2>
+  <p class="mt-4 text-muted">
+    Compare view displays GPUs in a normalized side-by-side layout where every metric is visually aligned for easy comparison:
+  </p>
+
+  <ul class="mt-4 space-y-2 text-muted list-disc pl-6">
+    <li><strong class="text-white">Aligned VRAM Bars</strong> — all bars scaled to the same width so you can instantly spot which GPU uses more memory</li>
+    <li><strong class="text-white">Utilization Comparison</strong> — GPU utilization percentages shown side by side</li>
+    <li><strong class="text-white">Temperature Column</strong> — temperatures stacked vertically for quick scanning</li>
+    <li><strong class="text-white">Power Draw Column</strong> — current wattage side by side</li>
+    <li><strong class="text-white">Delta Indicators</strong> — when GPUs differ significantly, the outlier is highlighted</li>
+  </ul>
+
+  <h2 class="mt-12 text-2xl font-bold">Use Cases</h2>
+  <div class="mt-6 space-y-4">
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">Data Parallel Training</h3>
+      <p class="mt-1 text-sm text-muted">
+        When using PyTorch DDP or DeepSpeed, all GPUs should have roughly equal VRAM usage. If one GPU is significantly higher, it may indicate an uneven batch distribution or a memory leak on that device.
+      </p>
+    </div>
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">Thermal Imbalance</h3>
+      <p class="mt-1 text-sm text-muted">
+        GPUs in the same chassis should run at similar temperatures under equal load. A 10C+ difference may indicate poor airflow, a failed fan, or dried thermal paste.
+      </p>
+    </div>
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">Power Budget Monitoring</h3>
+      <p class="mt-1 text-sm text-muted">
+        Quickly verify that all GPUs are drawing expected power. A GPU drawing significantly less power than its peers under the same workload may be throttled.
+      </p>
+    </div>
+  </div>
+
+  <h2 class="mt-12 text-2xl font-bold">Keyboard Shortcuts</h2>
+  <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold">Key</th>
+          <th class="px-4 py-3 text-left font-semibold">Action</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">Tab</kbd> / <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">Shift+Tab</kbd></td>
+          <td class="px-4 py-3 text-muted">Select next / previous GPU</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">d</kbd></td>
+          <td class="px-4 py-3 text-muted">Open selected GPU in Detail view</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">v</kbd></td>
+          <td class="px-4 py-3 text-muted">Return to Grid view</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="mt-12 text-2xl font-bold">When to Use Compare View</h2>
+  <p class="mt-4 text-muted">
+    Use Compare view whenever you are running multi-GPU workloads and want to verify that all GPUs are behaving consistently. It is particularly useful after hardware changes, driver updates, or when debugging performance regressions across devices. For investigating a specific GPU, switch to <a href="/docs/views/detail" class="text-cyan underline underline-offset-4 hover:text-cyan-dark transition-colors">Detail view</a>.
+  </p>
+</DocsLayout>

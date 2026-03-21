@@ -1,0 +1,174 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+
+const sidebarSections = [
+  {
+    heading: null,
+    links: [
+      { href: '/docs', label: 'Overview' },
+      { href: '/docs/getting-started', label: 'Getting Started' },
+    ],
+  },
+  {
+    heading: 'Views',
+    links: [
+      { href: '/docs/views/grid', label: 'Grid' },
+      { href: '/docs/views/detail', label: 'Detail' },
+      { href: '/docs/views/list', label: 'List' },
+      { href: '/docs/views/predict', label: 'Predict' },
+      { href: '/docs/views/compare', label: 'Compare' },
+      { href: '/docs/views/topology', label: 'Topology' },
+    ],
+  },
+  {
+    heading: 'Features',
+    links: [
+      { href: '/docs/leak-detection', label: 'Leak Detection' },
+      { href: '/docs/themes', label: 'Themes' },
+    ],
+  },
+  {
+    heading: 'Reference',
+    links: [
+      { href: '/docs/keyboard', label: 'Keyboard Shortcuts' },
+      { href: '/docs/configuration', label: 'Configuration' },
+      { href: '/docs/faq', label: 'FAQ' },
+    ],
+  },
+];
+
+const currentPath = Astro.url.pathname.replace(/\/$/, '');
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="relative mx-auto max-w-[1400px] pt-24 lg:pt-28">
+    <!-- Mobile sidebar toggle -->
+    <div class="sticky top-[72px] z-40 flex items-center border-b border-border bg-dark/80 backdrop-blur-xl px-4 py-3 lg:hidden">
+      <button
+        type="button"
+        id="docs-sidebar-toggle"
+        class="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-3 py-2 text-sm font-medium text-muted transition-colors hover:text-white hover:border-border-hover"
+        aria-expanded="false"
+        aria-controls="docs-sidebar"
+      >
+        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+        Documentation
+      </button>
+    </div>
+
+    <div class="flex">
+      <!-- Sidebar overlay (mobile) -->
+      <div
+        id="docs-sidebar-overlay"
+        class="fixed inset-0 z-40 bg-dark/60 backdrop-blur-sm hidden lg:hidden"
+        aria-hidden="true"
+      ></div>
+
+      <!-- Sidebar -->
+      <aside
+        id="docs-sidebar"
+        class="fixed top-0 left-0 z-50 h-full w-[280px] -translate-x-full overflow-y-auto border-r border-border bg-dark pt-24 pb-8 transition-transform duration-300 lg:sticky lg:top-28 lg:z-0 lg:h-[calc(100vh-7rem)] lg:w-[240px] lg:translate-x-0 lg:bg-transparent lg:pt-0"
+        role="navigation"
+        aria-label="Documentation navigation"
+      >
+        <nav class="px-4 lg:px-0 lg:pr-4">
+          {sidebarSections.map((section, sectionIdx) => (
+            <div class:list={[sectionIdx > 0 && 'mt-6']}>
+              {section.heading && (
+                <h3 class="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-muted/60">
+                  {section.heading}
+                </h3>
+              )}
+              <ul role="list" class="space-y-0.5">
+                {section.links.map((link) => {
+                  const isActive = currentPath === link.href.replace(/\/$/, '');
+                  return (
+                    <li>
+                      <a
+                        href={link.href}
+                        class:list={[
+                          'block rounded-lg px-3 py-2 text-sm font-medium transition-colors duration-150',
+                          isActive
+                            ? 'bg-cyan/10 text-cyan border-l-2 border-cyan'
+                            : 'text-muted hover:bg-surface hover:text-white',
+                        ]}
+                        aria-current={isActive ? 'page' : undefined}
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
+        </nav>
+      </aside>
+
+      <!-- Content area -->
+      <div class="min-w-0 flex-1 px-4 py-8 sm:px-6 lg:px-12 lg:py-10">
+        <article class="mx-auto max-w-[65ch]">
+          <slot />
+        </article>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  const toggle = document.getElementById('docs-sidebar-toggle');
+  const sidebar = document.getElementById('docs-sidebar');
+  const overlay = document.getElementById('docs-sidebar-overlay');
+
+  function openSidebar() {
+    sidebar?.classList.remove('-translate-x-full');
+    sidebar?.classList.add('translate-x-0');
+    overlay?.classList.remove('hidden');
+    toggle?.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSidebar() {
+    sidebar?.classList.add('-translate-x-full');
+    sidebar?.classList.remove('translate-x-0');
+    overlay?.classList.add('hidden');
+    toggle?.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  toggle?.addEventListener('click', () => {
+    const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+    if (isExpanded) {
+      closeSidebar();
+    } else {
+      openSidebar();
+    }
+  });
+
+  overlay?.addEventListener('click', closeSidebar);
+
+  // Close sidebar when clicking a link (mobile)
+  sidebar?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 1024) {
+        closeSidebar();
+      }
+    });
+  });
+
+  // Close on escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeSidebar();
+    }
+  });
+</script>

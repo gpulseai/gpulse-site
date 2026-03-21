@@ -1,0 +1,128 @@
+---
+import DocsLayout from '../../../layouts/DocsLayout.astro';
+import Screenshot from '../../../components/Screenshot.astro';
+---
+
+<DocsLayout
+  title="Predict View — gpulse"
+  description="Learn about gpulse Predict view: OOM prediction with leak detection algorithms, time-to-OOM estimates, confidence scores, and framework detection."
+>
+  <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Predict View</h1>
+  <p class="mt-4 text-lg text-muted leading-relaxed">
+    The heart of gpulse's differentiator. Predict view runs leak detection algorithms against memory history and shows time-to-OOM estimates, growth rates, and confidence scores.
+  </p>
+  <p class="mt-2 text-muted">
+    Press <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-sm text-cyan">P</kbd> (uppercase) from any view to enter Predict mode.
+  </p>
+
+  <Screenshot
+    src="/screenshots/predict-leak-detected.png"
+    alt="gpulse Predict view showing a risk overview table with GPU 0 flagged as HIGH risk, linear trend detector output, R-squared value, growth rate, and ETA to OOM"
+    caption="Predict view — leak detected on GPU 0 with high confidence and an estimated 47 minutes to OOM"
+    class="mt-8"
+    glow={false}
+  />
+
+  <h2 class="mt-12 text-2xl font-bold">What You See</h2>
+  <p class="mt-4 text-muted">
+    Predict view is divided into several panels:
+  </p>
+
+  <h3 class="mt-8 text-lg font-semibold">Risk Overview Table</h3>
+  <p class="mt-2 text-muted">
+    A summary row per GPU showing:
+  </p>
+  <ul class="mt-3 space-y-2 text-muted list-disc pl-6">
+    <li><strong class="text-white">Risk Level</strong> — LOW / MEDIUM / HIGH / CRITICAL, color-coded</li>
+    <li><strong class="text-white">VRAM Usage</strong> — current usage and percentage</li>
+    <li><strong class="text-white">Growth Rate</strong> — memory increase per unit time (e.g., 12.4 MB/min)</li>
+    <li><strong class="text-white">ETA to OOM</strong> — estimated time until memory runs out, or "Stable" if no leak detected</li>
+    <li><strong class="text-white">Confidence</strong> — statistical confidence of the detection (0-100%)</li>
+    <li><strong class="text-white">Detector</strong> — which algorithm flagged the issue (Linear, Spike, Composite)</li>
+  </ul>
+
+  <h3 class="mt-8 text-lg font-semibold">Detection Detail Panel</h3>
+  <p class="mt-2 text-muted">
+    For the selected GPU, a detailed breakdown showing:
+  </p>
+  <ul class="mt-3 space-y-2 text-muted list-disc pl-6">
+    <li><strong class="text-white">Algorithm Used</strong> — LinearTrendDetector, SpikeDetector, or CompositeDetector</li>
+    <li><strong class="text-white">R-squared (R²)</strong> — how well the linear regression fits the memory data (0.0 = no fit, 1.0 = perfect fit)</li>
+    <li><strong class="text-white">Slope</strong> — rate of memory growth in bytes per second</li>
+    <li><strong class="text-white">Pattern Type</strong> — Gradual Leak, Sudden Spike, Cyclic, Step Increase, or Unknown</li>
+    <li><strong class="text-white">Framework Detected</strong> — PyTorch, TensorFlow, JAX, Ollama, MLX, or Unknown</li>
+    <li><strong class="text-white">Suspected Process</strong> — the process most likely responsible for the leak</li>
+  </ul>
+
+  <h3 class="mt-8 text-lg font-semibold">Memory History Sparkline</h3>
+  <p class="mt-2 text-muted">
+    A compact chart showing memory usage over the analysis window. The trend line is overlaid when a leak is detected, making the growth pattern visually obvious.
+  </p>
+
+  <h2 class="mt-12 text-2xl font-bold">Reading the Output</h2>
+  <div class="mt-6 space-y-4">
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">Growth Rate</h3>
+      <p class="mt-1 text-sm text-muted">
+        How fast memory is increasing, displayed in human-readable units (KB/s, MB/min, GB/hr). A positive growth rate does not always mean a leak — some workloads legitimately grow over time. Cross-reference with R² to assess significance.
+      </p>
+    </div>
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">R² (R-squared)</h3>
+      <p class="mt-1 text-sm text-muted">
+        A statistical measure of how well memory growth fits a linear trend. R² = 0.95+ suggests a genuine steady leak. R² = 0.5-0.8 suggests noisy or intermittent growth. R² &lt; 0.5 is likely normal variation.
+      </p>
+    </div>
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">Confidence</h3>
+      <p class="mt-1 text-sm text-muted">
+        A composite score (0-100%) combining R², growth rate significance, and pattern matching. The detection threshold defaults to 75% — only leaks above this confidence trigger a HIGH or CRITICAL risk rating.
+      </p>
+    </div>
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">ETA to OOM</h3>
+      <p class="mt-1 text-sm text-muted">
+        Extrapolated time until VRAM is completely exhausted based on the current growth rate. Displayed as hours:minutes or "Stable" when no upward trend is detected. This is a projection — actual OOM time may vary if the workload changes.
+      </p>
+    </div>
+  </div>
+
+  <h2 class="mt-12 text-2xl font-bold">Keyboard Shortcuts</h2>
+  <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold">Key</th>
+          <th class="px-4 py-3 text-left font-semibold">Action</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">Tab</kbd> / <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">Shift+Tab</kbd></td>
+          <td class="px-4 py-3 text-muted">Select next / previous GPU in the risk table</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">a</kbd></td>
+          <td class="px-4 py-3 text-muted">Acknowledge an alert</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">A</kbd></td>
+          <td class="px-4 py-3 text-muted">View alert history</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">d</kbd></td>
+          <td class="px-4 py-3 text-muted">Switch to Detail view for selected GPU</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">v</kbd></td>
+          <td class="px-4 py-3 text-muted">Return to Grid view</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="mt-12 text-2xl font-bold">When to Use Predict View</h2>
+  <p class="mt-4 text-muted">
+    Open Predict view when you are running long training jobs or inference servers and want to proactively detect memory leaks before they cause an OOM crash. It is especially valuable for overnight runs where you cannot manually monitor the terminal. For a deeper understanding of the detection algorithms, see <a href="/docs/leak-detection" class="text-cyan underline underline-offset-4 hover:text-cyan-dark transition-colors">Leak Detection</a>.
+  </p>
+</DocsLayout>
