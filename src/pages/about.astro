@@ -1,0 +1,199 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Why gpulse — gpulse"
+  description="The engineering story behind gpulse: why Rust, why zero telemetry, and why GPU monitoring needs to be rebuilt from scratch."
+>
+  <section class="px-4 pt-32 pb-24">
+    <div class="mx-auto max-w-3xl">
+
+      <!-- Breadcrumb -->
+      <nav class="mb-8" aria-label="Breadcrumb">
+        <ol class="flex items-center gap-2 text-sm text-muted">
+          <li>
+            <a href="/" class="transition-colors hover:text-cyan">Home</a>
+          </li>
+          <li aria-hidden="true">/</li>
+          <li class="text-white" aria-current="page">About</li>
+        </ol>
+      </nav>
+
+      <!-- Page header -->
+      <header class="mb-16">
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">Why gpulse</h1>
+        <p class="mt-4 text-muted text-lg leading-relaxed">
+          The engineering decisions behind a GPU monitoring tool built to last.
+        </p>
+      </header>
+
+      <!-- Content -->
+      <div class="space-y-16 text-muted leading-relaxed">
+
+        <!-- Section 1: The Problem -->
+        <section>
+          <h2 class="text-2xl font-bold text-white mb-2">The Problem</h2>
+          <p class="text-cyan italic mb-6">"GPU monitoring is stuck in 2015."</p>
+          <p>
+            Most ML engineers monitor GPUs with <code class="font-mono text-sm text-white bg-surface px-1.5 py-0.5 rounded">nvidia-smi</code> &mdash; a text-only tool that hasn't fundamentally changed in a decade. When a 72-hour training run crashes at 3am because of an out-of-memory error, you find out after the fact. There's no prediction, no early warning, and no cross-vendor visibility.
+          </p>
+          <p class="mt-4">
+            We built gpulse because we were tired of losing training runs.
+          </p>
+        </section>
+
+        <!-- Section 2: Why Rust -->
+        <section>
+          <h2 class="text-2xl font-bold text-white mb-2">Why Rust</h2>
+          <p class="text-cyan italic mb-6">"Performance is a feature."</p>
+          <p>
+            gpulse is written entirely in Rust. Not because it's trendy &mdash; because GPU monitoring must be invisible. A monitoring tool that consumes CPU cycles or leaks memory defeats its own purpose.
+          </p>
+          <p class="mt-4 text-white font-medium">What Rust gives us:</p>
+          <ul class="mt-3 space-y-3">
+            <li class="flex items-start gap-3">
+              <span class="text-cyan mt-0.5 shrink-0">&bull;</span>
+              <span><strong class="text-white">Zero-cost abstractions</strong> &mdash; monitor at 60fps with &lt;1% CPU overhead</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-cyan mt-0.5 shrink-0">&bull;</span>
+              <span><strong class="text-white">Memory safety without garbage collection</strong> &mdash; no GC pauses, no memory leaks in the monitor itself</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-cyan mt-0.5 shrink-0">&bull;</span>
+              <span><strong class="text-white">Fearless concurrency</strong> &mdash; safely collect metrics from multiple GPUs in parallel</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-cyan mt-0.5 shrink-0">&bull;</span>
+              <span><strong class="text-white">Single binary deployment</strong> &mdash; no runtime dependencies, no Python, no Docker</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-cyan mt-0.5 shrink-0">&bull;</span>
+              <span><strong class="text-white">136,000 lines of safe Rust</strong> with zero <code class="font-mono text-sm text-white bg-surface px-1.5 py-0.5 rounded">unsafe</code> in user-facing code paths</span>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Section 3: Security -->
+        <section>
+          <h2 class="text-2xl font-bold text-white mb-2">Why Security Matters</h2>
+          <p class="text-cyan italic mb-6">"Your GPU data stays on your machine."</p>
+          <p>
+            gpulse collects zero telemetry. There are no analytics, no crash reports, no phone-home connections. Every byte of GPU data stays on your local machine.
+          </p>
+          <p class="mt-4">
+            When we build fleet monitoring (Pro tier), the architecture is outbound-only &mdash; your GPU nodes push metrics, nothing listens for inbound connections. The agent runs as an unprivileged user with only GPU access. Binary integrity is verified with Ed25519 signatures.
+          </p>
+          <p class="mt-4">
+            We don't believe monitoring tools should be attack surfaces.
+          </p>
+        </section>
+
+        <!-- Section 4: Engineering Philosophy -->
+        <section>
+          <h2 class="text-2xl font-bold text-white mb-2">Engineering Philosophy</h2>
+          <p class="text-cyan italic mb-6">"Built like infrastructure."</p>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <span class="text-cyan mt-0.5 shrink-0">&bull;</span>
+              <span><strong class="text-white">524 tests</strong> covering every view mode, widget, and interaction</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-cyan mt-0.5 shrink-0">&bull;</span>
+              <span><strong class="text-white">19 security issues</strong> found and fixed through 4 independent code reviews</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-cyan mt-0.5 shrink-0">&bull;</span>
+              <span><strong class="text-white">15 themes</strong> including 2 colorblind-safe variants (WCAG AA certified)</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-cyan mt-0.5 shrink-0">&bull;</span>
+              <span><strong class="text-white">7 view modes</strong> each purpose-built for a different monitoring task</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-cyan mt-0.5 shrink-0">&bull;</span>
+              <span><strong class="text-white">4 GPU vendors</strong> (Apple Silicon, NVIDIA, AMD, Intel) from a single binary</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-cyan mt-0.5 shrink-0">&bull;</span>
+              <span><strong class="text-white">3 leak detection algorithms</strong> running in real-time: linear trend, spike detection, composite scoring</span>
+            </li>
+          </ul>
+          <p class="mt-6">
+            Every commit goes through automated testing. Every release is stripped, signed, and checksummed. We treat a monitoring tool with the same rigor as the infrastructure it watches.
+          </p>
+        </section>
+
+        <!-- Section 5: The Vision -->
+        <section>
+          <h2 class="text-2xl font-bold text-white mb-2">The Vision</h2>
+          <p class="text-cyan italic mb-6">"One tool. Every GPU. Zero surprises."</p>
+          <p>
+            Today, gpulse monitors local GPUs with predictive OOM detection. Tomorrow, it monitors your fleet &mdash; from a single Mac Studio to a thousand H100s across AWS, Azure, and GCP.
+          </p>
+          <p class="mt-4">
+            We're building the tool we wish existed when we started training models.
+          </p>
+        </section>
+
+        <!-- Section 6: By the Numbers -->
+        <section>
+          <h2 class="text-2xl font-bold text-white mb-8">By the Numbers</h2>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-6">
+            <div class="rounded-xl bg-surface border border-border p-6 text-center">
+              <p class="text-3xl md:text-4xl font-extrabold text-cyan font-mono">136K</p>
+              <p class="mt-2 text-sm text-muted">lines of Rust</p>
+            </div>
+            <div class="rounded-xl bg-surface border border-border p-6 text-center">
+              <p class="text-3xl md:text-4xl font-extrabold text-cyan font-mono">524+</p>
+              <p class="mt-2 text-sm text-muted">automated tests</p>
+            </div>
+            <div class="rounded-xl bg-surface border border-border p-6 text-center">
+              <p class="text-3xl md:text-4xl font-extrabold text-cyan font-mono">15</p>
+              <p class="mt-2 text-sm text-muted">color themes</p>
+            </div>
+            <div class="rounded-xl bg-surface border border-border p-6 text-center">
+              <p class="text-3xl md:text-4xl font-extrabold text-cyan font-mono">4</p>
+              <p class="mt-2 text-sm text-muted">GPU vendors</p>
+            </div>
+            <div class="rounded-xl bg-surface border border-border p-6 text-center">
+              <p class="text-3xl md:text-4xl font-extrabold text-cyan font-mono">3</p>
+              <p class="mt-2 text-sm text-muted">detection algorithms</p>
+            </div>
+            <div class="rounded-xl bg-surface border border-border p-6 text-center">
+              <p class="text-3xl md:text-4xl font-extrabold text-cyan font-mono">0</p>
+              <p class="mt-2 text-sm text-muted">telemetry</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 7: About the Author -->
+        <section class="border-t border-border pt-16">
+          <h2 class="text-2xl font-bold text-white mb-4">About the Author</h2>
+          <p class="text-lg">
+            <strong class="text-white">Built by Karthik Kirubakaran</strong>
+          </p>
+          <p class="mt-3">
+            MIT alum. Building developer tools that respect your time, your data, and your hardware.
+          </p>
+          <ul class="mt-6 space-y-2 text-sm">
+            <li class="flex items-center gap-2">
+              <span class="text-muted">Email:</span>
+              <a href="mailto:karthik@gpulse.ai" class="text-cyan transition-colors hover:text-cyan-dark">karthik@gpulse.ai</a>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-muted">GitHub:</span>
+              <a href="https://github.com/kkirubakaran" target="_blank" rel="noopener noreferrer" class="text-cyan transition-colors hover:text-cyan-dark">github.com/kkirubakaran</a>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-muted">Twitter/X:</span>
+              <a href="https://x.com/kaboramedia" target="_blank" rel="noopener noreferrer" class="text-cyan transition-colors hover:text-cyan-dark">@kaboramedia</a>
+            </li>
+          </ul>
+        </section>
+
+      </div>
+    </div>
+  </section>
+</BaseLayout>
