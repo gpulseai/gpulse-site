@@ -1,0 +1,332 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Terminal from '../components/Terminal.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import { Badge } from '../components/ui/Badge';
+import { Button } from '../components/ui/Button';
+import { Card } from '../components/ui/Card';
+---
+
+<BaseLayout
+  title="Download gpulse — Free GPU Monitoring for macOS"
+  description="Install gpulse in seconds via Homebrew, curl, or manual download. Real-time GPU monitoring with OOM prediction for Apple Silicon and Intel Macs."
+>
+  <!-- Hero -->
+  <section
+    class="relative flex flex-col items-center justify-center px-4 pt-36 pb-16"
+    aria-labelledby="download-heading"
+  >
+    <!-- Subtle radial gradient background -->
+    <div
+      class="pointer-events-none absolute inset-0 overflow-hidden"
+      aria-hidden="true"
+    >
+      <div class="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/4 h-[800px] w-[800px] rounded-full bg-cyan/[0.04] blur-[120px]"></div>
+    </div>
+
+    <div class="relative z-10 flex flex-col items-center text-center">
+      <Badge variant="cyan" client:load>Free forever</Badge>
+
+      <h1
+        id="download-heading"
+        class="text-5xl md:text-7xl font-extrabold mt-8 tracking-tight leading-[1.1]"
+      >
+        Download <span class="text-cyan">gpulse</span>
+      </h1>
+
+      <p class="text-lg md:text-xl text-muted mt-6 max-w-2xl leading-relaxed">
+        Free forever for local GPU monitoring. No account required, no credit card, no telemetry.
+      </p>
+    </div>
+  </section>
+
+  <!-- Platform Detection Banner -->
+  <section class="pb-8 px-4">
+    <div class="mx-auto max-w-3xl">
+      <div
+        id="platform-banner"
+        class="rounded-xl border border-cyan/20 bg-cyan/5 px-6 py-4 text-center"
+        role="status"
+        aria-live="polite"
+      >
+        <p class="text-sm text-cyan font-medium" id="platform-text">
+          Detecting your platform...
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Install Methods -->
+  <section class="py-24 md:py-32" aria-labelledby="install-heading">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <SectionHeader
+        eyebrow="INSTALL"
+        title="Choose your install method"
+        subtitle="All methods install the same binary. Pick whichever you prefer."
+      />
+
+      <!-- Method tabs -->
+      <div class="mt-16 space-y-6">
+
+        <!-- Method 1: Homebrew -->
+        <div class="rounded-2xl border border-border bg-surface p-8 transition-all duration-300 hover:border-cyan/30">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-cyan/10 text-cyan font-bold font-mono text-sm">1</span>
+            <h3 class="text-xl font-bold">Homebrew</h3>
+            <Badge variant="cyan" client:load>Recommended</Badge>
+          </div>
+          <p class="text-muted text-sm mb-6 ml-11">The easiest way to install and keep gpulse up to date.</p>
+          <Terminal
+            title="Terminal"
+            command="brew install kkirubakaran/gpulse/gpulse"
+            class="w-full"
+          />
+        </div>
+
+        <!-- Method 2: curl -->
+        <div class="rounded-2xl border border-border bg-surface p-8 transition-all duration-300 hover:border-cyan/30">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-cyan/10 text-cyan font-bold font-mono text-sm">2</span>
+            <h3 class="text-xl font-bold">Shell installer</h3>
+          </div>
+          <p class="text-muted text-sm mb-6 ml-11">One-liner that downloads and installs the correct binary for your system.</p>
+          <Terminal
+            title="Terminal"
+            command="curl -sSL https://gpulse.ai/install.sh | sh"
+            class="w-full"
+          />
+        </div>
+
+        <!-- Method 3: Manual download -->
+        <div class="rounded-2xl border border-border bg-surface p-8 transition-all duration-300 hover:border-cyan/30">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-cyan/10 text-cyan font-bold font-mono text-sm">3</span>
+            <h3 class="text-xl font-bold">Manual download</h3>
+          </div>
+          <p class="text-muted text-sm mb-6 ml-11">Download the binary directly and place it in your PATH.</p>
+
+          <div class="space-y-3">
+            <!-- Apple Silicon -->
+            <a
+              href="#"
+              class="flex items-center justify-between rounded-xl border border-border bg-dark/80 px-5 py-4 transition-all duration-200 hover:border-cyan/30 hover:bg-dark group"
+              id="download-apple-silicon"
+            >
+              <div class="flex items-center gap-4">
+                <svg class="w-6 h-6 text-muted group-hover:text-cyan transition-colors" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                </svg>
+                <div>
+                  <p class="font-semibold text-sm">macOS Apple Silicon</p>
+                  <p class="text-xs text-muted">M1 / M2 / M3 / M4 &mdash; arm64</p>
+                </div>
+              </div>
+              <svg class="w-5 h-5 text-muted group-hover:text-cyan transition-colors" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </a>
+
+            <!-- Intel -->
+            <a
+              href="#"
+              class="flex items-center justify-between rounded-xl border border-border bg-dark/80 px-5 py-4 transition-all duration-200 hover:border-cyan/30 hover:bg-dark group"
+              id="download-intel"
+            >
+              <div class="flex items-center gap-4">
+                <svg class="w-6 h-6 text-muted group-hover:text-cyan transition-colors" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                </svg>
+                <div>
+                  <p class="font-semibold text-sm">macOS Intel</p>
+                  <p class="text-xs text-muted">Intel x86_64</p>
+                </div>
+              </div>
+              <svg class="w-5 h-5 text-muted group-hover:text-cyan transition-colors" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </a>
+
+            <!-- Linux (coming soon) -->
+            <div
+              class="flex items-center justify-between rounded-xl border border-border bg-dark/80 px-5 py-4 opacity-50 cursor-not-allowed"
+              aria-disabled="true"
+            >
+              <div class="flex items-center gap-4">
+                <svg class="w-6 h-6 text-muted" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                </svg>
+                <div>
+                  <p class="font-semibold text-sm">Linux</p>
+                  <p class="text-xs text-muted">Coming soon</p>
+                </div>
+              </div>
+              <Badge variant="default" client:load>Soon</Badge>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- System Requirements -->
+  <section class="py-24 md:py-32 bg-surface section-gradient-top" aria-labelledby="requirements-heading">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <SectionHeader
+        eyebrow="REQUIREMENTS"
+        title="System requirements"
+      />
+
+      <div class="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <div class="rounded-xl border border-border bg-dark/80 p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-cyan/10">
+              <svg class="w-5 h-5 text-cyan" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
+              </svg>
+            </div>
+            <h3 class="font-semibold">Operating System</h3>
+          </div>
+          <p class="text-sm text-muted leading-relaxed">macOS 12 (Monterey) or later</p>
+        </div>
+
+        <div class="rounded-xl border border-border bg-dark/80 p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-cyan/10">
+              <svg class="w-5 h-5 text-cyan" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25z" />
+              </svg>
+            </div>
+            <h3 class="font-semibold">Architecture</h3>
+          </div>
+          <p class="text-sm text-muted leading-relaxed">Apple Silicon (M1/M2/M3/M4) or Intel x86_64</p>
+        </div>
+
+        <div class="rounded-xl border border-border bg-dark/80 p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-cyan/10">
+              <svg class="w-5 h-5 text-cyan" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
+              </svg>
+            </div>
+            <h3 class="font-semibold">Disk Space</h3>
+          </div>
+          <p class="text-sm text-muted leading-relaxed">~20MB</p>
+        </div>
+
+        <div class="rounded-xl border border-border bg-dark/80 p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-cyan/10">
+              <svg class="w-5 h-5 text-cyan" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" />
+              </svg>
+            </div>
+            <h3 class="font-semibold">Terminal</h3>
+          </div>
+          <p class="text-sm text-muted leading-relaxed">Terminal.app, iTerm2, Ghostty, Alacritty, or Kitty</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- After Install -->
+  <section class="py-24 md:py-32" aria-labelledby="after-install-heading">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <SectionHeader
+        eyebrow="GET STARTED"
+        title="After installation"
+        subtitle="Launch the dashboard and start monitoring immediately."
+      />
+
+      <div class="mt-16 space-y-8">
+        <Terminal
+          title="Launch gpulse"
+          command="gpulse dashboard"
+          class="w-full"
+        />
+
+        <div class="rounded-xl border border-border bg-surface p-8">
+          <h3 class="font-bold text-lg mb-6">Quick tips</h3>
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <div class="flex items-start gap-3">
+              <kbd class="inline-flex items-center justify-center w-8 h-8 rounded border border-border bg-dark font-mono text-sm text-cyan shrink-0">?</kbd>
+              <div>
+                <p class="font-semibold text-sm">Help</p>
+                <p class="text-xs text-muted">Show all keybindings</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <kbd class="inline-flex items-center justify-center w-8 h-8 rounded border border-border bg-dark font-mono text-sm text-cyan shrink-0">t</kbd>
+              <div>
+                <p class="font-semibold text-sm">Themes</p>
+                <p class="text-xs text-muted">Cycle through 15 themes</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <kbd class="inline-flex items-center justify-center w-8 h-8 rounded border border-border bg-dark font-mono text-sm text-cyan shrink-0">P</kbd>
+              <div>
+                <p class="font-semibold text-sm">Predict</p>
+                <p class="text-xs text-muted">OOM prediction mode</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <p class="text-muted text-sm">
+            Need help? Check the <a href="/docs" class="text-cyan underline underline-offset-4 hover:text-cyan-dark transition-colors">documentation</a> or email <a href="mailto:info@gpulse.ai" class="text-cyan underline underline-offset-4 hover:text-cyan-dark transition-colors">info@gpulse.ai</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  // Platform detection
+  function detectPlatform() {
+    const platform = navigator.platform;
+    const userAgent = navigator.userAgent;
+    const bannerText = document.getElementById('platform-text');
+    const banner = document.getElementById('platform-banner');
+
+    if (!bannerText || !banner) return;
+
+    // Detect Apple Silicon: Modern Macs report as MacIntel even on ARM,
+    // but we can check via userAgent hints or maxTouchPoints
+    const isMac = platform === 'MacIntel' || platform.startsWith('Mac');
+    const isAppleSilicon = isMac && (navigator.maxTouchPoints > 0 || /ARM|arm64/.test(userAgent));
+    const isLinux = platform.startsWith('Linux');
+    const isWindows = platform.startsWith('Win');
+
+    if (isAppleSilicon) {
+      bannerText.textContent = 'Detected: macOS on Apple Silicon — all install methods below will work for your Mac.';
+      // Highlight Apple Silicon download
+      const appleLink = document.getElementById('download-apple-silicon');
+      if (appleLink) {
+        appleLink.classList.add('border-cyan/30', 'ring-1', 'ring-cyan/20');
+      }
+    } else if (isMac) {
+      bannerText.textContent = 'Detected: macOS on Intel — all install methods below will work for your Mac.';
+      const intelLink = document.getElementById('download-intel');
+      if (intelLink) {
+        intelLink.classList.add('border-cyan/30', 'ring-1', 'ring-cyan/20');
+      }
+    } else if (isLinux) {
+      bannerText.textContent = 'Detected: Linux — gpulse for Linux is coming soon. Join the waitlist to be notified.';
+      banner.classList.remove('border-cyan/20', 'bg-cyan/5');
+      banner.classList.add('border-yellow/20', 'bg-yellow/5');
+      bannerText.classList.remove('text-cyan');
+      bannerText.classList.add('text-yellow');
+    } else if (isWindows) {
+      bannerText.textContent = 'Detected: Windows — gpulse currently supports macOS. Linux support is coming soon.';
+      banner.classList.remove('border-cyan/20', 'bg-cyan/5');
+      banner.classList.add('border-yellow/20', 'bg-yellow/5');
+      bannerText.classList.remove('text-cyan');
+      bannerText.classList.add('text-yellow');
+    } else {
+      bannerText.textContent = 'gpulse is available for macOS (Apple Silicon and Intel).';
+    }
+  }
+
+  detectPlatform();
+</script>

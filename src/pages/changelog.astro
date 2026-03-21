@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import { Badge } from '../components/ui/Badge';
+---
+
+<BaseLayout
+  title="Changelog — gpulse"
+  description="See what's new in gpulse. Release notes, new features, bug fixes, and security updates."
+>
+  <!-- Hero -->
+  <section
+    class="relative flex flex-col items-center justify-center px-4 pt-36 pb-16"
+    aria-labelledby="changelog-heading"
+  >
+    <div
+      class="pointer-events-none absolute inset-0 overflow-hidden"
+      aria-hidden="true"
+    >
+      <div class="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/4 h-[800px] w-[800px] rounded-full bg-cyan/[0.04] blur-[120px]"></div>
+    </div>
+
+    <div class="relative z-10 flex flex-col items-center text-center">
+      <h1
+        id="changelog-heading"
+        class="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1]"
+      >
+        Changelog
+      </h1>
+      <p class="text-lg md:text-xl text-muted mt-6 max-w-2xl leading-relaxed">
+        All notable changes to gpulse, documented with every release.
+      </p>
+    </div>
+  </section>
+
+  <!-- Changelog Entries -->
+  <section class="py-24 md:py-32" aria-label="Release history">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+
+      <!-- v2.0.0 -->
+      <article class="relative" aria-labelledby="v2-0-0">
+        <!-- Version header -->
+        <div class="flex items-center gap-4 mb-8">
+          <Badge variant="green" client:load>v2.0.0</Badge>
+          <time datetime="2026-03-21" class="text-sm text-muted font-mono">March 21, 2026</time>
+          <Badge variant="cyan" client:load>Latest</Badge>
+        </div>
+
+        <!-- Added -->
+        <div class="mb-10">
+          <h3 class="text-lg font-bold flex items-center gap-3 mb-5">
+            <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-green/10 text-green text-xs font-mono">+</span>
+            Added
+          </h3>
+          <ul class="space-y-3" role="list">
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-green mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span><strong class="text-white">15 color themes</strong>: Monokai (default), Dark, Dracula, Catppuccin Mocha, Tokyo Night, Nord, One Dark, Gruvbox Dark, btop, Solarized Dark/Light, High Contrast, Colorblind Safe/Light</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-green mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span><strong class="text-white">Predict mode (<kbd class="font-mono text-cyan">P</kbd> key)</strong>: Real-time memory leak detection with OOM prediction &mdash; linear trend analysis, spike detection, composite scoring, growth rate (MiB/s), ETA to OOM, confidence score, pattern classification, ML framework detection (PyTorch, TensorFlow, JAX, Ollama, MLX), on-screen alerts on first leak detection</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-green mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span><strong class="text-white">Compare view (<kbd class="font-mono text-cyan">c</kbd> key)</strong>: Multi-GPU comparison in adaptive grid (2x2, 3x2)</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-green mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span><strong class="text-white">7 view modes</strong>: Grid, Detail, List, Compare, Topology, Predict, Fleet</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-green mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span><strong class="text-white">Demo mode</strong>: <code class="font-mono text-xs bg-dark/80 border border-border rounded px-1.5 py-0.5">--demo nvidia:4</code>, <code class="font-mono text-xs bg-dark/80 border border-border rounded px-1.5 py-0.5">--demo apple:1,nvidia:2,amd:1</code>, etc.</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-green mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span><strong class="text-white">Process table</strong>: PID, GPU-MEM, %UTL, %CPU, %MEM, TIME, COMMAND</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-green mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span><strong class="text-white">Multi-vendor support</strong>: NVIDIA (NVML), Apple Silicon (Metal/IOKit), AMD, Intel</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-green mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span><strong class="text-white">Distribution pipeline</strong>: build-release.sh, release.sh, Homebrew formula</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-green mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span><strong class="text-white">Prometheus endpoint</strong> and OpenTelemetry export</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-green mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span><strong class="text-white">Email/Slack/Discord/webhook alerting</strong> infrastructure</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-green mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span><strong class="text-white">SQLite persistence</strong> with optional encryption</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-green mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span><strong class="text-white">SSH-based remote monitoring</strong> with bastion support</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Security -->
+        <div class="mb-10">
+          <h3 class="text-lg font-bold flex items-center gap-3 mb-5">
+            <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-red/10 text-red text-xs font-mono">!</span>
+            Security
+          </h3>
+          <ul class="space-y-3" role="list">
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-red mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span>19 security issues found and fixed across 4 code reviews</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-red mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span>Division-by-zero guards, f64 overflow protection</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-red mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span>WCAG AA contrast compliance across all themes</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-red mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span>Command line sanitization, UTF-8 safety</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Divider -->
+        <div class="h-px bg-gradient-to-r from-transparent via-border to-transparent my-16" aria-hidden="true"></div>
+      </article>
+
+      <!-- v1.0.0 -->
+      <article class="relative" aria-labelledby="v1-0-0">
+        <!-- Version header -->
+        <div class="flex items-center gap-4 mb-8">
+          <Badge variant="green" client:load>v1.0.0</Badge>
+          <time datetime="2025-01-15" class="text-sm text-muted font-mono">January 15, 2025</time>
+        </div>
+
+        <!-- Added -->
+        <div class="mb-10">
+          <h3 class="text-lg font-bold flex items-center gap-3 mb-5">
+            <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-green/10 text-green text-xs font-mono">+</span>
+            Added
+          </h3>
+          <ul class="space-y-3" role="list">
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-green mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span>Initial release with NVIDIA NVML-based GPU monitoring</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-green mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span>Memory leak detection algorithms</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-green mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span>CLI and basic TUI</span>
+            </li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </section>
+</BaseLayout>
