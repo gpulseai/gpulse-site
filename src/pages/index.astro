@@ -121,6 +121,115 @@ import { Card } from '../components/ui/Card';
     </div>
   </section>
 
+  <!-- ─── Who Uses gpulse Section ─── -->
+  <section class="py-24 md:py-32" aria-labelledby="personas-heading">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <SectionHeader
+        eyebrow="WHO USES GPULSE"
+        title="Built for everyone who works with GPUs"
+        subtitle="From solo researchers to platform teams managing hundreds of GPUs."
+      />
+
+      <div class="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- ML Engineers -->
+        <Card client:load>
+          <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-cyan/10 mb-6">
+            <svg class="w-6 h-6 text-cyan" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold mb-2">ML Engineers</h3>
+          <p class="text-muted text-sm leading-relaxed mb-4">
+            Stop losing training runs to OOM crashes. Predict memory exhaustion hours before it happens.
+          </p>
+          <p class="text-xs text-muted/60">
+            <span class="text-cyan/70 font-mono">Uses:</span> Predict mode, Detail view, Alerts
+          </p>
+        </Card>
+
+        <!-- Data Scientists -->
+        <Card client:load>
+          <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-cyan/10 mb-6">
+            <svg class="w-6 h-6 text-cyan" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Data Scientists</h3>
+          <p class="text-muted text-sm leading-relaxed mb-4">
+            Know if your GPU is actually being used — or if you forgot <code class="text-cyan/70 text-xs">.to('cuda')</code> again.
+          </p>
+          <p class="text-xs text-muted/60">
+            <span class="text-cyan/70 font-mono">Uses:</span> Grid view, Process table, Framework detection
+          </p>
+        </Card>
+
+        <!-- MLOps / Platform Teams -->
+        <Card client:load>
+          <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-cyan/10 mb-6">
+            <svg class="w-6 h-6 text-cyan" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3m3 3a3 3 0 100 6h13.5a3 3 0 100-6m-16.5-3a3 3 0 013-3h13.5a3 3 0 013 3m-19.5 0a4.5 4.5 0 01.9-2.7L5.737 5.1a3.375 3.375 0 012.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 01.9 2.7m0 0a3 3 0 01-3 3m0 3h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008zm-3 6h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold mb-2">MLOps / Platform Teams</h3>
+          <p class="text-muted text-sm leading-relaxed mb-4">
+            Fleet-wide GPU visibility across your cluster. Know who's using what, and where capacity is wasted.
+          </p>
+          <p class="text-xs text-muted/60">
+            <span class="text-cyan/70 font-mono">Uses:</span> Grid view, Prometheus endpoint, Compare mode
+          </p>
+        </Card>
+
+        <!-- Apple Silicon Users -->
+        <Card client:load>
+          <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-cyan/10 mb-6">
+            <svg class="w-6 h-6 text-cyan" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Mac Studio / Apple Silicon Users</h3>
+          <p class="text-muted text-sm leading-relaxed mb-4">
+            First-class unified memory monitoring. See GPU share, memory pressure, and swap — no other tool does this.
+          </p>
+          <p class="text-xs text-muted/60">
+            <span class="text-cyan/70 font-mono">Uses:</span> Detail view, Memory pressure, Predict mode
+          </p>
+        </Card>
+
+        <!-- SREs / DevOps -->
+        <Card client:load>
+          <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-cyan/10 mb-6">
+            <svg class="w-6 h-6 text-cyan" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0-10.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.25-8.25-3.286zm0 13.036h.008v.008H12v-.008z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold mb-2">SREs / DevOps</h3>
+          <p class="text-muted text-sm leading-relaxed mb-4">
+            Thermal alerts before your GPUs throttle. Detect hardware failures before they cascade into incidents.
+          </p>
+          <p class="text-xs text-muted/60">
+            <span class="text-cyan/70 font-mono">Uses:</span> Prometheus endpoint, Compare mode, Alerts
+          </p>
+        </Card>
+
+        <!-- Game Developers -->
+        <Card client:load>
+          <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-cyan/10 mb-6">
+            <svg class="w-6 h-6 text-cyan" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 01-.657.643 48.491 48.491 0 01-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 01-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 00-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 01-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 00.657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 01-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 005.427-.63 48.05 48.05 0 00.582-4.717.532.532 0 00-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.96.401v0a.656.656 0 00.657-.663 48.422 48.422 0 00-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 01-.61-.58v0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Game Developers</h3>
+          <p class="text-muted text-sm leading-relaxed mb-4">
+            Profile VRAM budgets and thermal throttling during development. Cross-vendor, always-on, zero setup.
+          </p>
+          <p class="text-xs text-muted/60">
+            <span class="text-cyan/70 font-mono">Uses:</span> Detail view, Grid view, Thermal monitoring
+          </p>
+        </Card>
+      </div>
+    </div>
+  </section>
+
   <!-- ─── Screenshot Showcase Section ─── -->
   <section class="py-24 md:py-32 bg-surface section-gradient-top" aria-labelledby="views-heading">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
