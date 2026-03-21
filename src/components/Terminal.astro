@@ -46,35 +46,56 @@ const elementId = `terminal-${Math.random().toString(36).slice(2, 9)}`;
   </div>
 </div>
 
-<script>
-  document.querySelectorAll<HTMLButtonElement>('[data-copy-target]').forEach((button) => {
-    button.addEventListener('click', async () => {
-      const targetId = button.getAttribute('data-copy-target');
-      if (!targetId) return;
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('[data-copy-target]').forEach(function(button) {
+      button.addEventListener('click', function() {
+        var targetId = button.getAttribute('data-copy-target');
+        if (!targetId) return;
 
-      const codeEl = document.getElementById(targetId);
-      if (!codeEl) return;
+        var codeEl = document.getElementById(targetId);
+        if (!codeEl) return;
 
-      // Get text content without the "$ " prompt
-      const text = codeEl.textContent?.replace(/^\$\s*/, '').trim() || '';
+        // Get text content without the "$ " prompt
+        var text = (codeEl.textContent || '').replace(/^\$\s*/, '').trim();
 
-      try {
-        await navigator.clipboard.writeText(text);
-        button.setAttribute('aria-label', 'Copied!');
-        button.classList.add('text-cyan');
-
-        setTimeout(() => {
-          button.classList.remove('text-cyan');
-          button.setAttribute('aria-label', `Copy command: ${text}`);
-        }, 2000);
-      } catch {
-        // Fallback: select the text
-        const range = document.createRange();
-        range.selectNodeContents(codeEl);
-        const selection = window.getSelection();
-        selection?.removeAllRanges();
-        selection?.addRange(range);
-      }
+        // Try clipboard API first, fallback to execCommand
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(text).then(function() {
+            showCopied(button, text);
+          }).catch(function() {
+            fallbackCopy(text, button);
+          });
+        } else {
+          fallbackCopy(text, button);
+        }
+      });
     });
+
+    function showCopied(button, text) {
+      button.setAttribute('aria-label', 'Copied!');
+      button.classList.add('text-cyan');
+      setTimeout(function() {
+        button.classList.remove('text-cyan');
+        button.setAttribute('aria-label', 'Copy command: ' + text);
+      }, 2000);
+    }
+
+    function fallbackCopy(text, button) {
+      var textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        showCopied(button, text);
+      } catch(e) {
+        // Last resort: select the text visually
+        console.warn('Copy failed:', e);
+      }
+      document.body.removeChild(textarea);
+    }
   });
 </script>
