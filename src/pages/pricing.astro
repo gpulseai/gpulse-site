@@ -240,6 +240,261 @@ import { Card } from '../components/ui/Card';
     </div>
   </section>
 
+  <!-- Detailed Comparison Table -->
+  <section class="py-24 md:py-32 bg-surface section-gradient-top" aria-labelledby="comparison-heading">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <SectionHeader
+        eyebrow="COMPARE"
+        title="What's in each tier?"
+        subtitle="Every tier includes full local GPU monitoring. Pro adds fleet visibility. Enterprise adds cloud-scale automation."
+      />
+
+      <div class="mt-16 overflow-x-auto -mx-4 px-4">
+        <table class="w-full min-w-[640px] border-collapse" role="grid">
+          <thead>
+            <tr class="border-b border-border">
+              <th class="text-left py-4 pr-4 text-sm font-semibold text-muted w-[40%]">Feature</th>
+              <th class="text-center py-4 px-4 text-sm font-semibold w-[20%]">Free</th>
+              <th class="text-center py-4 px-4 text-sm font-semibold w-[20%]">
+                <span class="inline-flex items-center gap-2">Pro <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-yellow/10 border border-yellow/20 text-yellow">PRO</span></span>
+              </th>
+              <th class="text-center py-4 px-4 text-sm font-semibold w-[20%]">
+                <span class="inline-flex items-center gap-2">Enterprise <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-purple/10 border border-purple/20 text-purple">ENT</span></span>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="text-sm">
+            <!-- Core Features group -->
+            <tr class="border-b border-border/50">
+              <td colspan="4" class="pt-6 pb-2 text-xs font-mono uppercase tracking-wider text-cyan">Core Monitoring</td>
+            </tr>
+            <tr class="border-b border-border/30 hover:bg-surface-elevated/50 transition-colors">
+              <td class="py-3 pr-4 text-muted">Local GPU monitoring</td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+            </tr>
+            <tr class="border-b border-border/30 hover:bg-surface-elevated/50 transition-colors">
+              <td class="py-3 pr-4 text-muted">Apple Silicon + NVIDIA + AMD + Intel</td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+            </tr>
+            <tr class="border-b border-border/30 hover:bg-surface-elevated/50 transition-colors">
+              <td class="py-3 pr-4 text-muted">15 themes, 7 view modes</td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+            </tr>
+            <tr class="border-b border-border/30 hover:bg-surface-elevated/50 transition-colors">
+              <td class="py-3 pr-4 text-muted">OOM prediction &amp; leak detection</td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+            </tr>
+            <tr class="border-b border-border/30 hover:bg-surface-elevated/50 transition-colors">
+              <td class="py-3 pr-4 text-muted">Per-process GPU attribution</td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+            </tr>
+            <tr class="border-b border-border/30 hover:bg-surface-elevated/50 transition-colors">
+              <td class="py-3 pr-4 text-muted">Prometheus /metrics endpoint</td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+            </tr>
+
+            <!-- Pro Features group -->
+            <tr class="border-b border-border/50">
+              <td colspan="4" class="pt-8 pb-2 text-xs font-mono uppercase tracking-wider text-yellow">Pro Features</td>
+            </tr>
+            <tr class="border-b border-border/30 hover:bg-surface-elevated/50 transition-colors">
+              <td class="py-3 pr-4 text-muted">Fleet monitoring (SSH, up to 20 machines)</td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+            </tr>
+            <tr class="border-b border-border/30 hover:bg-surface-elevated/50 transition-colors">
+              <td class="py-3 pr-4 text-muted">Email, Slack &amp; Discord alerts</td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+            </tr>
+            <tr class="border-b border-border/30 hover:bg-surface-elevated/50 transition-colors">
+              <td class="py-3 pr-4 text-muted">Memory bandwidth monitoring</td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+            </tr>
+            <tr class="border-b border-border/30 hover:bg-surface-elevated/50 transition-colors">
+              <td class="py-3 pr-4 text-muted">NVLink bandwidth &amp; error tracking</td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+            </tr>
+            <tr class="border-b border-border/30 hover:bg-surface-elevated/50 transition-colors">
+              <td class="py-3 pr-4 text-muted">ECC error monitoring</td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+            </tr>
+            <tr class="border-b border-border/30 hover:bg-surface-elevated/50 transition-colors">
+              <td class="py-3 pr-4 text-muted">Thermal throttle duration tracking</td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+            </tr>
+            <tr class="border-b border-border/30 hover:bg-surface-elevated/50 transition-colors">
+              <td class="py-3 pr-4 text-muted">Energy consumption tracking</td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+            </tr>
+            <tr class="border-b border-border/30 hover:bg-surface-elevated/50 transition-colors">
+              <td class="py-3 pr-4 text-muted">Web dashboard</td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+            </tr>
+            <tr class="border-b border-border/30 hover:bg-surface-elevated/50 transition-colors">
+              <td class="py-3 pr-4 text-muted">Priority support</td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+            </tr>
+
+            <!-- Enterprise Features group -->
+            <tr class="border-b border-border/50">
+              <td colspan="4" class="pt-8 pb-2 text-xs font-mono uppercase tracking-wider text-purple">Enterprise Features</td>
+            </tr>
+            <tr class="border-b border-border/30 hover:bg-surface-elevated/50 transition-colors">
+              <td class="py-3 pr-4 text-muted">Cloud API auto-discovery (AWS/Azure/GCP)</td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+            </tr>
+            <tr class="border-b border-border/30 hover:bg-surface-elevated/50 transition-colors">
+              <td class="py-3 pr-4 text-muted">Agent-based fleet monitoring (unlimited)</td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+            </tr>
+            <tr class="border-b border-border/30 hover:bg-surface-elevated/50 transition-colors">
+              <td class="py-3 pr-4 text-muted">K8s GPU pod monitoring</td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+            </tr>
+            <tr class="border-b border-border/30 hover:bg-surface-elevated/50 transition-colors">
+              <td class="py-3 pr-4 text-muted">Tensor core utilization</td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+            </tr>
+            <tr class="border-b border-border/30 hover:bg-surface-elevated/50 transition-colors">
+              <td class="py-3 pr-4 text-muted">SM/EU occupancy profiling</td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+            </tr>
+            <tr class="border-b border-border/30 hover:bg-surface-elevated/50 transition-colors">
+              <td class="py-3 pr-4 text-muted">MIG partition monitoring</td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+            </tr>
+            <tr class="border-b border-border/30 hover:bg-surface-elevated/50 transition-colors">
+              <td class="py-3 pr-4 text-muted">RBAC &amp; SSO (SAML, OIDC)</td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+            </tr>
+            <tr class="border-b border-border/30 hover:bg-surface-elevated/50 transition-colors">
+              <td class="py-3 pr-4 text-muted">GPU scheduling &amp; orchestration</td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+            </tr>
+            <tr class="border-b border-border/30 hover:bg-surface-elevated/50 transition-colors">
+              <td class="py-3 pr-4 text-muted">Custom alert policies &amp; escalation</td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+            </tr>
+            <tr class="border-b border-border/30 hover:bg-surface-elevated/50 transition-colors">
+              <td class="py-3 pr-4 text-muted">PagerDuty/OpsGenie integration</td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+            </tr>
+            <tr class="border-b border-border/30 hover:bg-surface-elevated/50 transition-colors">
+              <td class="py-3 pr-4 text-muted">Audit logs &amp; SLA</td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+            </tr>
+            <tr class="hover:bg-surface-elevated/50 transition-colors">
+              <td class="py-3 pr-4 text-muted">Dedicated support engineer</td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><span class="text-muted/40">&mdash;</span></td>
+              <td class="py-3 px-4 text-center"><svg class="w-5 h-5 text-cyan mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROI Section -->
+  <section class="py-24 md:py-32" aria-labelledby="roi-heading">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <SectionHeader
+        eyebrow="ROI"
+        title="Why Pro pays for itself"
+        subtitle="GPU compute is expensive. Wasted GPU time is more expensive. gpulse Pro catches problems before they cost you thousands."
+      />
+
+      <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2">
+        <!-- Stat 1 -->
+        <div class="rounded-2xl border border-border bg-dark/80 p-8 hover:border-cyan/30 transition-colors">
+          <p class="text-5xl md:text-6xl font-extrabold text-cyan">$30</p>
+          <p class="text-lg font-semibold mt-3">per idle H100 hour</p>
+          <p class="text-muted text-sm mt-2 leading-relaxed">
+            A single H100 sitting idle on cloud costs ~$30/hr. gpulse Pro at $29/mo catches just one hour of waste and you've already hit ROI.
+          </p>
+        </div>
+
+        <!-- Stat 2 -->
+        <div class="rounded-2xl border border-border bg-dark/80 p-8 hover:border-cyan/30 transition-colors">
+          <p class="text-5xl md:text-6xl font-extrabold text-cyan">$17,280</p>
+          <p class="text-lg font-semibold mt-3">to restart a crashed 72h training run</p>
+          <p class="text-muted text-sm mt-2 leading-relaxed">
+            A 72-hour training run on 8x H100s that crashes to OOM costs $17,280 to restart. OOM prediction preventing one crash pays for <span class="text-cyan font-semibold">50 years</span> of Pro.
+          </p>
+        </div>
+
+        <!-- Stat 3 -->
+        <div class="rounded-2xl border border-border bg-dark/80 p-8 hover:border-cyan/30 transition-colors">
+          <p class="text-5xl md:text-6xl font-extrabold text-cyan">1 hour</p>
+          <p class="text-lg font-semibold mt-3">to pay back your first month</p>
+          <p class="text-muted text-sm mt-2 leading-relaxed">
+            Pro monitors up to 20 machines. Catch one idle GPU for one hour on any of them and the subscription has already paid for itself.
+          </p>
+        </div>
+
+        <!-- Stat 4 -->
+        <div class="rounded-2xl border border-border bg-dark/80 p-8 hover:border-cyan/30 transition-colors">
+          <p class="text-5xl md:text-6xl font-extrabold text-cyan">0 min</p>
+          <p class="text-lg font-semibold mt-3">setup time</p>
+          <p class="text-muted text-sm mt-2 leading-relaxed">
+            No agents to deploy, no config files to write. SSH into your cloud VMs (AWS, Azure, GCP) or on-prem servers and start monitoring immediately.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Pricing FAQ -->
   <section class="py-24 md:py-32 bg-surface section-gradient-top" aria-labelledby="pricing-faq-heading">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">

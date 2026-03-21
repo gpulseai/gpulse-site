@@ -121,6 +121,82 @@ import { Card } from '../components/ui/Card';
     </div>
   </section>
 
+  <!-- ─── Scale Section ─── -->
+  <section class="py-24 md:py-32 bg-surface section-gradient-top" aria-labelledby="scale-heading">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <SectionHeader
+        eyebrow="SCALE"
+        title="From laptop to fleet"
+        subtitle="Start with local monitoring. Scale to 20 machines with Pro. Go unlimited with Enterprise cloud integration."
+      />
+
+      <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
+        <!-- Local (Free) -->
+        <div class="rounded-2xl border border-border bg-dark/80 p-8 hover:border-cyan/30 transition-all duration-300">
+          <div class="flex items-center justify-center w-14 h-14 rounded-xl bg-cyan/10 mb-6">
+            <svg class="w-7 h-7 text-cyan" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
+            </svg>
+          </div>
+          <div class="flex items-center gap-3 mb-3">
+            <h3 class="text-xl font-bold">Local</h3>
+            <span class="text-xs text-muted font-mono">FREE</span>
+          </div>
+          <p class="text-lg text-muted mb-4">Monitor GPUs on your machine</p>
+          <p class="text-sm text-muted/70 leading-relaxed">
+            Install and run. No account needed. Full OOM prediction, 15 themes, 7 view modes, and Prometheus endpoint included.
+          </p>
+        </div>
+
+        <!-- Fleet (Pro) -->
+        <div class="rounded-2xl border border-yellow/20 bg-dark/80 p-8 hover:border-yellow/40 transition-all duration-300 relative">
+          <div class="absolute top-4 right-4">
+            <Badge variant="yellow" client:load>PRO</Badge>
+          </div>
+          <div class="flex items-center justify-center w-14 h-14 rounded-xl bg-yellow/10 mb-6">
+            <svg class="w-7 h-7 text-yellow" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3m3 3a3 3 0 100 6h13.5a3 3 0 100-6m-16.5-3a3 3 0 013-3h13.5a3 3 0 013 3m-19.5 0a4.5 4.5 0 01.9-2.7L5.737 5.1a3.375 3.375 0 012.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 01.9 2.7m0 0a3 3 0 01-3 3m0 3h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008zm-3 6h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008z" />
+            </svg>
+          </div>
+          <div class="flex items-center gap-3 mb-3">
+            <h3 class="text-xl font-bold">Fleet</h3>
+            <span class="text-xs text-yellow font-mono">$29/mo</span>
+          </div>
+          <p class="text-lg text-muted mb-4">Monitor up to 20 machines via SSH</p>
+          <p class="text-sm text-muted/70 leading-relaxed">
+            SSH into cloud VMs (AWS, Azure, GCP) or on-prem servers. Bastion/jump host support. Email, Slack, and Discord alerts. Advanced hardware metrics.
+          </p>
+        </div>
+
+        <!-- Cloud-Scale (Enterprise) -->
+        <div class="rounded-2xl border border-purple/20 bg-dark/80 p-8 hover:border-purple/40 transition-all duration-300 relative">
+          <div class="absolute top-4 right-4">
+            <Badge variant="purple" client:load>ENT</Badge>
+          </div>
+          <div class="flex items-center justify-center w-14 h-14 rounded-xl bg-purple/10 mb-6">
+            <svg class="w-7 h-7 text-purple" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z" />
+            </svg>
+          </div>
+          <div class="flex items-center gap-3 mb-3">
+            <h3 class="text-xl font-bold">Cloud-Scale</h3>
+            <span class="text-xs text-purple font-mono">CUSTOM</span>
+          </div>
+          <p class="text-lg text-muted mb-4">Auto-discover GPU instances across clouds</p>
+          <p class="text-sm text-muted/70 leading-relaxed">
+            Cloud API integration for AWS, Azure, and GCP. K8s DaemonSet deployment. Agent-based push for unlimited machines. RBAC, SSO, and audit logs.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-12 text-center">
+        <Button variant="secondary" size="lg" href="/pricing" client:load>
+          Compare all features
+        </Button>
+      </div>
+    </div>
+  </section>
+
   <!-- ─── Who Uses gpulse Section ─── -->
   <section class="py-24 md:py-32" aria-labelledby="personas-heading">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
