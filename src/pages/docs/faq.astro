@@ -1,0 +1,119 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+  title="FAQ — gpulse"
+  description="Frequently asked questions about gpulse GPU monitoring tool. Supported GPUs, Linux support, OOM prediction, data privacy, and more."
+>
+  <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Frequently Asked Questions</h1>
+  <p class="mt-4 text-lg text-muted leading-relaxed">
+    Answers to the most common questions about gpulse.
+  </p>
+
+  <!-- GPU Support -->
+  <h2 class="mt-12 text-2xl font-bold">What GPUs are supported?</h2>
+  <p class="mt-4 text-muted">
+    gpulse supports four GPU vendors out of the box:
+  </p>
+  <ul class="mt-3 space-y-2 text-muted list-disc pl-6">
+    <li><strong class="text-white">NVIDIA</strong> — via NVML (NVIDIA Management Library). Requires NVIDIA drivers 450.0 or later.</li>
+    <li><strong class="text-white">Apple Silicon</strong> — via Metal and IOKit. Works on M1, M2, M3, and M4 chips.</li>
+    <li><strong class="text-white">AMD</strong> — via ROCm. Requires ROCm 5.0 or later on supported Linux distributions.</li>
+    <li><strong class="text-white">Intel</strong> — via Level Zero. Supports Intel Arc and Data Center GPU Max series.</li>
+  </ul>
+  <p class="mt-3 text-muted">
+    gpulse auto-detects your GPU vendor at startup. No configuration is needed to select the right driver interface.
+  </p>
+
+  <!-- Linux Support -->
+  <h2 class="mt-12 text-2xl font-bold">Does gpulse work on Linux?</h2>
+  <p class="mt-4 text-muted">
+    gpulse currently supports <strong class="text-white">macOS</strong> (both Apple Silicon and Intel). Linux support with NVIDIA and AMD GPUs is actively in development and will be available in a future release. Sign up for the newsletter to be notified.
+  </p>
+
+  <!-- OOM Prediction -->
+  <h2 class="mt-12 text-2xl font-bold">How does OOM prediction work?</h2>
+  <p class="mt-4 text-muted">
+    gpulse uses three detection algorithms running in real time:
+  </p>
+  <ol class="mt-3 space-y-2 text-muted list-decimal pl-6">
+    <li><strong class="text-white">LinearTrendDetector</strong> — performs least-squares linear regression on memory usage over time. If the slope is positive and R² exceeds the threshold, it flags a leak and calculates time to OOM.</li>
+    <li><strong class="text-white">SpikeDetector</strong> — detects sudden large increases in memory within a sliding time window.</li>
+    <li><strong class="text-white">CompositeDetector</strong> — runs both detectors and returns the highest-confidence result.</li>
+  </ol>
+  <p class="mt-3 text-muted">
+    See <a href="/docs/leak-detection" class="text-cyan underline underline-offset-4 hover:text-cyan-dark transition-colors">Leak Detection</a> for a deep dive into the algorithms.
+  </p>
+
+  <!-- Data Privacy -->
+  <h2 class="mt-12 text-2xl font-bold">What data does gpulse collect?</h2>
+  <p class="mt-4 text-muted">
+    <strong class="text-white">None.</strong> gpulse monitors your local GPU hardware and does not send any data anywhere. There is no telemetry, no analytics, and no phone-home behavior. All processing happens on your machine. Your GPU metrics, process names, and system information never leave your device.
+  </p>
+
+  <!-- Open Source -->
+  <h2 class="mt-12 text-2xl font-bold">Is gpulse open source?</h2>
+  <p class="mt-4 text-muted">
+    The free tier is free to use, but the source code is not publicly available. gpulse is distributed as a compiled binary. This allows us to offer a high-quality product while maintaining the ability to fund continued development through Pro and Enterprise tiers.
+  </p>
+
+  <!-- Difference from nvidia-smi -->
+  <h2 class="mt-12 text-2xl font-bold">How is gpulse different from nvidia-smi?</h2>
+  <p class="mt-4 text-muted">
+    <code class="font-mono text-sm text-cyan bg-surface px-1.5 py-0.5 rounded">nvidia-smi</code> is a snapshot tool that shows current state. gpulse is a real-time monitoring dashboard that:
+  </p>
+  <ul class="mt-3 space-y-2 text-muted list-disc pl-6">
+    <li>Updates continuously without re-running a command</li>
+    <li>Provides 7 specialized view modes for different tasks</li>
+    <li>Runs memory leak detection algorithms with OOM time prediction</li>
+    <li>Supports Apple Silicon, AMD, and Intel (not just NVIDIA)</li>
+    <li>Includes 15 color themes with accessibility options</li>
+    <li>Offers process management (filter, sort, kill) from within the UI</li>
+  </ul>
+
+  <!-- Multi-GPU -->
+  <h2 class="mt-12 text-2xl font-bold">Can I monitor multiple GPUs?</h2>
+  <p class="mt-4 text-muted">
+    Yes. gpulse automatically detects all GPUs in your system and shows them simultaneously. Grid view tiles all GPUs, Compare view shows them side by side, and you can press <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">1</kbd>-<kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">8</kbd> to jump to a specific GPU.
+  </p>
+
+  <!-- Demo Mode -->
+  <h2 class="mt-12 text-2xl font-bold">Can I try gpulse without a GPU?</h2>
+  <p class="mt-4 text-muted">
+    Yes. Demo mode simulates GPUs with realistic workload data:
+  </p>
+  <pre class="mt-3 rounded-xl border border-border bg-[#0d0d0d] px-5 py-4 overflow-x-auto"><code class="font-mono text-sm text-muted leading-relaxed">gpulse dashboard --demo nvidia:4</code></pre>
+  <p class="mt-3 text-muted">
+    This simulates 4 NVIDIA GPUs with active workloads, temperature fluctuations, and even memory leak patterns so you can explore every view mode.
+  </p>
+
+  <!-- Performance Impact -->
+  <h2 class="mt-12 text-2xl font-bold">Does gpulse affect GPU performance?</h2>
+  <p class="mt-4 text-muted">
+    gpulse is designed to have negligible overhead. It reads GPU metrics through vendor-provided libraries (NVML, Metal, ROCm, Level Zero) that are specifically designed for monitoring. Typical resource usage:
+  </p>
+  <ul class="mt-3 space-y-1 text-muted list-disc pl-6">
+    <li>CPU: &lt;1% on a single core</li>
+    <li>Memory: ~20 MB resident</li>
+    <li>GPU impact: none (reads metrics only, does not allocate GPU memory)</li>
+  </ul>
+
+  <!-- Prometheus -->
+  <h2 class="mt-12 text-2xl font-bold">Can I export metrics to Prometheus / Grafana?</h2>
+  <p class="mt-4 text-muted">
+    Yes. gpulse includes a built-in Prometheus metrics endpoint that you can scrape at a configurable address (default <code class="font-mono text-sm text-cyan bg-surface px-1.5 py-0.5 rounded">localhost:9090/metrics</code>). This exposes all GPU metrics in Prometheus format, ready for Grafana dashboards.
+  </p>
+
+  <!-- Bug Reports -->
+  <h2 class="mt-12 text-2xl font-bold">How do I report bugs or request features?</h2>
+  <p class="mt-4 text-muted">
+    Email us at <a href="mailto:info@gpulse.ai" class="text-cyan underline underline-offset-4 hover:text-cyan-dark transition-colors">info@gpulse.ai</a>. We read every message and typically respond within 24 hours. Include your gpulse version (<code class="font-mono text-sm text-cyan bg-surface px-1.5 py-0.5 rounded">gpulse --version</code>), OS version, and GPU model when reporting bugs.
+  </p>
+
+  <!-- Fleet / Multi-Machine -->
+  <h2 class="mt-12 text-2xl font-bold">Can I monitor GPUs on remote machines?</h2>
+  <p class="mt-4 text-muted">
+    Fleet monitoring for multi-machine setups is coming in the <strong class="text-white">Pro tier</strong>. It will support monitoring up to 20 machines via SSH with a unified dashboard. <a href="mailto:info@gpulse.ai" class="text-cyan underline underline-offset-4 hover:text-cyan-dark transition-colors">Join the waitlist</a> to be notified when it launches.
+  </p>
+</DocsLayout>

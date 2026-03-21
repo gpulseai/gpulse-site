@@ -1,0 +1,264 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+import Screenshot from '../../components/Screenshot.astro';
+---
+
+<DocsLayout
+  title="Leak Detection — gpulse"
+  description="How gpulse detects GPU memory leaks using three algorithms: LinearTrendDetector, SpikeDetector, and CompositeDetector. Understand growth rates, R², confidence, and ETA to OOM."
+>
+  <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Leak Detection</h1>
+  <p class="mt-4 text-lg text-muted leading-relaxed">
+    gpulse's leak detection engine continuously analyzes GPU memory usage patterns and predicts out-of-memory events before they crash your workload. It uses three pluggable detection algorithms running in real time.
+  </p>
+
+  <Screenshot
+    src="/screenshots/predict-leak-detected.png"
+    alt="gpulse Predict view showing a risk overview with GPU 0 flagged as HIGH risk, linear trend detector output, and ETA to OOM"
+    caption="A leak detected with high confidence — the Predict view shows the growth rate, R², and estimated time to OOM"
+    class="mt-8"
+    glow={false}
+  />
+
+  <!-- Algorithms -->
+  <h2 class="mt-12 text-2xl font-bold">Detection Algorithms</h2>
+  <p class="mt-4 text-muted">
+    gpulse ships with three detection algorithms. By default, the CompositeDetector runs both sub-algorithms and returns the highest-confidence result.
+  </p>
+
+  <h3 class="mt-8 text-lg font-semibold">1. LinearTrendDetector</h3>
+  <p class="mt-2 text-muted">
+    Performs least-squares linear regression on memory usage over time. If the slope is positive and the R² value exceeds the configured threshold, it flags a leak.
+  </p>
+  <div class="mt-4 space-y-3">
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h4 class="text-sm font-semibold">How It Works</h4>
+      <p class="mt-1 text-sm text-muted">
+        Collects memory snapshots at the configured sampling interval. Fits a line <code class="font-mono text-xs text-cyan bg-dark px-1 py-0.5 rounded">y = mx + b</code> where <code class="font-mono text-xs text-cyan bg-dark px-1 py-0.5 rounded">y</code> is VRAM usage and <code class="font-mono text-xs text-cyan bg-dark px-1 py-0.5 rounded">x</code> is time. The slope <code class="font-mono text-xs text-cyan bg-dark px-1 py-0.5 rounded">m</code> is the growth rate. R² measures how well the data fits the line.
+      </p>
+    </div>
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h4 class="text-sm font-semibold">Best For</h4>
+      <p class="mt-1 text-sm text-muted">
+        Gradual, steady memory growth typical of training loops with accumulating tensors, unreleased CUDA contexts, or growing optimizer state.
+      </p>
+    </div>
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h4 class="text-sm font-semibold">Default Thresholds</h4>
+      <ul class="mt-1 text-sm text-muted list-disc pl-5">
+        <li>Minimum R²: 0.7 (configurable)</li>
+        <li>Minimum slope: 1 MB/s (configurable)</li>
+        <li>Minimum analysis duration: 5 minutes</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="mt-8 text-lg font-semibold">2. SpikeDetector</h3>
+  <p class="mt-2 text-muted">
+    Detects sudden, large increases in memory usage within a sliding time window. Unlike the trend detector, it does not require a sustained linear pattern.
+  </p>
+  <div class="mt-4 space-y-3">
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h4 class="text-sm font-semibold">How It Works</h4>
+      <p class="mt-1 text-sm text-muted">
+        Compares memory usage at the start and end of a configurable window (default: 30 seconds). If the increase exceeds the spike percentage threshold, it fires. Useful for catching allocation bursts.
+      </p>
+    </div>
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h4 class="text-sm font-semibold">Best For</h4>
+      <p class="mt-1 text-sm text-muted">
+        Sudden allocation bursts during batch processing, model loading events, or resource exhaustion scenarios where memory jumps in large steps rather than growing linearly.
+      </p>
+    </div>
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h4 class="text-sm font-semibold">Default Thresholds</h4>
+      <ul class="mt-1 text-sm text-muted list-disc pl-5">
+        <li>Spike percentage: 20% increase</li>
+        <li>Time window: 30 seconds</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="mt-8 text-lg font-semibold">3. CompositeDetector</h3>
+  <p class="mt-2 text-muted">
+    Runs both LinearTrendDetector and SpikeDetector in parallel, then returns the result with the highest confidence score. This is the default detector.
+  </p>
+  <div class="mt-4 rounded-xl border border-border bg-surface p-4">
+    <h4 class="text-sm font-semibold">Why Use Composite</h4>
+    <p class="mt-1 text-sm text-muted">
+      You do not need to know what kind of leak you are looking for. The composite approach catches both gradual leaks and sudden spikes with a single configuration. It is the recommended default for unknown or heterogeneous workloads.
+    </p>
+  </div>
+
+  <!-- Reading the Output -->
+  <h2 class="mt-12 text-2xl font-bold">Reading the Predict View Output</h2>
+  <p class="mt-4 text-muted">
+    When you press <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-sm text-cyan">P</kbd> to open Predict view, the following metrics appear for each GPU:
+  </p>
+
+  <div class="mt-6 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold">Metric</th>
+          <th class="px-4 py-3 text-left font-semibold">Meaning</th>
+          <th class="px-4 py-3 text-left font-semibold">Example</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3 font-semibold">Growth Rate</td>
+          <td class="px-4 py-3 text-muted">Rate of memory increase per unit time</td>
+          <td class="px-4 py-3"><code class="font-mono text-xs text-cyan">12.4 MB/min</code></td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 font-semibold">R²</td>
+          <td class="px-4 py-3 text-muted">Goodness of fit (0.0 = no trend, 1.0 = perfect line)</td>
+          <td class="px-4 py-3"><code class="font-mono text-xs text-cyan">0.982</code></td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 font-semibold">Confidence</td>
+          <td class="px-4 py-3 text-muted">Composite score combining R², slope significance, and pattern</td>
+          <td class="px-4 py-3"><code class="font-mono text-xs text-cyan">91%</code></td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 font-semibold">ETA to OOM</td>
+          <td class="px-4 py-3 text-muted">Projected time until VRAM exhaustion</td>
+          <td class="px-4 py-3"><code class="font-mono text-xs text-cyan">0h 47m</code></td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 font-semibold">Detector</td>
+          <td class="px-4 py-3 text-muted">Which algorithm produced the result</td>
+          <td class="px-4 py-3"><code class="font-mono text-xs text-cyan">LinearTrend</code></td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 font-semibold">Pattern</td>
+          <td class="px-4 py-3 text-muted">Classified leak pattern type</td>
+          <td class="px-4 py-3"><code class="font-mono text-xs text-cyan">Gradual Leak</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pattern Types -->
+  <h2 class="mt-12 text-2xl font-bold">Pattern Types</h2>
+  <p class="mt-4 text-muted">
+    The pattern recognition engine classifies detected leaks into one of five categories:
+  </p>
+
+  <div class="mt-6 space-y-4">
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">Gradual Leak</h3>
+      <p class="mt-1 text-sm text-muted">
+        Steady, linear memory growth over time. Common in training loops where tensors accumulate due to missing <code class="font-mono text-xs text-cyan bg-dark px-1 py-0.5 rounded">del</code> or <code class="font-mono text-xs text-cyan bg-dark px-1 py-0.5 rounded">torch.cuda.empty_cache()</code> calls. R² is typically high (0.9+).
+      </p>
+    </div>
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">Sudden Spike</h3>
+      <p class="mt-1 text-sm text-muted">
+        A large, one-time jump in memory. Often caused by loading a new model, opening a large dataset, or a batch size that exceeds expectations. Check if the spike is followed by stabilization (expected) or continued growth (problem).
+      </p>
+    </div>
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">Cyclic</h3>
+      <p class="mt-1 text-sm text-muted">
+        Memory rises and falls in a repeating pattern, but the peaks gradually increase over time. Typical of batch processing where each cycle leaks a small amount. The net effect is slow growth hiding inside normal-looking oscillations.
+      </p>
+    </div>
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">Step Increase</h3>
+      <p class="mt-1 text-sm text-muted">
+        Memory increases in discrete jumps separated by stable plateaus. Common when a process periodically allocates a new buffer or loads additional model layers without releasing previous ones.
+      </p>
+    </div>
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">Unknown</h3>
+      <p class="mt-1 text-sm text-muted">
+        The data does not clearly match any recognized pattern. May occur when there is too little data, too much noise, or a genuinely novel memory behavior.
+      </p>
+    </div>
+  </div>
+
+  <!-- Framework Detection -->
+  <h2 class="mt-12 text-2xl font-bold">Framework Detection</h2>
+  <p class="mt-4 text-muted">
+    gpulse identifies the ML framework responsible for GPU processes, which helps contextualize the leak:
+  </p>
+
+  <div class="mt-6 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold">Framework</th>
+          <th class="px-4 py-3 text-left font-semibold">Detection Method</th>
+          <th class="px-4 py-3 text-left font-semibold">Common Leak Causes</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3 font-semibold">PyTorch</td>
+          <td class="px-4 py-3 text-muted">Process name, linked libraries</td>
+          <td class="px-4 py-3 text-muted">Retained computation graphs, growing loss history, unclosed DataLoaders</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 font-semibold">TensorFlow</td>
+          <td class="px-4 py-3 text-muted">Process name, linked libraries</td>
+          <td class="px-4 py-3 text-muted">Session accumulation, eager mode tensor leaks, TensorBoard writer buffers</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 font-semibold">JAX</td>
+          <td class="px-4 py-3 text-muted">Process name, XLA indicators</td>
+          <td class="px-4 py-3 text-muted">JIT cache growth, unreleased XLA buffers</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 font-semibold">Ollama</td>
+          <td class="px-4 py-3 text-muted">Process name <code class="font-mono text-xs text-cyan bg-dark px-1 py-0.5 rounded">ollama</code></td>
+          <td class="px-4 py-3 text-muted">Context window accumulation, concurrent model loading</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 font-semibold">MLX</td>
+          <td class="px-4 py-3 text-muted">Metal API indicators</td>
+          <td class="px-4 py-3 text-muted">Array accumulation on Apple Silicon unified memory</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Configuration -->
+  <h2 class="mt-12 text-2xl font-bold">Configuration</h2>
+  <p class="mt-4 text-muted">
+    Detection thresholds can be tuned in the configuration file. The defaults work well for most workloads, but you can adjust sensitivity if you experience false positives or missed detections.
+  </p>
+
+  <div class="mt-4">
+    <CodeBlock code={`[detection]
+# Minimum R² for trend significance (0.0-1.0)
+min-r-squared = 0.8
+
+# Minimum slope for leak classification (MB/sec)
+min-slope-mb-per-sec = 1.0
+
+# Confidence threshold for leak alerts (0.0-1.0)
+confidence-threshold = 0.75
+
+# Minimum samples required before analysis starts
+minimum-samples = 20
+
+# Analysis window in hours
+analysis-window-hours = 1.0`} language="toml" />
+  </div>
+
+  <p class="mt-4 text-sm text-muted">
+    See <a href="/docs/configuration" class="text-cyan underline underline-offset-4 hover:text-cyan-dark transition-colors">Configuration</a> for the full reference.
+  </p>
+
+  <!-- Tips -->
+  <h2 class="mt-12 text-2xl font-bold">Tips</h2>
+  <ul class="mt-4 space-y-3 text-muted list-disc pl-6">
+    <li><strong class="text-white">Give it time.</strong> The detector needs at least 20 samples (default) before it has enough data to analyze. With a 30-second interval, that is about 10 minutes of data.</li>
+    <li><strong class="text-white">R² below 0.7 is usually noise.</strong> Memory fluctuations are normal. Only R² above 0.8 strongly suggests a real trend.</li>
+    <li><strong class="text-white">Check the suspected process.</strong> The Predict view names the process most likely causing the leak. Use <kbd class="rounded border border-border bg-dark px-1.5 py-0.5 font-mono text-xs text-cyan">d</kbd> to switch to Detail view and examine it further.</li>
+    <li><strong class="text-white">False positives happen.</strong> If a workload legitimately grows over time (e.g., loading checkpoints), it may trigger a detection. Adjust <code class="font-mono text-sm text-cyan bg-surface px-1.5 py-0.5 rounded">confidence-threshold</code> upward to reduce false alerts.</li>
+  </ul>
+</DocsLayout>

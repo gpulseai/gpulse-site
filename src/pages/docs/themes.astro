@@ -1,0 +1,141 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+  title="Themes — gpulse"
+  description="15 built-in color themes for gpulse including Monokai, Dracula, Catppuccin, Nord, and accessibility-optimized colorblind-safe options."
+>
+  <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Themes</h1>
+  <p class="mt-4 text-lg text-muted leading-relaxed">
+    gpulse ships with 15 built-in color themes. Press <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-sm text-cyan">t</kbd> to cycle through them in real time. Your selection is remembered across sessions.
+  </p>
+
+  <h2 class="mt-12 text-2xl font-bold">All Themes</h2>
+  <p class="mt-4 text-muted">
+    The following table lists every theme with its palette description. Themes are listed in cycle order.
+  </p>
+
+  <div class="mt-6 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold w-8">#</th>
+          <th class="px-4 py-3 text-left font-semibold">Theme</th>
+          <th class="px-4 py-3 text-left font-semibold">Description</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3 text-muted">1</td>
+          <td class="px-4 py-3 font-semibold">Monokai <span class="text-xs text-cyan font-normal">(default)</span></td>
+          <td class="px-4 py-3 text-muted">Classic dark background with vibrant syntax colors — green, orange, pink, purple. A beloved editor staple.</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">2</td>
+          <td class="px-4 py-3 font-semibold">Dark</td>
+          <td class="px-4 py-3 text-muted">Minimal dark theme with muted grays and white accents. Clean and distraction-free.</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">3</td>
+          <td class="px-4 py-3 font-semibold">Dracula</td>
+          <td class="px-4 py-3 text-muted">Deep purple-gray background with cyan, green, orange, pink, and purple accents. The popular Dracula palette.</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">4</td>
+          <td class="px-4 py-3 font-semibold">Catppuccin Mocha</td>
+          <td class="px-4 py-3 text-muted">Warm dark base with pastel accents — rosewater, flamingo, pink, mauve, lavender. Soothing eye candy.</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">5</td>
+          <td class="px-4 py-3 font-semibold">Tokyo Night</td>
+          <td class="px-4 py-3 text-muted">Dark blue-gray background with cool blue, cyan, and magenta highlights. Inspired by Tokyo city lights.</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">6</td>
+          <td class="px-4 py-3 font-semibold">Nord</td>
+          <td class="px-4 py-3 text-muted">Arctic, blue-tinted palette with frost-inspired accent colors. Low contrast, easy on the eyes during long sessions.</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">7</td>
+          <td class="px-4 py-3 font-semibold">One Dark</td>
+          <td class="px-4 py-3 text-muted">The Atom editor's One Dark theme — dark background with well-balanced blue, green, red, and orange accents.</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">8</td>
+          <td class="px-4 py-3 font-semibold">Gruvbox Dark</td>
+          <td class="px-4 py-3 text-muted">Retro, earthy tones with warm orange, yellow, and green on a dark brown background. High readability.</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">9</td>
+          <td class="px-4 py-3 font-semibold">btop</td>
+          <td class="px-4 py-3 text-muted">Inspired by btop++, the system monitor. Vibrant neon colors on a dark background with bold accents.</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">10</td>
+          <td class="px-4 py-3 font-semibold">Solarized Dark</td>
+          <td class="px-4 py-3 text-muted">Ethan Schoonover's Solarized dark variant — deep blue-green base with carefully calibrated accent colors.</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">11</td>
+          <td class="px-4 py-3 font-semibold">Light</td>
+          <td class="px-4 py-3 text-muted">Clean white background with dark text. For well-lit environments and users who prefer light interfaces.</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">12</td>
+          <td class="px-4 py-3 font-semibold">Solarized Light</td>
+          <td class="px-4 py-3 text-muted">The light variant of Solarized — warm cream background with the same calibrated accent colors as Solarized Dark.</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">13</td>
+          <td class="px-4 py-3 font-semibold">High Contrast</td>
+          <td class="px-4 py-3 text-muted">Pure black background with bright white text and vivid accent colors. Maximum contrast for accessibility and outdoor use.</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">14</td>
+          <td class="px-4 py-3 font-semibold">Colorblind Safe</td>
+          <td class="px-4 py-3 text-muted">Dark theme using only blue-orange color pairs that are distinguishable by users with protanopia, deuteranopia, and tritanopia.</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">15</td>
+          <td class="px-4 py-3 font-semibold">Colorblind Safe Light</td>
+          <td class="px-4 py-3 text-muted">Light variant of the colorblind-safe palette. Same blue-orange color pairs on a white background.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="mt-12 text-2xl font-bold">Switching Themes</h2>
+  <p class="mt-4 text-muted">
+    Press <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-sm text-cyan">t</kbd> at any time to cycle to the next theme. The change is instant and your selection persists across sessions — gpulse saves your preference to the config file.
+  </p>
+  <p class="mt-3 text-muted">
+    You can also set the theme in your configuration file:
+  </p>
+  <div class="mt-4">
+    <pre class="rounded-xl border border-border bg-[#0d0d0d] px-5 py-4 overflow-x-auto"><code class="font-mono text-sm text-muted leading-relaxed">[ui]
+theme = "catppuccin-mocha"</code></pre>
+  </div>
+  <p class="mt-3 text-sm text-muted">
+    Valid theme names (kebab-case): <code class="font-mono text-xs text-cyan bg-surface px-1 py-0.5 rounded">monokai</code>, <code class="font-mono text-xs text-cyan bg-surface px-1 py-0.5 rounded">dark</code>, <code class="font-mono text-xs text-cyan bg-surface px-1 py-0.5 rounded">dracula</code>, <code class="font-mono text-xs text-cyan bg-surface px-1 py-0.5 rounded">catppuccin-mocha</code>, <code class="font-mono text-xs text-cyan bg-surface px-1 py-0.5 rounded">tokyo-night</code>, <code class="font-mono text-xs text-cyan bg-surface px-1 py-0.5 rounded">nord</code>, <code class="font-mono text-xs text-cyan bg-surface px-1 py-0.5 rounded">one-dark</code>, <code class="font-mono text-xs text-cyan bg-surface px-1 py-0.5 rounded">gruvbox-dark</code>, <code class="font-mono text-xs text-cyan bg-surface px-1 py-0.5 rounded">btop</code>, <code class="font-mono text-xs text-cyan bg-surface px-1 py-0.5 rounded">solarized-dark</code>, <code class="font-mono text-xs text-cyan bg-surface px-1 py-0.5 rounded">light</code>, <code class="font-mono text-xs text-cyan bg-surface px-1 py-0.5 rounded">solarized-light</code>, <code class="font-mono text-xs text-cyan bg-surface px-1 py-0.5 rounded">high-contrast</code>, <code class="font-mono text-xs text-cyan bg-surface px-1 py-0.5 rounded">colorblind-safe</code>, <code class="font-mono text-xs text-cyan bg-surface px-1 py-0.5 rounded">colorblind-safe-light</code>.
+  </p>
+
+  <h2 class="mt-12 text-2xl font-bold">Accessibility</h2>
+  <p class="mt-4 text-muted">
+    gpulse includes three themes specifically designed for accessibility:
+  </p>
+  <ul class="mt-4 space-y-3 text-muted list-disc pl-6">
+    <li>
+      <strong class="text-white">High Contrast</strong> — for users who need maximum contrast, outdoor environments, or low-quality monitors. Pure black/white base with vivid accents.
+    </li>
+    <li>
+      <strong class="text-white">Colorblind Safe</strong> — uses only blue and orange accent colors, which remain distinguishable across protanopia (red-blind), deuteranopia (green-blind), and tritanopia (blue-blind). Status is conveyed through shape and text in addition to color.
+    </li>
+    <li>
+      <strong class="text-white">Colorblind Safe Light</strong> — the same colorblind-safe palette on a light background for users who prefer light interfaces.
+    </li>
+  </ul>
+  <p class="mt-4 text-sm text-muted">
+    In all themes, gpulse uses text labels alongside color indicators (e.g., "OK", "WARN", "CRIT") so that status is never communicated by color alone.
+  </p>
+</DocsLayout>

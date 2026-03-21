@@ -1,0 +1,245 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+  title="Keyboard Shortcuts — gpulse"
+  description="Complete keyboard shortcut reference for gpulse. Navigate views, manage processes, toggle themes, and control the dashboard entirely from the keyboard."
+>
+  <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Keyboard Shortcuts</h1>
+  <p class="mt-4 text-lg text-muted leading-relaxed">
+    gpulse is designed for keyboard-first navigation. Every action is a single keystroke away — no modifier keys required for the most common operations.
+  </p>
+  <p class="mt-2 text-muted">
+    Press <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-sm text-cyan">?</kbd> at any time to see a context-aware help overlay showing shortcuts available in your current view.
+  </p>
+
+  <!-- Navigation -->
+  <h2 class="mt-12 text-2xl font-bold">Navigation</h2>
+  <p class="mt-4 text-sm text-muted">Switch between views and navigate the interface.</p>
+
+  <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold w-32">Key</th>
+          <th class="px-4 py-3 text-left font-semibold">Action</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">v</kbd></td>
+          <td class="px-4 py-3 text-muted">Cycle through views (Grid, List, etc.)</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">d</kbd></td>
+          <td class="px-4 py-3 text-muted">Detail view — deep dive into selected GPU</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">c</kbd></td>
+          <td class="px-4 py-3 text-muted">Compare view — side-by-side GPU comparison</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">g</kbd></td>
+          <td class="px-4 py-3 text-muted">Topology view — GPU interconnect diagram</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">P</kbd></td>
+          <td class="px-4 py-3 text-muted">Predict view — OOM prediction and leak detection</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">F</kbd></td>
+          <td class="px-4 py-3 text-muted">Fleet view — multi-machine monitoring (Pro)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- General -->
+  <h2 class="mt-12 text-2xl font-bold">General</h2>
+  <p class="mt-4 text-sm text-muted">Available in all views.</p>
+
+  <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold w-32">Key</th>
+          <th class="px-4 py-3 text-left font-semibold">Action</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">q</kbd></td>
+          <td class="px-4 py-3 text-muted">Quit gpulse</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">?</kbd></td>
+          <td class="px-4 py-3 text-muted">Show help overlay with available shortcuts</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">t</kbd></td>
+          <td class="px-4 py-3 text-muted">Cycle to next theme</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">p</kbd></td>
+          <td class="px-4 py-3 text-muted">Pause / resume auto-refresh</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">r</kbd></td>
+          <td class="px-4 py-3 text-muted">Force refresh data</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">R</kbd></td>
+          <td class="px-4 py-3 text-muted">Rescan GPUs (rediscover hardware)</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">:</kbd></td>
+          <td class="px-4 py-3 text-muted">Open command palette</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">Esc</kbd></td>
+          <td class="px-4 py-3 text-muted">Close modal / overlay / return to previous view</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Process Table -->
+  <h2 class="mt-12 text-2xl font-bold">Process Table</h2>
+  <p class="mt-4 text-sm text-muted">Available when the process table is visible (Grid, Detail, List views).</p>
+
+  <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold w-32">Key</th>
+          <th class="px-4 py-3 text-left font-semibold">Action</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">s</kbd></td>
+          <td class="px-4 py-3 text-muted">Cycle sort column (PID, name, memory, utilization)</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">f</kbd></td>
+          <td class="px-4 py-3 text-muted">Filter processes by name (type to search)</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">K</kbd></td>
+          <td class="px-4 py-3 text-muted">Kill selected process (prompts for confirmation)</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">Enter</kbd></td>
+          <td class="px-4 py-3 text-muted">Open process details modal for selected row</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3">
+            <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">Up</kbd> / <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">Down</kbd>
+          </td>
+          <td class="px-4 py-3 text-muted">Navigate rows in process table</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Alerts -->
+  <h2 class="mt-12 text-2xl font-bold">Alerts</h2>
+  <p class="mt-4 text-sm text-muted">Manage leak detection alerts.</p>
+
+  <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold w-32">Key</th>
+          <th class="px-4 py-3 text-left font-semibold">Action</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">a</kbd></td>
+          <td class="px-4 py-3 text-muted">Acknowledge current alert</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">A</kbd></td>
+          <td class="px-4 py-3 text-muted">View alert history</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- GPU Selection -->
+  <h2 class="mt-12 text-2xl font-bold">GPU Selection</h2>
+  <p class="mt-4 text-sm text-muted">Select which GPU to focus on.</p>
+
+  <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold w-32">Key</th>
+          <th class="px-4 py-3 text-left font-semibold">Action</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">Tab</kbd></td>
+          <td class="px-4 py-3 text-muted">Select next GPU</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">Shift+Tab</kbd></td>
+          <td class="px-4 py-3 text-muted">Select previous GPU</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3">
+            <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">1</kbd> - <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">8</kbd>
+          </td>
+          <td class="px-4 py-3 text-muted">Jump directly to GPU by index (1 = GPU 0, 2 = GPU 1, etc.)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="mt-12 text-2xl font-bold">Quick Reference Card</h2>
+  <p class="mt-4 text-muted">
+    The most frequently used shortcuts at a glance:
+  </p>
+
+  <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
+    <div class="flex items-center gap-3 rounded-lg border border-border bg-surface px-3 py-2.5">
+      <kbd class="inline-flex items-center justify-center w-8 h-8 rounded border border-border bg-dark font-mono text-sm text-cyan">v</kbd>
+      <span class="text-sm text-muted">Cycle views</span>
+    </div>
+    <div class="flex items-center gap-3 rounded-lg border border-border bg-surface px-3 py-2.5">
+      <kbd class="inline-flex items-center justify-center w-8 h-8 rounded border border-border bg-dark font-mono text-sm text-cyan">d</kbd>
+      <span class="text-sm text-muted">Detail</span>
+    </div>
+    <div class="flex items-center gap-3 rounded-lg border border-border bg-surface px-3 py-2.5">
+      <kbd class="inline-flex items-center justify-center w-8 h-8 rounded border border-border bg-dark font-mono text-sm text-cyan">P</kbd>
+      <span class="text-sm text-muted">Predict</span>
+    </div>
+    <div class="flex items-center gap-3 rounded-lg border border-border bg-surface px-3 py-2.5">
+      <kbd class="inline-flex items-center justify-center w-8 h-8 rounded border border-border bg-dark font-mono text-sm text-cyan">t</kbd>
+      <span class="text-sm text-muted">Theme</span>
+    </div>
+    <div class="flex items-center gap-3 rounded-lg border border-border bg-surface px-3 py-2.5">
+      <kbd class="inline-flex items-center justify-center w-8 h-8 rounded border border-border bg-dark font-mono text-sm text-cyan">?</kbd>
+      <span class="text-sm text-muted">Help</span>
+    </div>
+    <div class="flex items-center gap-3 rounded-lg border border-border bg-surface px-3 py-2.5">
+      <kbd class="inline-flex items-center justify-center w-8 h-8 rounded border border-border bg-dark font-mono text-sm text-cyan">q</kbd>
+      <span class="text-sm text-muted">Quit</span>
+    </div>
+    <div class="flex items-center gap-3 rounded-lg border border-border bg-surface px-3 py-2.5">
+      <kbd class="inline-flex items-center justify-center w-8 h-8 rounded border border-border bg-dark font-mono text-sm text-cyan">s</kbd>
+      <span class="text-sm text-muted">Sort</span>
+    </div>
+    <div class="flex items-center gap-3 rounded-lg border border-border bg-surface px-3 py-2.5">
+      <kbd class="inline-flex items-center justify-center w-8 h-8 rounded border border-border bg-dark font-mono text-sm text-cyan">K</kbd>
+      <span class="text-sm text-muted">Kill process</span>
+    </div>
+    <div class="flex items-center gap-3 rounded-lg border border-border bg-surface px-3 py-2.5">
+      <kbd class="inline-flex items-center justify-center w-8 h-8 rounded border border-border bg-dark font-mono text-sm text-cyan">:</kbd>
+      <span class="text-sm text-muted">Command palette</span>
+    </div>
+  </div>
+</DocsLayout>

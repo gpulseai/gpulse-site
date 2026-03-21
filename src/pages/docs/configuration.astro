@@ -1,0 +1,289 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+---
+
+<DocsLayout
+  title="Configuration — gpulse"
+  description="gpulse configuration reference: config file location, TOML options, detection thresholds, UI settings, and environment variable overrides."
+>
+  <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Configuration</h1>
+  <p class="mt-4 text-lg text-muted leading-relaxed">
+    gpulse works out of the box with zero configuration. For advanced tuning, you can create a TOML configuration file to adjust monitoring intervals, detection thresholds, UI preferences, and more.
+  </p>
+
+  <h2 class="mt-12 text-2xl font-bold">Config File Location</h2>
+  <p class="mt-4 text-muted">
+    gpulse looks for configuration files in this order:
+  </p>
+  <ol class="mt-3 space-y-2 text-muted list-decimal pl-6">
+    <li>Path specified via <code class="font-mono text-sm text-cyan bg-surface px-1.5 py-0.5 rounded">--config /path/to/file.toml</code></li>
+    <li><code class="font-mono text-sm text-cyan bg-surface px-1.5 py-0.5 rounded">./gpu-leak-detector.toml</code> (current directory)</li>
+    <li><code class="font-mono text-sm text-cyan bg-surface px-1.5 py-0.5 rounded">~/.config/gpulse/config.toml</code> (user config)</li>
+  </ol>
+  <p class="mt-3 text-sm text-muted">
+    If no config file exists, gpulse uses sensible defaults.
+  </p>
+
+  <h2 class="mt-12 text-2xl font-bold">Example Configuration</h2>
+  <p class="mt-4 text-muted">
+    A minimal configuration file with the most commonly tuned options:
+  </p>
+  <div class="mt-4">
+    <CodeBlock code={`# gpulse configuration
+# See: https://gpulse.ai/docs/configuration
+
+[monitoring]
+# Sampling interval in seconds (1-3600)
+interval-seconds = 30
+
+# Number of memory snapshots to keep for analysis
+history-size = 1000
+
+[detection]
+# Minimum R² for leak trend significance (0.0-1.0)
+min-r-squared = 0.8
+
+# Confidence threshold for leak alerts (0.0-1.0)
+confidence-threshold = 0.75
+
+# Minimum samples before analysis starts
+minimum-samples = 20
+
+# Analysis window in hours
+analysis-window-hours = 1.0
+
+[ui]
+# Color theme (see /docs/themes for full list)
+theme = "monokai"
+
+# Default view on startup
+default-view = "grid"
+
+[alerts]
+# Enable leak detection alerts
+enabled = true
+
+# Maximum alerts per hour to prevent spam
+max-rate-per-hour = 10`} language="toml" />
+  </div>
+
+  <h2 class="mt-12 text-2xl font-bold">Configuration Sections</h2>
+
+  <!-- [monitoring] -->
+  <h3 class="mt-8 text-lg font-semibold">[monitoring]</h3>
+  <p class="mt-2 text-muted">Controls how frequently gpulse samples GPU data and how much history it retains.</p>
+
+  <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold">Option</th>
+          <th class="px-4 py-3 text-left font-semibold">Default</th>
+          <th class="px-4 py-3 text-left font-semibold">Description</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3"><code class="font-mono text-xs text-cyan">interval-seconds</code></td>
+          <td class="px-4 py-3 text-muted">30</td>
+          <td class="px-4 py-3 text-muted">Seconds between GPU metric samples (1-3600)</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><code class="font-mono text-xs text-cyan">history-size</code></td>
+          <td class="px-4 py-3 text-muted">1000</td>
+          <td class="px-4 py-3 text-muted">Number of snapshots to keep in memory (100-10000)</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><code class="font-mono text-xs text-cyan">enable-process-attribution</code></td>
+          <td class="px-4 py-3 text-muted">true</td>
+          <td class="px-4 py-3 text-muted">Track per-process GPU memory usage</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- [detection] -->
+  <h3 class="mt-8 text-lg font-semibold">[detection]</h3>
+  <p class="mt-2 text-muted">Tune the leak detection algorithm sensitivity.</p>
+
+  <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold">Option</th>
+          <th class="px-4 py-3 text-left font-semibold">Default</th>
+          <th class="px-4 py-3 text-left font-semibold">Description</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3"><code class="font-mono text-xs text-cyan">min-r-squared</code></td>
+          <td class="px-4 py-3 text-muted">0.8</td>
+          <td class="px-4 py-3 text-muted">Minimum R² for trend significance (0.0-1.0)</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><code class="font-mono text-xs text-cyan">min-slope-mb-per-sec</code></td>
+          <td class="px-4 py-3 text-muted">1.0</td>
+          <td class="px-4 py-3 text-muted">Minimum memory growth rate to flag (MB/sec)</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><code class="font-mono text-xs text-cyan">confidence-threshold</code></td>
+          <td class="px-4 py-3 text-muted">0.75</td>
+          <td class="px-4 py-3 text-muted">Minimum confidence to trigger an alert (0.0-1.0)</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><code class="font-mono text-xs text-cyan">minimum-samples</code></td>
+          <td class="px-4 py-3 text-muted">20</td>
+          <td class="px-4 py-3 text-muted">Snapshots required before analysis begins (10-1000)</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><code class="font-mono text-xs text-cyan">analysis-window-hours</code></td>
+          <td class="px-4 py-3 text-muted">1.0</td>
+          <td class="px-4 py-3 text-muted">How far back to analyze for trends (0.5-24.0)</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><code class="font-mono text-xs text-cyan">ignore-patterns</code></td>
+          <td class="px-4 py-3 text-muted">[]</td>
+          <td class="px-4 py-3 text-muted">Regex patterns for process names to exclude from analysis</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- [ui] -->
+  <h3 class="mt-8 text-lg font-semibold">[ui]</h3>
+  <p class="mt-2 text-muted">Customize the terminal interface appearance and behavior.</p>
+
+  <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold">Option</th>
+          <th class="px-4 py-3 text-left font-semibold">Default</th>
+          <th class="px-4 py-3 text-left font-semibold">Description</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3"><code class="font-mono text-xs text-cyan">theme</code></td>
+          <td class="px-4 py-3 text-muted">"monokai"</td>
+          <td class="px-4 py-3 text-muted">Color theme name (see <a href="/docs/themes" class="text-cyan underline underline-offset-4 hover:text-cyan-dark">Themes</a>)</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><code class="font-mono text-xs text-cyan">default-view</code></td>
+          <td class="px-4 py-3 text-muted">"grid"</td>
+          <td class="px-4 py-3 text-muted">View to show on startup (grid, list, detail, compare, topology, predict)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- [alerts] -->
+  <h3 class="mt-8 text-lg font-semibold">[alerts]</h3>
+  <p class="mt-2 text-muted">Configure the alert system for leak detection notifications.</p>
+
+  <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold">Option</th>
+          <th class="px-4 py-3 text-left font-semibold">Default</th>
+          <th class="px-4 py-3 text-left font-semibold">Description</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3"><code class="font-mono text-xs text-cyan">enabled</code></td>
+          <td class="px-4 py-3 text-muted">true</td>
+          <td class="px-4 py-3 text-muted">Enable or disable the alert system</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><code class="font-mono text-xs text-cyan">max-rate-per-hour</code></td>
+          <td class="px-4 py-3 text-muted">10</td>
+          <td class="px-4 py-3 text-muted">Maximum alerts per hour to prevent notification fatigue</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- [gpu] -->
+  <h3 class="mt-8 text-lg font-semibold">[gpu]</h3>
+  <p class="mt-2 text-muted">Hardware discovery and GPU-specific settings.</p>
+
+  <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold">Option</th>
+          <th class="px-4 py-3 text-left font-semibold">Default</th>
+          <th class="px-4 py-3 text-left font-semibold">Description</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3"><code class="font-mono text-xs text-cyan">gpu-indices</code></td>
+          <td class="px-4 py-3 text-muted">[]</td>
+          <td class="px-4 py-3 text-muted">Specific GPU indices to monitor (empty = all GPUs)</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><code class="font-mono text-xs text-cyan">discovery-timeout</code></td>
+          <td class="px-4 py-3 text-muted">30</td>
+          <td class="px-4 py-3 text-muted">Timeout for GPU discovery operations in seconds</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="mt-12 text-2xl font-bold">Environment Variables</h2>
+  <p class="mt-4 text-muted">
+    You can override any configuration value with an environment variable. The naming convention is:
+  </p>
+  <div class="mt-4 rounded-xl border border-border bg-surface p-4">
+    <code class="font-mono text-sm text-cyan">GPULSE_&lt;SECTION&gt;_&lt;KEY&gt;</code>
+    <p class="mt-2 text-sm text-muted">
+      Example: <code class="font-mono text-xs text-cyan bg-dark px-1 py-0.5 rounded">[monitoring] interval-seconds = 30</code> becomes <code class="font-mono text-xs text-cyan bg-dark px-1 py-0.5 rounded">GPULSE_MONITORING_INTERVAL_SECONDS=30</code>
+    </p>
+  </div>
+
+  <div class="mt-4">
+    <CodeBlock code={`# Override monitoring interval
+export GPULSE_MONITORING_INTERVAL_SECONDS=60
+
+# Override theme
+export GPULSE_UI_THEME=dracula
+
+# Override detection confidence
+export GPULSE_DETECTION_CONFIDENCE_THRESHOLD=0.9`} language="bash" />
+  </div>
+
+  <h2 class="mt-12 text-2xl font-bold">Command-Line Overrides</h2>
+  <p class="mt-4 text-muted">
+    Common configuration can also be set via command-line flags, which take highest precedence:
+  </p>
+
+  <div class="mt-4">
+    <CodeBlock code={`# Use a specific config file
+gpulse dashboard --config /path/to/config.toml
+
+# Override refresh interval
+gpulse dashboard --interval 10
+
+# Start in a specific view
+gpulse dashboard --view predict
+
+# Monitor specific GPUs only
+gpulse dashboard --gpus 0,1`} language="bash" />
+  </div>
+
+  <h2 class="mt-12 text-2xl font-bold">Precedence Order</h2>
+  <p class="mt-4 text-muted">
+    When multiple sources set the same value, the highest precedence wins:
+  </p>
+  <ol class="mt-3 space-y-1 text-muted list-decimal pl-6">
+    <li><strong class="text-white">Command-line flags</strong> (highest)</li>
+    <li><strong class="text-white">Environment variables</strong></li>
+    <li><strong class="text-white">Config file</strong></li>
+    <li><strong class="text-white">Built-in defaults</strong> (lowest)</li>
+  </ol>
+</DocsLayout>
