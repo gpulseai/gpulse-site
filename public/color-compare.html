@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>gpulse — Accent Color Comparison</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0a0a0b; color: #fff; font-family: 'Inter', system-ui, sans-serif; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .variant { padding: 48px 32px; display: flex; flex-direction: column; align-items: center; border: 1px solid #262630; position: relative; }
+    .label { position: absolute; top: 16px; left: 16px; font-family: 'JetBrains Mono', monospace; font-size: 14px; padding: 4px 12px; border-radius: 9999px; font-weight: 600; }
+    .badge { font-family: 'JetBrains Mono', monospace; font-size: 13px; padding: 6px 16px; border-radius: 9999px; border: 1px solid; margin-bottom: 24px; }
+    h1 { font-size: 42px; font-weight: 800; text-align: center; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 16px; }
+    .subtitle { color: #a0a0b0; text-align: center; font-size: 15px; line-height: 1.6; max-width: 400px; margin-bottom: 24px; }
+    .buttons { display: flex; gap: 12px; margin-bottom: 32px; }
+    .btn-primary { padding: 10px 24px; border-radius: 12px; font-weight: 600; font-size: 14px; border: none; cursor: pointer; }
+    .btn-secondary { padding: 10px 24px; border-radius: 12px; font-weight: 600; font-size: 14px; border: 1px solid #262630; background: transparent; color: #fff; cursor: pointer; }
+    .terminal { background: #0d0d0d; border: 1px solid #262630; border-radius: 12px; width: 100%; max-width: 420px; overflow: hidden; }
+    .terminal-bar { background: #1a1a1a; padding: 10px 14px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #262630; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .terminal-body { padding: 16px; font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+    .terminal-body span { opacity: 0.5; }
+    .metrics { display: flex; gap: 24px; margin-top: 24px; text-align: center; }
+    .metric-value { font-size: 28px; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+    .metric-label { font-size: 11px; color: #a0a0b0; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; }
+    .vote { margin-top: 16px; font-size: 24px; cursor: pointer; padding: 8px 24px; border-radius: 12px; border: 2px solid #262630; background: transparent; color: #fff; transition: all 0.2s; }
+    .vote:hover { transform: scale(1.1); }
+    h2 { text-align: center; padding: 32px; font-size: 28px; grid-column: span 2; color: #a0a0b0; }
+  </style>
+</head>
+<body>
+  <h2 style="color: #fff; padding-top: 48px;">Pick your accent color for gpulse.ai</h2>
+
+  <div class="grid">
+    <!-- A: Electric Green -->
+    <div class="variant">
+      <div class="label" style="background: #10b98120; color: #10b981; border: 1px solid #10b98140;">A — Electric Green</div>
+      <div class="badge" style="color: #10b981; border-color: #10b98140; background: #10b98110;">v2.0.0 — Now with OOM Prediction</div>
+      <h1>Never lose a training run<br/><span style="color: #10b981;">to OOM.</span></h1>
+      <p class="subtitle">Real-time GPU monitoring with predictive leak detection. Apple Silicon, NVIDIA, AMD, Intel — one tool, every GPU.</p>
+      <div class="buttons">
+        <button class="btn-primary" style="background: #10b981; color: #0a0a0b;">Download Free</button>
+        <button class="btn-secondary" style="border-color: #10b98140;">View Docs</button>
+      </div>
+      <div class="terminal">
+        <div class="terminal-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>
+        <div class="terminal-body"><span>$</span> brew install kkirubakaran/gpulse/gpulse</div>
+      </div>
+      <div class="metrics">
+        <div><div class="metric-value" style="color: #10b981;">15</div><div class="metric-label">Themes</div></div>
+        <div><div class="metric-value" style="color: #10b981;">7</div><div class="metric-label">View Modes</div></div>
+        <div><div class="metric-value" style="color: #10b981;">4</div><div class="metric-label">GPU Vendors</div></div>
+      </div>
+    </div>
+
+    <!-- B: Amber/Gold -->
+    <div class="variant">
+      <div class="label" style="background: #f59e0b20; color: #f59e0b; border: 1px solid #f59e0b40;">B — Amber / Gold</div>
+      <div class="badge" style="color: #f59e0b; border-color: #f59e0b40; background: #f59e0b10;">v2.0.0 — Now with OOM Prediction</div>
+      <h1>Never lose a training run<br/><span style="color: #f59e0b;">to OOM.</span></h1>
+      <p class="subtitle">Real-time GPU monitoring with predictive leak detection. Apple Silicon, NVIDIA, AMD, Intel — one tool, every GPU.</p>
+      <div class="buttons">
+        <button class="btn-primary" style="background: #f59e0b; color: #0a0a0b;">Download Free</button>
+        <button class="btn-secondary" style="border-color: #f59e0b40;">View Docs</button>
+      </div>
+      <div class="terminal">
+        <div class="terminal-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>
+        <div class="terminal-body"><span>$</span> brew install kkirubakaran/gpulse/gpulse</div>
+      </div>
+      <div class="metrics">
+        <div><div class="metric-value" style="color: #f59e0b;">15</div><div class="metric-label">Themes</div></div>
+        <div><div class="metric-value" style="color: #f59e0b;">7</div><div class="metric-label">View Modes</div></div>
+        <div><div class="metric-value" style="color: #f59e0b;">4</div><div class="metric-label">GPU Vendors</div></div>
+      </div>
+    </div>
+
+    <!-- C: Coral/Orange -->
+    <div class="variant">
+      <div class="label" style="background: #f9731620; color: #f97316; border: 1px solid #f9731640;">C — Coral / Orange</div>
+      <div class="badge" style="color: #f97316; border-color: #f9731640; background: #f9731610;">v2.0.0 — Now with OOM Prediction</div>
+      <h1>Never lose a training run<br/><span style="color: #f97316;">to OOM.</span></h1>
+      <p class="subtitle">Real-time GPU monitoring with predictive leak detection. Apple Silicon, NVIDIA, AMD, Intel — one tool, every GPU.</p>
+      <div class="buttons">
+        <button class="btn-primary" style="background: #f97316; color: #0a0a0b;">Download Free</button>
+        <button class="btn-secondary" style="border-color: #f9731640;">View Docs</button>
+      </div>
+      <div class="terminal">
+        <div class="terminal-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>
+        <div class="terminal-body"><span>$</span> brew install kkirubakaran/gpulse/gpulse</div>
+      </div>
+      <div class="metrics">
+        <div><div class="metric-value" style="color: #f97316;">15</div><div class="metric-label">Themes</div></div>
+        <div><div class="metric-value" style="color: #f97316;">7</div><div class="metric-label">View Modes</div></div>
+        <div><div class="metric-value" style="color: #f97316;">4</div><div class="metric-label">GPU Vendors</div></div>
+      </div>
+    </div>
+
+    <!-- D: Violet -->
+    <div class="variant">
+      <div class="label" style="background: #8b5cf620; color: #8b5cf6; border: 1px solid #8b5cf640;">D — Violet</div>
+      <div class="badge" style="color: #8b5cf6; border-color: #8b5cf640; background: #8b5cf610;">v2.0.0 — Now with OOM Prediction</div>
+      <h1>Never lose a training run<br/><span style="color: #8b5cf6;">to OOM.</span></h1>
+      <p class="subtitle">Real-time GPU monitoring with predictive leak detection. Apple Silicon, NVIDIA, AMD, Intel — one tool, every GPU.</p>
+      <div class="buttons">
+        <button class="btn-primary" style="background: #8b5cf6; color: #fff;">Download Free</button>
+        <button class="btn-secondary" style="border-color: #8b5cf640;">View Docs</button>
+      </div>
+      <div class="terminal">
+        <div class="terminal-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>
+        <div class="terminal-body"><span>$</span> brew install kkirubakaran/gpulse/gpulse</div>
+      </div>
+      <div class="metrics">
+        <div><div class="metric-value" style="color: #8b5cf6;">15</div><div class="metric-label">Themes</div></div>
+        <div><div class="metric-value" style="color: #8b5cf6;">7</div><div class="metric-label">View Modes</div></div>
+        <div><div class="metric-value" style="color: #8b5cf6;">4</div><div class="metric-label">GPU Vendors</div></div>
+      </div>
+    </div>
+  </div>
+
+    <!-- E: Rose / Hot Pink -->
+    <div class="variant">
+      <div class="label" style="background: #e11d4820; color: #e11d48; border: 1px solid #e11d4840;">E — Rose / Hot Pink</div>
+      <div class="badge" style="color: #e11d48; border-color: #e11d4840; background: #e11d4810;">v2.0.0 — Now with OOM Prediction</div>
+      <h1>Never lose a training run<br/><span style="color: #e11d48;">to OOM.</span></h1>
+      <p class="subtitle">Real-time GPU monitoring with predictive leak detection. Apple Silicon, NVIDIA, AMD, Intel — one tool, every GPU.</p>
+      <div class="buttons">
+        <button class="btn-primary" style="background: #e11d48; color: #fff;">Download Free</button>
+        <button class="btn-secondary" style="border-color: #e11d4840;">View Docs</button>
+      </div>
+      <div class="terminal">
+        <div class="terminal-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>
+        <div class="terminal-body"><span>$</span> brew install kkirubakaran/gpulse/gpulse</div>
+      </div>
+      <div class="metrics">
+        <div><div class="metric-value" style="color: #e11d48;">15</div><div class="metric-label">Themes</div></div>
+        <div><div class="metric-value" style="color: #e11d48;">7</div><div class="metric-label">View Modes</div></div>
+        <div><div class="metric-value" style="color: #e11d48;">4</div><div class="metric-label">GPU Vendors</div></div>
+      </div>
+    </div>
+
+    <!-- F: Teal -->
+    <div class="variant">
+      <div class="label" style="background: #14b8a620; color: #14b8a6; border: 1px solid #14b8a640;">F — Teal</div>
+      <div class="badge" style="color: #14b8a6; border-color: #14b8a640; background: #14b8a610;">v2.0.0 — Now with OOM Prediction</div>
+      <h1>Never lose a training run<br/><span style="color: #14b8a6;">to OOM.</span></h1>
+      <p class="subtitle">Real-time GPU monitoring with predictive leak detection. Apple Silicon, NVIDIA, AMD, Intel — one tool, every GPU.</p>
+      <div class="buttons">
+        <button class="btn-primary" style="background: #14b8a6; color: #0a0a0b;">Download Free</button>
+        <button class="btn-secondary" style="border-color: #14b8a640;">View Docs</button>
+      </div>
+      <div class="terminal">
+        <div class="terminal-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>
+        <div class="terminal-body"><span>$</span> brew install kkirubakaran/gpulse/gpulse</div>
+      </div>
+      <div class="metrics">
+        <div><div class="metric-value" style="color: #14b8a6;">15</div><div class="metric-label">Themes</div></div>
+        <div><div class="metric-value" style="color: #14b8a6;">7</div><div class="metric-label">View Modes</div></div>
+        <div><div class="metric-value" style="color: #14b8a6;">4</div><div class="metric-label">GPU Vendors</div></div>
+      </div>
+    </div>
+  </div>
+
+  <h2 style="padding-bottom: 48px; font-size: 18px;">Scroll to see all 6 options. UI/UX Pro Max recommends <strong style="color: #22c55e;">Green</strong> for dev tools.</h2>
+</body>
+</html>

@@ -11,7 +11,7 @@ import { Card } from '../components/ui/Card';
 <BaseLayout>
   <!-- Hero Section -->
   <section
-    class="relative min-h-screen flex flex-col items-center justify-center px-4 pt-24 pb-16"
+    class="relative min-h-screen flex flex-col items-center justify-center px-4 pt-28 pb-20"
     aria-labelledby="hero-heading"
   >
     <!-- Subtle radial gradient background -->
@@ -19,13 +19,13 @@ import { Card } from '../components/ui/Card';
       class="pointer-events-none absolute inset-0 overflow-hidden"
       aria-hidden="true"
     >
-      <div class="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/4 h-[800px] w-[800px] rounded-full bg-cyan/[0.03] blur-[120px]"></div>
+      <div class="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/4 h-[800px] w-[800px] rounded-full bg-cyan/[0.04] blur-[120px]"></div>
     </div>
 
     <div class="relative z-10 flex flex-col items-center">
       <!-- Eyebrow badge -->
       <Badge variant="cyan" client:load>
-        v2.0.0 — Now with OOM Prediction
+        v2.0.0 — OOM Prediction is here
       </Badge>
 
       <!-- Headline -->
@@ -39,8 +39,7 @@ import { Card } from '../components/ui/Card';
 
       <!-- Subtitle -->
       <p class="text-lg md:text-xl text-muted text-center mt-6 max-w-2xl leading-relaxed">
-        Real-time GPU monitoring with predictive leak detection.
-        Apple Silicon, NVIDIA, AMD, Intel — one tool, every GPU.
+        Real-time GPU monitoring with predictive memory leak detection. Supports Apple&nbsp;Silicon, NVIDIA, AMD, and Intel&nbsp;— all from a single terminal command.
       </p>
 
       <!-- CTAs -->
@@ -48,8 +47,8 @@ import { Card } from '../components/ui/Card';
         <Button variant="primary" size="lg" href="#download" client:load>
           Download Free
         </Button>
-        <Button variant="secondary" size="lg" href="/docs" client:load>
-          View Docs
+        <Button variant="secondary" size="lg" href="#features" client:load>
+          See Features
         </Button>
       </div>
 
@@ -57,15 +56,15 @@ import { Card } from '../components/ui/Card';
       <Terminal
         title="Install gpulse"
         command="brew install kkirubakaran/gpulse/gpulse"
-        class="mt-16 max-w-2xl w-full"
+        class="mt-14 max-w-2xl w-full"
       />
 
       <!-- Hero screenshot -->
       <Screenshot
         src="/screenshots/grid-4gpu.png"
-        alt="gpulse dashboard monitoring 4 NVIDIA GPUs in grid view, showing real-time memory usage, utilization percentages, and process lists"
-        caption="Grid view — 4x NVIDIA GPUs with real-time memory, utilization, and process monitoring"
-        class="mt-12"
+        alt="gpulse dashboard monitoring 4 NVIDIA GPUs in grid view with Monokai theme, showing real-time VRAM usage, GPU utilization, temperature, power draw, and per-process attribution"
+        caption="Grid view — 4 NVIDIA GPUs with real-time memory, utilization, temperature, and process monitoring"
+        class="mt-10"
       />
     </div>
   </section>
@@ -76,7 +75,7 @@ import { Card } from '../components/ui/Card';
       <SectionHeader
         eyebrow="FEATURES"
         title="Everything you need to monitor GPUs"
-        subtitle="From memory leaks to thermal throttling, gpulse watches it all."
+        subtitle="Memory leaks, thermal throttling, OOM crashes — gpulse detects problems before they cost you hours of compute."
       />
 
       <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -89,7 +88,7 @@ import { Card } from '../components/ui/Card';
           </div>
           <h3 class="text-xl font-bold mb-3">Beautiful TUI Dashboard</h3>
           <p class="text-muted leading-relaxed">
-            btop-quality GPU monitoring. Memory, utilization, temperature, power, processes — all in one glance. 15 themes included.
+            A btop-quality terminal interface for GPU monitoring. See memory, utilization, temperature, power draw, and per-process attribution at a glance. Ships with 15 built-in themes.
           </p>
         </Card>
 
@@ -100,9 +99,9 @@ import { Card } from '../components/ui/Card';
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
             </svg>
           </div>
-          <h3 class="text-xl font-bold mb-3">OOM Prediction</h3>
+          <h3 class="text-xl font-bold mb-3">Predictive OOM Detection</h3>
           <p class="text-muted leading-relaxed">
-            Detects memory leaks before they crash your training run. Linear trend analysis, spike detection, and pattern fingerprinting with real-time ETA to OOM.
+            Three detection algorithms — linear trend analysis, spike detection, and composite scoring — monitor memory growth in real time. Get an estimated time-to-OOM before your training run crashes.
           </p>
         </Card>
 
@@ -115,7 +114,7 @@ import { Card } from '../components/ui/Card';
           </div>
           <h3 class="text-xl font-bold mb-3">Every GPU, One Tool</h3>
           <p class="text-muted leading-relaxed">
-            Apple Silicon, NVIDIA, AMD, Intel. Universal monitoring with vendor-specific metrics. Local today, fleet monitoring coming soon.
+            Supports Apple Silicon (Metal), NVIDIA (NVML), AMD (ROCm), and Intel (Level Zero). One binary, universal vendor coverage. Fleet monitoring for multi-machine setups coming soon.
           </p>
         </Card>
       </div>
@@ -127,32 +126,33 @@ import { Card } from '../components/ui/Card';
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <SectionHeader
         eyebrow="VIEW MODES"
-        title="7 powerful ways to see your GPUs"
+        title="Seven ways to see your GPUs"
+        subtitle="Switch between views with a single keystroke. Each mode is purpose-built for a different monitoring task."
       />
 
       <div class="mt-16 grid grid-cols-1 gap-10 md:grid-cols-2">
         <Screenshot
           src="/screenshots/grid-4gpu.png"
-          alt="gpulse grid view showing 4 GPUs with memory and utilization metrics"
-          caption="Grid View — See all GPUs at a glance"
+          alt="gpulse Grid view with 4 NVIDIA GPUs showing VRAM usage bars, GPU utilization, temperature, power draw, and a process table with python training workloads"
+          caption="Grid View — All GPUs at a glance with per-process attribution"
           glow={false}
         />
         <Screenshot
           src="/screenshots/predict-leak-detected.png"
-          alt="gpulse predict mode showing OOM detection with linear trend analysis"
-          caption="Predict Mode — OOM detection with real-time analysis"
+          alt="gpulse Predict mode showing a risk overview table with GPU 0 flagged as HIGH risk, linear trend detector output with R-squared 0.98, growth rate, and ETA to OOM"
+          caption="Predict Mode — Memory leak detected, ETA to OOM calculated"
           glow={false}
         />
         <Screenshot
           src="/screenshots/detail-gpu0-critical.png"
-          alt="gpulse detail view showing deep dive into a single GPU with all metrics"
-          caption="Detail View — Deep dive into a single GPU"
+          alt="gpulse Detail view showing GPU 0 NVIDIA RTX 4090 in critical state with 17.5 of 24 GB VRAM used, full process table with CPU and GPU utilization columns"
+          caption="Detail View — Full metrics for a single GPU"
           glow={false}
         />
         <Screenshot
           src="/screenshots/compare-4gpu.png"
-          alt="gpulse compare view showing side-by-side GPU comparison"
-          caption="Compare View — Side-by-side GPU comparison"
+          alt="gpulse Compare view showing 4 GPUs in a 2x2 grid with memory bars, utilization percentages, temperature and power side by side"
+          caption="Compare View — Side-by-side across all GPUs"
           glow={false}
         />
       </div>
@@ -164,7 +164,8 @@ import { Card } from '../components/ui/Card';
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <SectionHeader
         eyebrow="GET STARTED"
-        title="Monitor your GPUs in 30 seconds"
+        title="Up and running in 30 seconds"
+        subtitle="No configuration files. No dependencies. One command to install, one command to launch."
       />
 
       <div class="mt-16 grid grid-cols-1 gap-12 md:grid-cols-3">
@@ -200,9 +201,13 @@ import { Card } from '../components/ui/Card';
             3
           </div>
           <h3 class="text-xl font-bold mb-4">Monitor</h3>
-          <div class="w-full rounded-xl border border-border bg-surface p-6">
+          <div class="w-full rounded-xl border border-border bg-surface p-6 text-left">
             <p class="text-muted text-sm leading-relaxed">
-              Navigate views with keyboard shortcuts. Press <kbd class="inline-block rounded border border-border bg-dark px-1.5 py-0.5 font-mono text-xs text-cyan">?</kbd> for help.
+              Switch views: <kbd class="inline-block rounded border border-border bg-dark px-1.5 py-0.5 font-mono text-xs text-cyan">d</kbd> detail
+              <kbd class="inline-block rounded border border-border bg-dark px-1.5 py-0.5 font-mono text-xs text-cyan ml-2">P</kbd> predict
+              <kbd class="inline-block rounded border border-border bg-dark px-1.5 py-0.5 font-mono text-xs text-cyan ml-2">c</kbd> compare
+              <kbd class="inline-block rounded border border-border bg-dark px-1.5 py-0.5 font-mono text-xs text-cyan ml-2">t</kbd> theme
+              <kbd class="inline-block rounded border border-border bg-dark px-1.5 py-0.5 font-mono text-xs text-cyan ml-2">?</kbd> help
             </p>
           </div>
         </div>
@@ -216,7 +221,7 @@ import { Card } from '../components/ui/Card';
       <SectionHeader
         eyebrow="PRICING"
         title="Free for individuals. Pro for teams."
-        subtitle="No credit card required. Download and start monitoring in seconds."
+        subtitle="Download and start monitoring in seconds. No account required, no credit card needed."
       />
 
       <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -427,23 +432,26 @@ import { Card } from '../components/ui/Card';
   <section id="download" class="py-24 md:py-32 bg-surface" aria-labelledby="cta-heading">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
       <h2 id="cta-heading" class="text-4xl md:text-5xl font-bold tracking-tight">
-        Start monitoring your GPUs in 30 seconds.
+        Stop guessing. Start monitoring.
       </h2>
-      <p class="text-lg text-muted mt-4">
-        Free forever. No credit card required.
+      <p class="text-lg text-muted mt-4 max-w-xl mx-auto">
+        One command to install. Zero configuration. Free forever for local monitoring.
       </p>
-
-      <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-        <Button variant="primary" size="lg" href="#download" client:load>
-          Download Free
-        </Button>
-      </div>
 
       <Terminal
         title="Install gpulse"
         command="brew install kkirubakaran/gpulse/gpulse"
-        class="mt-12 max-w-2xl mx-auto"
+        class="mt-10 max-w-2xl mx-auto"
       />
+
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <Button variant="primary" size="lg" href="#download" client:load>
+          Download Free
+        </Button>
+        <Button variant="secondary" size="lg" href="mailto:info@gpulse.ai" client:load>
+          Contact Us
+        </Button>
+      </div>
     </div>
   </section>
 </BaseLayout>
