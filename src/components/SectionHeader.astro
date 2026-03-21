@@ -1,0 +1,38 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  class?: string;
+  align?: 'center' | 'left';
+}
+
+const { eyebrow, title, subtitle, class: className, align = 'center' } = Astro.props;
+const isCenter = align === 'center';
+---
+
+<div
+  class:list={[
+    isCenter && 'text-center',
+    className,
+  ]}
+>
+  {eyebrow && (
+    <p class="text-cyan text-sm font-mono uppercase tracking-wider mb-4">
+      {eyebrow}
+    </p>
+  )}
+  <h2 class="text-4xl md:text-5xl font-bold tracking-tight">
+    <Fragment set:html={title} />
+  </h2>
+  {subtitle && (
+    <p
+      class:list={[
+        'text-lg text-muted mt-4',
+        isCenter && 'max-w-2xl mx-auto',
+      ]}
+    >
+      {subtitle}
+    </p>
+  )}
+</div>

@@ -1,0 +1,141 @@
+---
+const navLinks = [
+  { href: '#features', label: 'Features' },
+  { href: '/docs', label: 'Docs' },
+  { href: '#pricing', label: 'Pricing' },
+];
+---
+
+<header
+  class="fixed top-0 left-0 right-0 z-50 border-b border-border bg-dark/80 backdrop-blur-xl"
+  role="banner"
+>
+  <nav
+    class="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4"
+    aria-label="Main navigation"
+  >
+    <!-- Logo -->
+    <a
+      href="/"
+      class="text-xl font-bold font-mono text-cyan transition-colors hover:text-cyan-dark"
+      aria-label="gpulse home"
+    >
+      gpulse
+    </a>
+
+    <!-- Desktop links -->
+    <ul class="hidden md:flex items-center gap-8" role="list">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class="text-sm font-medium text-muted transition-colors hover:text-white"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- Desktop CTA -->
+    <div class="hidden md:block">
+      <a
+        href="#download"
+        class="inline-flex items-center rounded-lg bg-cyan px-4 py-2 text-sm font-semibold text-dark transition-colors hover:bg-cyan-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
+      >
+        Download
+      </a>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button
+      type="button"
+      class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg text-muted transition-colors hover:text-white hover:bg-surface"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Toggle navigation menu"
+      id="mobile-menu-button"
+    >
+      <!-- Hamburger icon -->
+      <svg
+        class="h-5 w-5"
+        id="hamburger-icon"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        aria-hidden="true"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+      </svg>
+      <!-- Close icon (hidden by default) -->
+      <svg
+        class="h-5 w-5 hidden"
+        id="close-icon"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        aria-hidden="true"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    class="md:hidden hidden border-t border-border bg-dark/95 backdrop-blur-xl"
+    role="navigation"
+    aria-label="Mobile navigation"
+  >
+    <ul class="flex flex-col gap-1 px-6 py-4" role="list">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class="block rounded-lg px-4 py-3 text-sm font-medium text-muted transition-colors hover:bg-surface hover:text-white"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+      <li class="mt-2 pt-2 border-t border-border">
+        <a
+          href="#download"
+          class="block rounded-lg bg-cyan px-4 py-3 text-center text-sm font-semibold text-dark transition-colors hover:bg-cyan-dark"
+        >
+          Download
+        </a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  const menuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const hamburgerIcon = document.getElementById('hamburger-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  if (menuButton && mobileMenu && hamburgerIcon && closeIcon) {
+    menuButton.addEventListener('click', () => {
+      const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!isExpanded));
+      mobileMenu.classList.toggle('hidden');
+      hamburgerIcon.classList.toggle('hidden');
+      closeIcon.classList.toggle('hidden');
+    });
+
+    // Close menu when clicking a link
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        menuButton.setAttribute('aria-expanded', 'false');
+        mobileMenu.classList.add('hidden');
+        hamburgerIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+      });
+    });
+  }
+</script>

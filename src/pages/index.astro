@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Terminal from '../components/Terminal.astro';
+import Screenshot from '../components/Screenshot.astro';
+import { Badge } from '../components/ui/Badge';
+import { Button } from '../components/ui/Button';
+---
+
+<BaseLayout>
+  <!-- Hero Section -->
+  <section
+    class="relative min-h-screen flex flex-col items-center justify-center px-4 pt-24 pb-16"
+    aria-labelledby="hero-heading"
+  >
+    <!-- Subtle radial gradient background -->
+    <div
+      class="pointer-events-none absolute inset-0 overflow-hidden"
+      aria-hidden="true"
+    >
+      <div class="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/4 h-[800px] w-[800px] rounded-full bg-cyan/[0.03] blur-[120px]"></div>
+    </div>
+
+    <div class="relative z-10 flex flex-col items-center">
+      <!-- Eyebrow badge -->
+      <Badge variant="cyan" client:load>
+        v2.0.0 — Now with OOM Prediction
+      </Badge>
+
+      <!-- Headline -->
+      <h1
+        id="hero-heading"
+        class="text-5xl md:text-7xl font-extrabold text-center mt-8 tracking-tight leading-[1.1]"
+      >
+        Never lose a training run<br />
+        <span class="text-cyan">to OOM.</span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="text-lg md:text-xl text-muted text-center mt-6 max-w-2xl leading-relaxed">
+        Real-time GPU monitoring with predictive leak detection.
+        Apple Silicon, NVIDIA, AMD, Intel — one tool, every GPU.
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row gap-4 mt-10">
+        <Button variant="primary" size="lg" href="#download" client:load>
+          Download Free
+        </Button>
+        <Button variant="secondary" size="lg" href="/docs" client:load>
+          View Docs
+        </Button>
+      </div>
+
+      <!-- Terminal mockup -->
+      <Terminal
+        title="Install gpulse"
+        command="brew install kkirubakaran/gpulse/gpulse"
+        class="mt-16 max-w-2xl w-full"
+      />
+
+      <!-- Hero screenshot -->
+      <Screenshot
+        src="/screenshots/grid-4gpu.png"
+        alt="gpulse dashboard monitoring 4 NVIDIA GPUs in grid view, showing real-time memory usage, utilization percentages, and process lists"
+        caption="Grid view — 4x NVIDIA GPUs with real-time memory, utilization, and process monitoring"
+        class="mt-12"
+      />
+    </div>
+  </section>
+</BaseLayout>

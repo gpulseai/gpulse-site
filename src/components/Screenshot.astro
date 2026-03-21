@@ -1,0 +1,38 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  caption?: string;
+  class?: string;
+  glow?: boolean;
+}
+
+const { src, alt, caption, class: className, glow = true } = Astro.props;
+---
+
+<figure
+  class:list={[
+    'mx-auto max-w-5xl',
+    className,
+  ]}
+>
+  <div
+    class:list={[
+      'overflow-hidden rounded-2xl border border-border',
+      glow && 'shadow-[0_0_60px_-15px_var(--color-cyan-glow)]',
+    ]}
+  >
+    <img
+      src={src}
+      alt={alt}
+      loading="lazy"
+      decoding="async"
+      class="w-full h-auto"
+    />
+  </div>
+  {caption && (
+    <figcaption class="mt-4 text-center text-sm text-muted">
+      {caption}
+    </figcaption>
+  )}
+</figure>
