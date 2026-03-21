@@ -1,0 +1,231 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Privacy Policy — gpulse"
+  description="Privacy Policy for the gpulse GPU monitoring tool and gpulse.ai website. gpulse collects zero user data from the CLI tool."
+>
+  <section class="px-4 pt-32 pb-24">
+    <div class="mx-auto max-w-3xl">
+
+      <!-- Breadcrumb -->
+      <nav class="mb-8" aria-label="Breadcrumb">
+        <a href="/" class="text-sm text-muted transition-colors hover:text-cyan">
+          &larr; Back to Home
+        </a>
+      </nav>
+
+      <!-- Page header -->
+      <header class="mb-16">
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">Privacy Policy</h1>
+        <p class="mt-4 text-muted text-lg">
+          Effective Date: <time datetime="2026-03-21">March 21, 2026</time>
+        </p>
+      </header>
+
+      <!-- Content -->
+      <div class="space-y-12 text-muted leading-relaxed">
+
+        <!-- 1. Overview -->
+        <section>
+          <h2 class="text-xl font-semibold text-white mb-4">1. Overview</h2>
+          <p>
+            gpulse is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard information when you use the gpulse software ("Software") and the gpulse.ai website ("Website").
+          </p>
+          <p class="mt-3">
+            <strong class="text-white">The most important thing to know:</strong> the gpulse CLI tool collects absolutely zero user data. No telemetry, no analytics, no crash reports, and no network transmissions of any kind. All GPU monitoring data remains exclusively on your local machine.
+          </p>
+        </section>
+
+        <!-- 2. What the CLI Tool Does NOT Collect -->
+        <section>
+          <h2 class="text-xl font-semibold text-white mb-4">2. What the CLI Tool Does NOT Collect</h2>
+          <p>
+            The gpulse Software is a local monitoring tool that operates entirely on your machine. It does not:
+          </p>
+          <ul class="list-disc pl-6 space-y-2 mt-3">
+            <li>Collect or transmit telemetry or usage analytics of any kind;</li>
+            <li>Send crash reports or error logs to any server;</li>
+            <li>Transmit GPU metrics, memory statistics, or process information to any external service;</li>
+            <li>Collect personal information, system identifiers, or hardware fingerprints;</li>
+            <li>Make any network connections for data collection purposes;</li>
+            <li>Phone home, check for updates, or communicate with gpulse.ai servers.</li>
+          </ul>
+          <p class="mt-3">
+            The only optional network feature is the Prometheus metrics endpoint, which you must explicitly enable and configure. This endpoint runs on your local machine and exposes data only to services you designate.
+          </p>
+        </section>
+
+        <!-- 3. Website Data Collection -->
+        <section>
+          <h2 class="text-xl font-semibold text-white mb-4">3. Website Data Collection</h2>
+          <p>
+            The gpulse.ai Website uses <strong class="text-white">Cloudflare Web Analytics</strong> for privacy-respecting, cookieless analytics. Cloudflare Analytics:
+          </p>
+          <ul class="list-disc pl-6 space-y-2 mt-3">
+            <li>Does not use cookies or any client-side state;</li>
+            <li>Does not collect personally identifiable information (PII);</li>
+            <li>Does not track individual users across sessions or websites;</li>
+            <li>Provides only aggregated data such as page views, referrers, and country-level geography.</li>
+          </ul>
+          <p class="mt-3">
+            We do not use Google Analytics, Facebook Pixel, advertising trackers, or any other third-party tracking scripts. There are no tracking cookies on the gpulse.ai Website.
+          </p>
+        </section>
+
+        <!-- 4. Email Collection -->
+        <section>
+          <h2 class="text-xl font-semibold text-white mb-4">4. Email Collection</h2>
+          <p>
+            We collect your email address only if you voluntarily provide it by joining the waitlist or downloading the Software with email verification. We collect your email for the following purposes:
+          </p>
+          <ul class="list-disc pl-6 space-y-2 mt-3">
+            <li>Sending product updates and release announcements;</li>
+            <li>Delivering security notices relevant to the Software;</li>
+            <li>Providing beta invitations and early access to new features;</li>
+            <li>Sending download verification links.</li>
+          </ul>
+          <p class="mt-3">
+            <strong class="text-white">Legal basis (GDPR):</strong> Consent, under Article 6(1)(a) of the General Data Protection Regulation. You may withdraw your consent at any time by unsubscribing from emails or contacting us.
+          </p>
+          <p class="mt-3">
+            <strong class="text-white">We will never sell, share, rent, or trade your email address with any third party.</strong> Your email is used exclusively for the purposes described above.
+          </p>
+        </section>
+
+        <!-- 5. Data Storage -->
+        <section>
+          <h2 class="text-xl font-semibold text-white mb-4">5. Data Storage and Retention</h2>
+          <ul class="list-disc pl-6 space-y-2">
+            <li><strong class="text-white">Email addresses</strong> are stored in Cloudflare Workers KV, encrypted at rest. Emails are retained until you unsubscribe or request deletion.</li>
+            <li><strong class="text-white">Download audit logs</strong> (platform type and timestamp only) are retained for one (1) year for operational purposes and then deleted.</li>
+            <li><strong class="text-white">Web analytics</strong> are aggregated by Cloudflare and contain no individual user data. No individual records are retained beyond 30 days.</li>
+            <li><strong class="text-white">GPU monitoring data</strong> is never stored by us. There is no database, server, or cloud service that receives your GPU metrics or system information.</li>
+          </ul>
+        </section>
+
+        <!-- 6. Third-Party Services -->
+        <section>
+          <h2 class="text-xl font-semibold text-white mb-4">6. Third-Party Services</h2>
+          <p>
+            We use the following third-party services to operate the Website:
+          </p>
+          <ul class="list-disc pl-6 space-y-2 mt-3">
+            <li><strong class="text-white">Cloudflare</strong> — Website hosting, content delivery network (CDN), cookieless analytics, and Workers KV storage for email addresses. <a href="https://www.cloudflare.com/privacypolicy/" class="text-cyan hover:underline" target="_blank" rel="noopener noreferrer">Cloudflare Privacy Policy</a>.</li>
+            <li><strong class="text-white">Resend</strong> — Transactional email delivery for verification and product update emails. <a href="https://resend.com/legal/privacy-policy" class="text-cyan hover:underline" target="_blank" rel="noopener noreferrer">Resend Privacy Policy</a>.</li>
+          </ul>
+          <p class="mt-3">
+            Neither of these services has access to your GPU data, because no GPU data is ever transmitted from the Software. These services process only the limited data described in this policy (email addresses and aggregated web analytics).
+          </p>
+        </section>
+
+        <!-- 7. Cookies -->
+        <section>
+          <h2 class="text-xl font-semibold text-white mb-4">7. Cookies</h2>
+          <p>
+            The gpulse.ai Website does not use cookies. Cloudflare Web Analytics operates without cookies, using edge-side aggregation that requires no client-side storage. Because we use no cookies, no cookie consent banner is required.
+          </p>
+          <p class="mt-3">
+            If we introduce cookies in the future, this Privacy Policy will be updated accordingly and appropriate consent mechanisms will be implemented.
+          </p>
+        </section>
+
+        <!-- 8. GDPR Compliance -->
+        <section>
+          <h2 class="text-xl font-semibold text-white mb-4">8. GDPR Compliance (European Economic Area)</h2>
+          <p>
+            If you are located in the European Economic Area (EEA), you have the following rights under the General Data Protection Regulation:
+          </p>
+          <ul class="list-disc pl-6 space-y-2 mt-3">
+            <li><strong class="text-white">Lawful basis for processing:</strong> Consent (Article 6(1)(a)) for email collection. Legitimate interest (Article 6(1)(f)) for aggregated analytics.</li>
+            <li><strong class="text-white">Right of access:</strong> You may request a copy of all personal data we hold about you.</li>
+            <li><strong class="text-white">Right to rectification:</strong> You may request correction of inaccurate personal data.</li>
+            <li><strong class="text-white">Right to erasure:</strong> You may request deletion of your personal data. We will process deletion requests within 30 days.</li>
+            <li><strong class="text-white">Right to data portability:</strong> You may request your data in a machine-readable format.</li>
+            <li><strong class="text-white">Right to withdraw consent:</strong> You may withdraw consent for email communications at any time by unsubscribing or contacting us.</li>
+            <li><strong class="text-white">Right to lodge a complaint:</strong> You have the right to file a complaint with your local data protection authority.</li>
+          </ul>
+          <p class="mt-3">
+            <strong class="text-white">Data controller:</strong> Karthik Kirubakaran. To exercise any of these rights, contact <a href="mailto:privacy@gpulse.ai" class="text-cyan hover:underline">privacy@gpulse.ai</a>.
+          </p>
+          <p class="mt-3">
+            <strong class="text-white">International transfers:</strong> Data may be processed in the United States through Cloudflare infrastructure. Cloudflare is certified under the EU-U.S. Data Privacy Framework.
+          </p>
+        </section>
+
+        <!-- 9. CCPA Compliance -->
+        <section>
+          <h2 class="text-xl font-semibold text-white mb-4">9. CCPA Compliance (California Residents)</h2>
+          <p>
+            If you are a California resident, you have the following rights under the California Consumer Privacy Act (CCPA):
+          </p>
+          <ul class="list-disc pl-6 space-y-2 mt-3">
+            <li><strong class="text-white">Right to know:</strong> You may request disclosure of the categories and specific pieces of personal information we have collected.</li>
+            <li><strong class="text-white">Right to delete:</strong> You may request deletion of your personal information.</li>
+            <li><strong class="text-white">Right to opt-out of sale:</strong> We do not sell personal information. We have never sold personal information and have no plans to do so.</li>
+            <li><strong class="text-white">Right to non-discrimination:</strong> We will not discriminate against you for exercising your CCPA rights.</li>
+          </ul>
+          <p class="mt-3">
+            To exercise your CCPA rights, contact <a href="mailto:privacy@gpulse.ai" class="text-cyan hover:underline">privacy@gpulse.ai</a>. We will respond within 45 days as required by law.
+          </p>
+        </section>
+
+        <!-- 10. Children's Privacy -->
+        <section>
+          <h2 class="text-xl font-semibold text-white mb-4">10. Children's Privacy</h2>
+          <p>
+            The Software and Website are not directed at children under the age of 13. We do not knowingly collect personal information from children under 13. If we become aware that we have inadvertently collected personal information from a child under 13, we will take steps to delete that information promptly.
+          </p>
+          <p class="mt-3">
+            If you are a parent or guardian and believe your child has provided us with personal information, please contact us at <a href="mailto:privacy@gpulse.ai" class="text-cyan hover:underline">privacy@gpulse.ai</a>.
+          </p>
+        </section>
+
+        <!-- 11. Security -->
+        <section>
+          <h2 class="text-xl font-semibold text-white mb-4">11. Security</h2>
+          <p>
+            We take reasonable measures to protect the information we collect:
+          </p>
+          <ul class="list-disc pl-6 space-y-2 mt-3">
+            <li>Email addresses are stored in Cloudflare Workers KV with encryption at rest;</li>
+            <li>All connections to the Website are encrypted via HTTPS/TLS;</li>
+            <li>No passwords are stored, as there are no user accounts;</li>
+            <li>Access to backend systems is restricted and authenticated.</li>
+          </ul>
+          <p class="mt-3">
+            While we implement industry-standard security practices, no method of electronic transmission or storage is completely secure. We cannot guarantee absolute security of your information.
+          </p>
+        </section>
+
+        <!-- 12. Changes to This Policy -->
+        <section>
+          <h2 class="text-xl font-semibold text-white mb-4">12. Changes to This Policy</h2>
+          <p>
+            We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated effective date. Material changes will be communicated via email to users who have provided their email address.
+          </p>
+          <p class="mt-3">
+            We encourage you to review this Privacy Policy periodically. Your continued use of the Software or Website after any changes constitutes your acceptance of the revised policy.
+          </p>
+        </section>
+
+        <!-- 13. Contact -->
+        <section>
+          <h2 class="text-xl font-semibold text-white mb-4">13. Contact</h2>
+          <p>
+            If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:
+          </p>
+          <ul class="list-none space-y-2 mt-3">
+            <li><strong class="text-white">Privacy inquiries:</strong> <a href="mailto:privacy@gpulse.ai" class="text-cyan hover:underline">privacy@gpulse.ai</a></li>
+            <li><strong class="text-white">General inquiries:</strong> <a href="mailto:info@gpulse.ai" class="text-cyan hover:underline">info@gpulse.ai</a></li>
+          </ul>
+          <p class="mt-3">
+            We will respond to all privacy-related requests within 30 days of receipt.
+          </p>
+        </section>
+
+      </div>
+    </div>
+  </section>
+</BaseLayout>
