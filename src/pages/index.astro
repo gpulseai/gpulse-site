@@ -64,13 +64,13 @@ import { Card } from '../components/ui/Card';
         class="mt-14 max-w-2xl w-full glow-cyan"
       />
 
-      <!-- Hero screenshot -->
-      <Screenshot
-        src="/screenshots/grid-8gpu.png"
-        alt="gpulse dashboard monitoring 8 NVIDIA GPUs in grid view with Monokai theme, showing real-time VRAM usage, GPU utilization, temperature, power draw, OOM leak alert, and per-process attribution"
-        caption="Grid view — 8 NVIDIA GPUs with real-time monitoring and OOM leak detection alert"
-        class="mt-10"
-      />
+      <!-- Live terminal demo -->
+      <div class="mt-10 w-full max-w-5xl rounded-xl overflow-hidden border border-border glow-cyan">
+        <div id="demo-player"></div>
+      </div>
+      <p class="mt-3 text-sm text-muted/60 text-center">
+        Live demo — onboarding wizard, 7 dashboard views, leak detection, and theme cycling
+      </p>
     </div>
   </section>
 
@@ -696,4 +696,25 @@ import { Card } from '../components/ui/Card';
       </div>
     </div>
   </section>
+
+  <!-- Asciinema player init -->
+  <script is:inline src="https://unpkg.com/asciinema-player@3.8.0/dist/bundle/asciinema-player.min.js"></script>
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function() {
+      var el = document.getElementById('demo-player');
+      if (el && window.AsciinemaPlayer) {
+        AsciinemaPlayer.create('/gpulse-demo.cast', el, {
+          theme: 'monokai',
+          cols: 146,
+          rows: 37,
+          autoPlay: true,
+          loop: true,
+          speed: 1.5,
+          fit: 'width',
+          idleTimeLimit: 2,
+          preload: true,
+        });
+      }
+    });
+  </script>
 </BaseLayout>
