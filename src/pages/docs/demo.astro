@@ -1,0 +1,62 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/asciinema-player@3.8.0/dist/bundle/asciinema-player.css" />
+
+<DocsLayout
+  title="Live Demo — gpulse"
+  description="Watch gpulse in action: onboarding wizard, 7 dashboard views, leak detection alerts, and theme cycling in a live terminal recording."
+>
+  <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Live Demo</h1>
+  <p class="mt-4 text-lg text-muted leading-relaxed">
+    Watch gpulse in action — from first-run onboarding through all 7 dashboard views, leak detection alerts, and theme cycling. This is a real terminal recording running <code class="font-mono text-sm text-cyan bg-surface px-1.5 py-0.5 rounded">gpulse dashboard --demo nvidia:8</code>.
+  </p>
+
+  <div class="mt-8 rounded-xl overflow-hidden border border-border">
+    <div id="demo-player"></div>
+  </div>
+
+  <p class="mt-4 text-sm text-muted">
+    Use the controls at the bottom to pause, scrub, or adjust playback speed. The recording plays at 1.5x speed and loops automatically.
+  </p>
+
+  <h2 class="mt-12 text-2xl font-bold">What You'll See</h2>
+  <ol class="mt-4 space-y-3 text-muted list-decimal list-inside">
+    <li><strong class="text-white">Onboarding wizard</strong> — 4 quick setup questions on first launch</li>
+    <li><strong class="text-white">Grid view</strong> — 8 NVIDIA GPUs at a glance with real-time metrics</li>
+    <li><strong class="text-white">Detail view</strong> — deep metrics for a single GPU with process table</li>
+    <li><strong class="text-white">Predict view</strong> — leak detection with OOM time estimates</li>
+    <li><strong class="text-white">Compare view</strong> — side-by-side GPU comparison</li>
+    <li><strong class="text-white">Topology view</strong> — PCIe/NVLink interconnect diagram</li>
+    <li><strong class="text-white">Fleet view</strong> — multi-machine monitoring overview</li>
+    <li><strong class="text-white">Theme cycling</strong> — switch between 15 built-in themes</li>
+  </ol>
+
+  <h2 class="mt-12 text-2xl font-bold">Try It Yourself</h2>
+  <p class="mt-4 text-muted">
+    No GPU required — demo mode simulates data for any vendor:
+  </p>
+  <pre class="mt-4 rounded-xl bg-surface border border-border p-4 font-mono text-sm text-cyan overflow-x-auto"><code>brew tap gpulseai/gpulse && brew install gpulse
+gpulse dashboard --demo nvidia:8</code></pre>
+
+  <script is:inline src="https://unpkg.com/asciinema-player@3.8.0/dist/bundle/asciinema-player.min.js"></script>
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function() {
+      var el = document.getElementById('demo-player');
+      if (el && window.AsciinemaPlayer) {
+        AsciinemaPlayer.create('/gpulse-demo.cast', el, {
+          theme: 'monokai',
+          cols: 146,
+          rows: 37,
+          autoPlay: true,
+          loop: true,
+          speed: 1.5,
+          fit: 'width',
+          idleTimeLimit: 2,
+          preload: true,
+        });
+      }
+    });
+  </script>
+</DocsLayout>
