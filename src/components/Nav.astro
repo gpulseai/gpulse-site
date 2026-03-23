@@ -48,7 +48,7 @@ const navLinks = [
     <div class="hidden md:block">
       <a
         href="/download"
-        class="inline-flex items-center rounded-lg bg-cyan px-4 py-2 text-sm font-semibold text-dark transition-colors duration-200 hover:bg-cyan-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
+        class="inline-flex items-center rounded-lg bg-cyan px-4 py-2 text-sm font-semibold text-dark transition-all duration-200 hover:bg-cyan-dark hover:scale-105 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
       >
         Download
       </a>
@@ -103,7 +103,7 @@ const navLinks = [
         <li>
           <a
             href={link.href}
-            class="block rounded-lg px-4 py-3 text-sm font-medium text-muted transition-colors hover:bg-surface hover:text-white"
+            class="block rounded-lg px-4 py-3 min-h-11 text-sm font-medium text-muted transition-colors hover:bg-surface hover:text-white"
           >
             {link.label}
           </a>
@@ -112,7 +112,7 @@ const navLinks = [
       <li class="mt-2 pt-2 border-t border-border">
         <a
           href="/download"
-          class="block rounded-lg bg-cyan px-4 py-3 text-center text-sm font-semibold text-dark transition-colors hover:bg-cyan-dark"
+          class="block rounded-lg bg-cyan px-4 py-3 min-h-11 text-center text-sm font-semibold text-dark transition-all hover:bg-cyan-dark hover:scale-105 active:scale-95"
         >
           Download
         </a>

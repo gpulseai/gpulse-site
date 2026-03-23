@@ -41,7 +41,7 @@ const elementId = `terminal-${Math.random().toString(36).slice(2, 9)}`;
   <!-- Terminal body -->
   <div class="bg-[#0d0d0d] px-5 py-4 text-left">
     <code id={elementId} class="font-mono text-sm text-green leading-relaxed">
-      <span class="text-muted select-none" aria-hidden="true">$ </span>{command}
+      <span class="text-muted select-none" aria-hidden="true">$ </span>{command}<span class="terminal-cursor inline-block w-2 h-4 bg-green align-text-bottom ml-0.5" aria-hidden="true"></span>
     </code>
   </div>
 </div>

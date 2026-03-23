@@ -34,7 +34,7 @@ import { Card } from '../components/ui/Card';
         class="text-5xl md:text-7xl font-extrabold text-center mt-8 tracking-tight leading-[1.1]"
       >
         Never lose a training run<br />
-        <span class="text-cyan">to OOM.</span>
+        <span class="text-cyan text-glow">to OOM.</span>
       </h1>
 
       <!-- Subtitle -->
@@ -56,7 +56,7 @@ import { Card } from '../components/ui/Card';
       <Terminal
         title="Install gpulse"
         command="brew tap gpulseai/gpulse && brew install gpulse"
-        class="mt-14 max-w-2xl w-full"
+        class="mt-14 max-w-2xl w-full glow-cyan"
       />
 
       <!-- Hero screenshot -->
@@ -72,13 +72,15 @@ import { Card } from '../components/ui/Card';
   <!-- ─── Features Section ─── -->
   <section id="features" class="py-24 md:py-32" aria-labelledby="features-heading">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <SectionHeader
-        eyebrow="FEATURES"
-        title="Everything you need to monitor GPUs"
-        subtitle="Memory leaks, thermal throttling, OOM crashes — gpulse detects problems before they cost you hours of compute."
-      />
+      <div class="fade-in-up">
+        <SectionHeader
+          eyebrow="FEATURES"
+          title="Everything you need to monitor GPUs"
+          subtitle="Memory leaks, thermal throttling, OOM crashes — gpulse detects problems before they cost you hours of compute."
+        />
+      </div>
 
-      <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
+      <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3 stagger-children fade-in-up">
         <!-- Feature 1: Beautiful TUI Dashboard -->
         <Card client:load>
           <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-cyan/10 mb-6">
@@ -124,13 +126,15 @@ import { Card } from '../components/ui/Card';
   <!-- ─── Scale Section ─── -->
   <section class="py-24 md:py-32 bg-surface section-gradient-top" aria-labelledby="scale-heading">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <SectionHeader
-        eyebrow="SCALE"
-        title="From laptop to fleet"
-        subtitle="Start with local monitoring. Scale to 20 machines with Pro. Go unlimited with Enterprise cloud integration."
-      />
+      <div class="fade-in-up">
+        <SectionHeader
+          eyebrow="SCALE"
+          title="From laptop to fleet"
+          subtitle="Start with local monitoring. Scale to 20 machines with Pro. Go unlimited with Enterprise cloud integration."
+        />
+      </div>
 
-      <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
+      <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3 stagger-children fade-in-up">
         <!-- Local (Free) -->
         <div class="rounded-2xl border border-border bg-dark/80 p-8 hover:border-cyan/30 transition-all duration-300">
           <div class="flex items-center justify-center w-14 h-14 rounded-xl bg-cyan/10 mb-6">
@@ -200,13 +204,15 @@ import { Card } from '../components/ui/Card';
   <!-- ─── Who Uses gpulse Section ─── -->
   <section class="py-24 md:py-32" aria-labelledby="personas-heading">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <SectionHeader
-        eyebrow="WHO USES GPULSE"
-        title="Built for everyone who works with GPUs"
-        subtitle="From solo researchers to platform teams managing hundreds of GPUs."
-      />
+      <div class="fade-in-up">
+        <SectionHeader
+          eyebrow="WHO USES GPULSE"
+          title="Built for everyone who works with GPUs"
+          subtitle="From solo researchers to platform teams managing hundreds of GPUs."
+        />
+      </div>
 
-      <div class="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 stagger-children fade-in-up">
         <!-- ML Engineers -->
         <Card client:load>
           <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-cyan/10 mb-6">
@@ -309,13 +315,15 @@ import { Card } from '../components/ui/Card';
   <!-- ─── Screenshot Showcase Section ─── -->
   <section class="py-24 md:py-32 bg-surface section-gradient-top" aria-labelledby="views-heading">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <SectionHeader
-        eyebrow="VIEW MODES"
-        title="Seven ways to see your GPUs"
-        subtitle="Switch between views with a single keystroke. Each mode is purpose-built for a different monitoring task."
-      />
+      <div class="fade-in-up">
+        <SectionHeader
+          eyebrow="VIEW MODES"
+          title="Seven ways to see your GPUs"
+          subtitle="Switch between views with a single keystroke. Each mode is purpose-built for a different monitoring task."
+        />
+      </div>
 
-      <div class="mt-16 grid grid-cols-1 gap-10 md:grid-cols-2">
+      <div class="mt-16 grid grid-cols-1 gap-10 md:grid-cols-2 stagger-children fade-in-up">
         <Screenshot
           src="/screenshots/grid-4gpu.png"
           alt="gpulse Grid view with 4 NVIDIA GPUs showing VRAM usage bars, GPU utilization, temperature, power draw, and a process table with python training workloads"
@@ -350,18 +358,20 @@ import { Card } from '../components/ui/Card';
     <div class="absolute inset-0 bg-gradient-to-b from-transparent via-cyan/[0.02] to-transparent" aria-hidden="true"></div>
 
     <div class="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <SectionHeader
-        eyebrow="GET STARTED"
-        title="Up and running in 30 seconds"
-        subtitle="No configuration files. No dependencies. One command to install, one command to launch."
-      />
+      <div class="fade-in-up">
+        <SectionHeader
+          eyebrow="GET STARTED"
+          title="Up and running in 30 seconds"
+          subtitle="No configuration files. No dependencies. One command to install, one command to launch."
+        />
+      </div>
 
       <!-- Steps with connecting line -->
       <div class="mt-16 relative">
         <!-- Connecting line (hidden on mobile, visible on md+) -->
         <div class="hidden md:block absolute top-[60px] left-[16.67%] right-[16.67%] h-px bg-gradient-to-r from-cyan/0 via-cyan/30 to-cyan/0" aria-hidden="true"></div>
 
-        <div class="grid grid-cols-1 gap-12 md:grid-cols-3">
+        <div class="grid grid-cols-1 gap-12 md:grid-cols-3 stagger-children fade-in-up">
           <!-- Step 1 -->
           <div class="relative flex flex-col items-center text-center">
             <!-- Glowing number badge -->
@@ -438,13 +448,15 @@ import { Card } from '../components/ui/Card';
   <!-- ─── Pricing Section ─── -->
   <section id="pricing" class="py-24 md:py-32 bg-surface section-gradient-top" aria-labelledby="pricing-heading">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <SectionHeader
-        eyebrow="PRICING"
-        title="Free for individuals. Pro for teams."
-        subtitle="Download and start monitoring in seconds. No account required, no credit card needed."
-      />
+      <div class="fade-in-up">
+        <SectionHeader
+          eyebrow="PRICING"
+          title="Free for individuals. Pro for teams."
+          subtitle="Download and start monitoring in seconds. No account required, no credit card needed."
+        />
+      </div>
 
-      <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
+      <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3 stagger-children fade-in-up">
         <!-- Free Tier -->
         <Card client:load>
           <div class="flex flex-col h-full">
@@ -582,12 +594,14 @@ import { Card } from '../components/ui/Card';
   <!-- ─── FAQ Section ─── -->
   <section class="py-24 md:py-32" aria-labelledby="faq-heading">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-      <SectionHeader
-        eyebrow="FAQ"
-        title="Frequently asked questions"
-      />
+      <div class="fade-in-up">
+        <SectionHeader
+          eyebrow="FAQ"
+          title="Frequently asked questions"
+        />
+      </div>
 
-      <div class="mt-16 space-y-4">
+      <div class="mt-16 space-y-4 fade-in-up">
         <details class="group rounded-xl border border-border bg-surface transition-colors open:border-cyan/30">
           <summary class="flex cursor-pointer items-center justify-between px-6 py-5 text-left font-semibold transition-colors hover:text-cyan [&::-webkit-details-marker]:hidden">
             What GPUs are supported?
