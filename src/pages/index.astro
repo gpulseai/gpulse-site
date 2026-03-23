@@ -25,7 +25,7 @@ import { Card } from '../components/ui/Card';
     <div class="relative z-10 flex flex-col items-center">
       <!-- Eyebrow badge -->
       <Badge variant="cyan" client:load>
-        v2.0.0 — OOM Prediction is here
+        v2.2.0 — OOM Prediction is here
       </Badge>
 
       <!-- Headline -->
@@ -55,7 +55,7 @@ import { Card } from '../components/ui/Card';
       <!-- Terminal mockup -->
       <Terminal
         title="Install gpulse"
-        command="brew install kkirubakaran/gpulse/gpulse"
+        command="brew tap gpulseai/gpulse && brew install gpulse"
         class="mt-14 max-w-2xl w-full"
       />
 
@@ -88,7 +88,7 @@ import { Card } from '../components/ui/Card';
           </div>
           <h3 class="text-xl font-bold mb-3">Beautiful TUI Dashboard</h3>
           <p class="text-muted leading-relaxed">
-            A btop-quality terminal interface for GPU monitoring. See memory, utilization, temperature, power draw, and per-process attribution at a glance. Ships with 15 built-in themes.
+            A btop-quality terminal interface with 7 purpose-built views, Monokai default theme, and vim-style navigation. See memory, utilization, temperature, power draw, and per-process attribution at a glance. Ships with 15 themes. Customize everything with <code class="font-mono text-sm text-cyan bg-surface px-1.5 py-0.5 rounded">gpulse config</code>.
           </p>
         </Card>
 
@@ -101,7 +101,7 @@ import { Card } from '../components/ui/Card';
           </div>
           <h3 class="text-xl font-bold mb-3">Predictive OOM Detection</h3>
           <p class="text-muted leading-relaxed">
-            Three detection algorithms — linear trend analysis, spike detection, and composite scoring — monitor memory growth in real time. Get an estimated time-to-OOM before your training run crashes.
+            Three algorithms — linear trend analysis, spike detection, and composite scoring — provide real-time risk scoring for every GPU. View results in the dedicated Predict view with per-GPU risk levels, growth rates, and estimated time-to-OOM before your training run crashes.
           </p>
         </Card>
 
@@ -376,7 +376,7 @@ import { Card } from '../components/ui/Card';
             <p class="text-muted text-sm mb-6">One command via Homebrew. No dependencies.</p>
             <Terminal
               title="Terminal"
-              command="brew install kkirubakaran/gpulse/gpulse"
+              command="brew tap gpulseai/gpulse && brew install gpulse"
               class="w-full"
             />
           </div>
@@ -390,7 +390,7 @@ import { Card } from '../components/ui/Card';
               <div class="absolute inset-0 rounded-2xl bg-cyan/5 blur-xl -z-10" aria-hidden="true"></div>
             </div>
             <h3 class="text-xl font-bold mb-4">Launch</h3>
-            <p class="text-muted text-sm mb-6">Start the dashboard. That's it.</p>
+            <p class="text-muted text-sm mb-6">First launch runs a quick 4-question setup wizard to configure your preferences.</p>
             <Terminal
               title="Terminal"
               command="gpulse dashboard"
@@ -407,7 +407,7 @@ import { Card } from '../components/ui/Card';
               <div class="absolute inset-0 rounded-2xl bg-cyan/5 blur-xl -z-10" aria-hidden="true"></div>
             </div>
             <h3 class="text-xl font-bold mb-4">Monitor</h3>
-            <p class="text-muted text-sm mb-6">Navigate views with single keystrokes.</p>
+            <p class="text-muted text-sm mb-6">Navigate views with single keystrokes. Preferences saved to config.toml.</p>
             <!-- Keybindings grid -->
             <div class="w-full rounded-xl border border-border bg-dark/80 p-5">
               <div class="grid grid-cols-2 gap-3 text-left">
@@ -663,7 +663,7 @@ import { Card } from '../components/ui/Card';
 
       <Terminal
         title="Install gpulse"
-        command="brew install kkirubakaran/gpulse/gpulse"
+        command="brew tap gpulseai/gpulse && brew install gpulse"
         class="mt-10 max-w-2xl mx-auto"
       />
 

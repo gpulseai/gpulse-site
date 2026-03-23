@@ -59,14 +59,14 @@ import Screenshot from '../../components/Screenshot.astro';
   <h3 class="mt-8 text-lg font-semibold">Option 1: Homebrew (Recommended)</h3>
   <p class="mt-2 text-muted">The fastest way to install. One command, no dependencies.</p>
   <div class="mt-4">
-    <CodeBlock code="brew install kkirubakaran/gpulse/gpulse" language="bash" />
+    <CodeBlock code="brew tap gpulseai/gpulse && brew install gpulse" language="bash" />
   </div>
 
   <h3 class="mt-8 text-lg font-semibold">Option 2: Direct Download</h3>
   <p class="mt-2 text-muted">Download the latest release binary directly.</p>
   <div class="mt-4">
     <CodeBlock code={`# Download latest release for macOS (Apple Silicon)
-curl -L https://github.com/kkirubakaran/gpulse/releases/latest/download/gpulse-darwin-arm64.tar.gz -o gpulse.tar.gz
+curl -L https://github.com/gpulseai/gpulse/releases/latest/download/gpulse-darwin-arm64.tar.gz -o gpulse.tar.gz
 
 # Extract and install
 tar -xzf gpulse.tar.gz
@@ -75,7 +75,7 @@ sudo chmod +x /usr/local/bin/gpulse`} language="bash" />
   </div>
 
   <h3 class="mt-8 text-lg font-semibold">Option 3: Manual Install</h3>
-  <p class="mt-2 text-muted">Download the binary from the <a href="https://github.com/kkirubakaran/gpulse/releases" class="text-cyan underline underline-offset-4 hover:text-cyan-dark transition-colors">releases page</a> and place it somewhere in your <code class="font-mono text-sm text-cyan bg-surface px-1.5 py-0.5 rounded">$PATH</code>.</p>
+  <p class="mt-2 text-muted">Download the binary from the <a href="https://github.com/gpulseai/gpulse/releases" class="text-cyan underline underline-offset-4 hover:text-cyan-dark transition-colors">releases page</a> and place it somewhere in your <code class="font-mono text-sm text-cyan bg-surface px-1.5 py-0.5 rounded">$PATH</code>.</p>
 
   <h3 class="mt-8 text-lg font-semibold">Verify Installation</h3>
   <div class="mt-4">
@@ -88,7 +88,7 @@ sudo chmod +x /usr/local/bin/gpulse`} language="bash" />
   <!-- First Launch -->
   <h2 class="mt-12 text-2xl font-bold">First Launch</h2>
   <p class="mt-4 text-muted">
-    Launch the dashboard with a single command. No configuration files, no setup wizard, no account required.
+    Launch the dashboard with a single command. No account required.
   </p>
 
   <div class="mt-4">
@@ -96,8 +96,22 @@ sudo chmod +x /usr/local/bin/gpulse`} language="bash" />
   </div>
 
   <p class="mt-4 text-muted">
+    On first launch, gpulse runs a quick <strong>4-question onboarding wizard</strong> to configure your preferred theme, default view, refresh rate, and notification preferences. Your choices are saved to <code class="font-mono text-sm text-cyan bg-surface px-1.5 py-0.5 rounded">config.toml</code> and applied automatically on every subsequent launch.
+  </p>
+
+  <p class="mt-4 text-muted">
     gpulse will automatically detect your GPU hardware and display the Grid view — a tile layout showing every GPU with real-time metrics.
   </p>
+
+  <!-- Configuration -->
+  <h2 class="mt-12 text-2xl font-bold">Configuration</h2>
+  <p class="mt-4 text-muted">
+    You can change your preferences at any time using the <code class="font-mono text-sm text-cyan bg-surface px-1.5 py-0.5 rounded">gpulse config</code> command, which re-runs the onboarding wizard and updates your <code class="font-mono text-sm text-cyan bg-surface px-1.5 py-0.5 rounded">config.toml</code>.
+  </p>
+
+  <div class="mt-4">
+    <CodeBlock code="gpulse config" language="bash" />
+  </div>
 
   <Screenshot
     src="/screenshots/grid-4gpu.png"
