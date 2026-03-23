@@ -3,8 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="Terms of Service — gpulse"
-  description="Terms of Service for the gpulse GPU monitoring tool and gpulse.ai website."
+  title="Terms of Use — gpulse"
+  description="Terms of Use for the gpulse GPU monitoring tool and gpulse.ai website."
 >
   <section class="px-4 pt-32 pb-24">
     <div class="mx-auto max-w-3xl">
@@ -18,9 +18,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       <!-- Page header -->
       <header class="mb-16">
-        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">Terms of Service</h1>
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">Terms of Use</h1>
         <p class="mt-4 text-muted text-lg">
-          Effective Date: <time datetime="2026-03-21">March 21, 2026</time>
+          Effective Date: <time datetime="2026-03-23">March 23, 2026</time>
         </p>
       </header>
 
@@ -29,50 +29,58 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <!-- 1. Agreement -->
         <section>
-          <h2 class="text-xl font-semibold text-white mb-4">1. Agreement</h2>
+          <h2 class="text-xl font-semibold text-white mb-4">1. Agreement to Terms</h2>
           <p>
-            By downloading, installing, or using gpulse ("Software") or visiting gpulse.ai ("Website"), you agree to these Terms of Service ("Terms"). If you do not agree, do not use the Software or Website.
+            By downloading, installing, or using gpulse ("Software") or visiting gpulse.ai ("Website"), you agree to be bound by these Terms of Use ("Terms"). If you do not agree, do not use the Software or Website.
           </p>
           <p class="mt-3">
-            These Terms are between you and Karthik Kirubakaran ("Author," "we," "us"), the developer and owner of gpulse.
+            These Terms constitute a legal agreement between you ("User," "you") and Karthik Kirubakaran ("Author," "we," "us"), the developer and sole proprietor of gpulse.
+          </p>
+          <p class="mt-3">
+            If you are using the Software on behalf of an organization, you represent that you have authority to bind that organization to these Terms.
           </p>
         </section>
 
-        <!-- 2. License -->
+        <!-- 2. License Grant -->
         <section>
-          <h2 class="text-xl font-semibold text-white mb-4">2. License</h2>
+          <h2 class="text-xl font-semibold text-white mb-4">2. License Grant</h2>
           <p>
-            We grant you a <strong class="text-white">limited, non-exclusive, non-transferable, revocable</strong> license to use the compiled gpulse binary for GPU monitoring on devices you own or control. This license covers personal and commercial use.
+            Subject to these Terms, we grant you a <strong class="text-white">limited, non-exclusive, non-transferable, revocable</strong> license to use the compiled gpulse binary for GPU monitoring on devices you own or have authorization to manage.
           </p>
-          <p class="mt-3">
-            This license does not include access to source code. The Software is distributed as a compiled binary only.
-          </p>
+          <ul class="list-disc pl-6 space-y-2 mt-3">
+            <li><strong class="text-white">Scope:</strong> This license covers both personal and commercial use.</li>
+            <li><strong class="text-white">Binary only:</strong> The Software is distributed as a compiled binary. This license does not include access to source code.</li>
+            <li><strong class="text-white">Tier-dependent features:</strong> Certain features require a valid Pro or Enterprise license. Using paid features without a valid license is a violation of these Terms.</li>
+          </ul>
         </section>
 
         <!-- 3. Restrictions -->
         <section>
-          <h2 class="text-xl font-semibold text-white mb-4">3. Restrictions</h2>
+          <h2 class="text-xl font-semibold text-white mb-4">3. Acceptable Use and Restrictions</h2>
           <p>You agree not to:</p>
           <ul class="list-disc pl-6 space-y-2 mt-3">
-            <li>Reverse engineer, decompile, or disassemble the Software;</li>
-            <li>Modify, adapt, or create derivative works from the Software;</li>
-            <li>Redistribute, sublicense, rent, sell, or transfer the Software to third parties;</li>
-            <li>Remove or alter any proprietary notices on the Software;</li>
-            <li>Use the Software to build a competing product.</li>
+            <li>Reverse engineer, decompile, disassemble, or attempt to derive the source code of the Software;</li>
+            <li>Modify, adapt, translate, or create derivative works based on the Software;</li>
+            <li>Redistribute, sublicense, rent, lease, sell, or transfer the Software or your license key to any third party;</li>
+            <li>Share, publish, or distribute license keys;</li>
+            <li>Remove, alter, or obscure any proprietary notices, labels, or branding in the Software;</li>
+            <li>Use the Software to build a competing product or service;</li>
+            <li>Circumvent or attempt to circumvent license validation, feature gating, or any other technical protection measures;</li>
+            <li>Use the Software in any manner that violates applicable law.</li>
           </ul>
         </section>
 
-        <!-- 4. Ownership -->
+        <!-- 4. Intellectual Property -->
         <section>
-          <h2 class="text-xl font-semibold text-white mb-4">4. Ownership</h2>
+          <h2 class="text-xl font-semibold text-white mb-4">4. Intellectual Property</h2>
           <p>
-            The Software, including all code, design, and documentation, is the exclusive property of Karthik Kirubakaran. All rights not expressly granted here are reserved.
+            The Software, including all code, design, documentation, and website content, is the exclusive intellectual property of Karthik Kirubakaran. All rights not expressly granted in these Terms are reserved.
           </p>
           <p class="mt-3">
-            "gpulse" and associated branding are trademarks of Karthik Kirubakaran. You may reference gpulse by name for identification purposes consistent with fair use.
+            <strong class="text-white">Trademarks:</strong> "gpulse" and associated logos, branding, and visual identity are trademarks of Karthik Kirubakaran. You may reference gpulse by name for identification purposes consistent with nominative fair use, but you may not use our trademarks in a way that implies endorsement or affiliation without written permission.
           </p>
           <p class="mt-3">
-            If you provide feedback or suggestions about the Software, you grant us a perpetual, royalty-free license to use that feedback without obligation to you.
+            <strong class="text-white">Feedback:</strong> If you provide feedback, suggestions, or ideas about the Software, you grant us a perpetual, worldwide, royalty-free, irrevocable license to use, modify, and incorporate that feedback without compensation or attribution to you.
           </p>
         </section>
 
@@ -80,35 +88,54 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <section>
           <h2 class="text-xl font-semibold text-white mb-4">5. Free Tier</h2>
           <p>
-            The free tier provides local GPU monitoring with no time limit. It includes real-time metrics, memory tracking, process monitoring, and the terminal interface.
+            The free tier provides local GPU monitoring at no cost, with no time limit and no account required. Free tier features include real-time metrics, memory tracking, process monitoring, leak detection, and the full terminal user interface.
           </p>
           <p class="mt-3">
-            We may adjust which features are included in the free tier. If we materially reduce free tier functionality, we will provide 30 days' notice on the Website.
+            The free tier is provided <strong class="text-white">"as is"</strong> with no service level agreement, no guaranteed uptime, and no support obligations. We may adjust which features are included in the free tier at our discretion. If we materially reduce free tier functionality, we will provide 30 days' notice on the Website.
           </p>
         </section>
 
-        <!-- 6. Paid Plans -->
+        <!-- 6. Pro and Enterprise Tiers -->
         <section>
-          <h2 class="text-xl font-semibold text-white mb-4">6. Paid Plans</h2>
-          <p>
-            When available, Pro ($29/month) and Enterprise subscriptions will be governed by these additional terms:
-          </p>
-          <ul class="list-disc pl-6 space-y-2 mt-3">
-            <li>Subscriptions are billed on a recurring basis through a third-party payment processor.</li>
-            <li>You may cancel at any time. Access continues through the end of your current billing period.</li>
-            <li>We may change pricing with 30 days' written notice. Continued use after a price change constitutes acceptance.</li>
-            <li>No refunds for partial billing periods.</li>
+          <h2 class="text-xl font-semibold text-white mb-4">6. Pro and Enterprise Subscriptions</h2>
+
+          <h3 class="text-lg font-medium text-white mt-4 mb-3">Billing</h3>
+          <ul class="list-disc pl-6 space-y-2">
+            <li>Pro subscriptions are billed at $29 per month through a third-party payment processor.</li>
+            <li>Enterprise pricing is determined on a per-agreement basis. Contact <a href="mailto:sales@gpulse.ai" class="text-cyan hover:underline">sales@gpulse.ai</a> for details.</li>
+            <li>All prices are in US dollars unless otherwise stated.</li>
+            <li>Applicable taxes are your responsibility unless we are legally required to collect them.</li>
           </ul>
+
+          <h3 class="text-lg font-medium text-white mt-6 mb-3">License Keys</h3>
+          <ul class="list-disc pl-6 space-y-2">
+            <li>Paid subscriptions are activated via a license key file stored locally at <code class="text-cyan/80">~/.config/gpulse/license.key</code>.</li>
+            <li>License keys are personal to the subscriber and must not be shared or redistributed.</li>
+            <li>We reserve the right to revoke license keys that are shared, abused, or used in violation of these Terms.</li>
+          </ul>
+
+          <h3 class="text-lg font-medium text-white mt-6 mb-3">Cancellation and Refunds</h3>
+          <ul class="list-disc pl-6 space-y-2">
+            <li>You may cancel your subscription at any time.</li>
+            <li>Cancellation takes effect at the end of your current billing period. You retain access to paid features until then.</li>
+            <li>After cancellation, the Software reverts to free tier functionality.</li>
+            <li>No refunds are provided for partial billing periods, except where required by law.</li>
+          </ul>
+
+          <h3 class="text-lg font-medium text-white mt-6 mb-3">Price Changes</h3>
+          <p>
+            We may change subscription pricing with at least 30 days' written notice to the email address associated with your license. The new price takes effect at your next billing cycle after the notice period. If you do not agree to the new price, you may cancel before it takes effect.
+          </p>
         </section>
 
         <!-- 7. Privacy -->
         <section>
           <h2 class="text-xl font-semibold text-white mb-4">7. Privacy</h2>
           <p>
-            The gpulse CLI collects <strong class="text-white">zero user data</strong>. No telemetry, no analytics, no network calls. All GPU data stays on your machine.
+            The gpulse CLI collects <strong class="text-white">zero user data</strong>. No telemetry, no analytics, no network calls home. All GPU data stays on your machine.
           </p>
           <p class="mt-3">
-            The only optional network feature is the Prometheus metrics endpoint, which you must explicitly configure. For Website data practices, see our <a href="/privacy" class="text-cyan hover:underline">Privacy Policy</a>.
+            For details on data collected through the Website, forms, and subscriptions, see our <a href="/privacy" class="text-cyan hover:underline">Privacy Policy</a>, which is incorporated into these Terms by reference.
           </p>
         </section>
 
@@ -116,18 +143,30 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <section>
           <h2 class="text-xl font-semibold text-white mb-4">8. Third-Party Components</h2>
           <p>
-            The Software includes open-source libraries governed by their own licenses. License notices for all third-party components are bundled with the binary. We make no additional warranties for third-party components beyond those in their respective licenses.
+            The Software includes open-source libraries governed by their respective licenses. License notices for all bundled third-party components are included with the binary distribution. Our inclusion of these components does not extend any warranty beyond what their respective licenses provide.
+          </p>
+          <p class="mt-3">
+            Your use of third-party services in conjunction with gpulse (such as Prometheus, Grafana, or SSH infrastructure) is governed by those services' own terms. We are not responsible for the availability, security, or terms of third-party services.
           </p>
         </section>
 
-        <!-- 9. No Warranty -->
+        <!-- 9. Disclaimer of Warranties -->
         <section>
-          <h2 class="text-xl font-semibold text-white mb-4">9. No Warranty</h2>
+          <h2 class="text-xl font-semibold text-white mb-4">9. Disclaimer of Warranties</h2>
           <p class="uppercase font-medium text-white/90">
-            The Software and Website are provided "as is" without warranty of any kind, express or implied, including warranties of merchantability, fitness for a particular purpose, and non-infringement.
+            The Software and Website are provided "as is" and "as available" without warranty of any kind, whether express, implied, or statutory, including but not limited to warranties of merchantability, fitness for a particular purpose, accuracy, and non-infringement.
           </p>
           <p class="mt-3">
-            We do not guarantee that GPU metrics will be perfectly accurate, that leak detection will catch every issue, or that the Software will be error-free or compatible with every hardware configuration. The Software provides monitoring data for informational purposes. Decisions you make based on its output are your responsibility.
+            Without limiting the foregoing, we do not warrant that:
+          </p>
+          <ul class="list-disc pl-6 space-y-2 mt-2">
+            <li>GPU metrics reported by the Software will be perfectly accurate or complete;</li>
+            <li>Leak detection will identify every memory leak or prevent out-of-memory events;</li>
+            <li>The Software will be error-free, uninterrupted, or compatible with every hardware or software configuration;</li>
+            <li>The Software will meet your specific requirements.</li>
+          </ul>
+          <p class="mt-3">
+            The Software provides monitoring data for informational purposes. Decisions you make based on its output, including but not limited to resource allocation, workload management, and system administration, are your sole responsibility.
           </p>
         </section>
 
@@ -135,13 +174,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <section>
           <h2 class="text-xl font-semibold text-white mb-4">10. Limitation of Liability</h2>
           <p class="uppercase font-medium text-white/90">
-            To the maximum extent permitted by law, the Author shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, training runs, or goodwill, arising from your use of the Software or Website.
+            To the maximum extent permitted by applicable law, the Author shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, revenue, data, training runs, compute time, goodwill, or business opportunity, arising out of or related to your use of or inability to use the Software or Website, regardless of the cause of action or theory of liability.
           </p>
           <p class="mt-3">
-            Our total liability for any claim is limited to the amount you paid us in the 12 months before the claim arose, or $0 if you are on the free tier.
+            <strong class="text-white">Liability cap:</strong> Our total aggregate liability for any and all claims arising from these Terms or your use of the Software shall not exceed the greater of (a) the amount you paid us in the twelve (12) months immediately preceding the claim, or (b) fifty US dollars ($50).
           </p>
           <p class="mt-3">
-            Some jurisdictions do not allow these limitations. In those cases, our liability is limited to the maximum extent permitted by law.
+            Some jurisdictions do not allow the exclusion or limitation of certain damages. In those jurisdictions, our liability is limited to the maximum extent permitted by law.
           </p>
         </section>
 
@@ -149,7 +188,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <section>
           <h2 class="text-xl font-semibold text-white mb-4">11. Indemnification</h2>
           <p>
-            You agree to indemnify and hold harmless the Author from claims, damages, and expenses (including reasonable attorneys' fees) arising from your use of the Software, violation of these Terms, or infringement of any third-party rights.
+            You agree to indemnify, defend, and hold harmless the Author from and against any claims, damages, losses, liabilities, costs, and expenses (including reasonable attorneys' fees) arising out of or related to: (a) your use of the Software or Website; (b) your violation of these Terms; (c) your violation of any applicable law; or (d) your infringement of any third-party rights.
           </p>
         </section>
 
@@ -157,37 +196,78 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <section>
           <h2 class="text-xl font-semibold text-white mb-4">12. Termination</h2>
           <p>
-            Your license terminates automatically if you violate these Terms. You may terminate at any time by uninstalling the Software and ceasing all use. We may suspend or terminate access at any time, with or without cause.
+            <strong class="text-white">Automatic termination:</strong> Your license terminates automatically and immediately if you breach any provision of these Terms.
           </p>
           <p class="mt-3">
-            On termination, you must destroy all copies of the Software in your possession. Sections 4, 9, 10, 11, and 13 survive termination.
-          </p>
-        </section>
-
-        <!-- 13. Governing Law -->
-        <section>
-          <h2 class="text-xl font-semibold text-white mb-4">13. Governing Law</h2>
-          <p>
-            These Terms are governed by the laws of the Commonwealth of Massachusetts, USA, without regard to conflict of law principles.
+            <strong class="text-white">Voluntary termination:</strong> You may terminate at any time by uninstalling the Software and ceasing all use.
           </p>
           <p class="mt-3">
-            Disputes shall first be subject to good-faith negotiation for 30 days. If unresolved, they shall be submitted to the state and federal courts in Suffolk County, Massachusetts.
+            <strong class="text-white">Termination by us:</strong> We may suspend or terminate your license at any time, with or without cause, upon notice to you.
+          </p>
+          <p class="mt-3">
+            <strong class="text-white">Effect of termination:</strong> Upon termination, you must destroy all copies of the Software in your possession and cease all use. Termination of a paid subscription follows the cancellation terms in Section 6. Sections 4, 9, 10, 11, 13, and 14 survive termination.
           </p>
         </section>
 
-        <!-- 14. Changes -->
+        <!-- 13. Governing Law and Dispute Resolution -->
         <section>
-          <h2 class="text-xl font-semibold text-white mb-4">14. Changes to These Terms</h2>
+          <h2 class="text-xl font-semibold text-white mb-4">13. Governing Law and Dispute Resolution</h2>
           <p>
-            We may update these Terms at any time. Updated Terms will be posted here with a revised effective date. Material changes will be communicated via email to users who have provided their address. Continued use after changes constitutes acceptance.
+            These Terms are governed by and construed in accordance with the laws of the Commonwealth of Massachusetts, United States, without regard to its conflict of law provisions.
+          </p>
+          <p class="mt-3">
+            <strong class="text-white">Informal resolution:</strong> Before initiating any formal proceeding, you agree to contact us at <a href="mailto:legal@gpulse.ai" class="text-cyan hover:underline">legal@gpulse.ai</a> and attempt to resolve the dispute informally for at least 30 days.
+          </p>
+          <p class="mt-3">
+            <strong class="text-white">Jurisdiction:</strong> If informal resolution fails, any dispute shall be submitted exclusively to the state and federal courts located in Suffolk County, Massachusetts. You consent to the personal jurisdiction of these courts.
+          </p>
+          <p class="mt-3">
+            <strong class="text-white">International users:</strong> If you are accessing the Software from outside the United States, you are responsible for compliance with local laws. Nothing in these Terms overrides any mandatory consumer protection rights that may apply in your jurisdiction.
           </p>
         </section>
 
-        <!-- 15. General -->
+        <!-- 14. General Provisions -->
         <section>
-          <h2 class="text-xl font-semibold text-white mb-4">15. General</h2>
+          <h2 class="text-xl font-semibold text-white mb-4">14. General Provisions</h2>
+
+          <p class="mt-2">
+            <strong class="text-white">Entire agreement:</strong> These Terms, together with the <a href="/privacy" class="text-cyan hover:underline">Privacy Policy</a> and any applicable subscription or enterprise agreement, constitute the entire agreement between you and the Author regarding the Software and Website.
+          </p>
+
+          <p class="mt-3">
+            <strong class="text-white">Severability:</strong> If any provision of these Terms is found unenforceable or invalid, that provision will be limited or eliminated to the minimum extent necessary, and the remaining provisions will remain in full force and effect.
+          </p>
+
+          <p class="mt-3">
+            <strong class="text-white">Waiver:</strong> Our failure to enforce any right or provision of these Terms does not constitute a waiver of that right or provision. Any waiver must be in writing and signed by the Author.
+          </p>
+
+          <p class="mt-3">
+            <strong class="text-white">Assignment:</strong> You may not assign or transfer these Terms or your rights hereunder without our prior written consent. We may assign these Terms without restriction.
+          </p>
+
+          <p class="mt-3">
+            <strong class="text-white">Force majeure:</strong> We are not liable for any delay or failure in performance resulting from causes beyond our reasonable control, including but not limited to natural disasters, acts of government, internet outages, or third-party service failures.
+          </p>
+
+          <p class="mt-3">
+            <strong class="text-white">Export compliance:</strong> You agree to comply with all applicable export and import laws and regulations. You may not use the Software in any country or in any manner prohibited by applicable export control laws.
+          </p>
+        </section>
+
+        <!-- 15. Changes to These Terms -->
+        <section>
+          <h2 class="text-xl font-semibold text-white mb-4">15. Changes to These Terms</h2>
           <p>
-            If any provision of these Terms is unenforceable, the remaining provisions remain in effect. These Terms, together with the <a href="/privacy" class="text-cyan hover:underline">Privacy Policy</a> and any applicable subscription agreement, are the entire agreement between you and the Author regarding the Software and Website.
+            We may update these Terms at any time. When we do:
+          </p>
+          <ul class="list-disc pl-6 space-y-2 mt-3">
+            <li>Updated Terms will be posted at this URL with a revised effective date;</li>
+            <li>Material changes will be communicated via email to users who have provided their address;</li>
+            <li>For paid subscribers, material changes take effect at the start of the next billing cycle following 30 days' notice.</li>
+          </ul>
+          <p class="mt-3">
+            Continued use of the Software or Website after changes constitutes acceptance of the updated Terms. If you do not agree to updated Terms, you must stop using the Software and Website.
           </p>
         </section>
 
@@ -195,9 +275,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <section>
           <h2 class="text-xl font-semibold text-white mb-4">16. Contact</h2>
           <p>
-            Questions about these Terms? Reach us at
-            <a href="mailto:legal@gpulse.ai" class="text-cyan hover:underline">legal@gpulse.ai</a>.
+            Questions about these Terms? Reach us at:
           </p>
+          <ul class="list-none space-y-2 mt-3">
+            <li><strong class="text-white">Legal:</strong> <a href="mailto:legal@gpulse.ai" class="text-cyan hover:underline">legal@gpulse.ai</a></li>
+            <li><strong class="text-white">Sales:</strong> <a href="mailto:sales@gpulse.ai" class="text-cyan hover:underline">sales@gpulse.ai</a></li>
+            <li><strong class="text-white">General:</strong> <a href="mailto:karthik@gpulse.ai" class="text-cyan hover:underline">karthik@gpulse.ai</a></li>
+          </ul>
         </section>
 
       </div>
