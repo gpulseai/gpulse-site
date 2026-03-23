@@ -61,9 +61,9 @@ import { Card } from '../components/ui/Card';
 
       <!-- Hero screenshot -->
       <Screenshot
-        src="/screenshots/grid-4gpu.png"
-        alt="gpulse dashboard monitoring 4 NVIDIA GPUs in grid view with Monokai theme, showing real-time VRAM usage, GPU utilization, temperature, power draw, and per-process attribution"
-        caption="Grid view — 4 NVIDIA GPUs with real-time memory, utilization, temperature, and process monitoring"
+        src="/screenshots/grid-8gpu.png"
+        alt="gpulse dashboard monitoring 8 NVIDIA GPUs in grid view with Monokai theme, showing real-time VRAM usage, GPU utilization, temperature, power draw, OOM leak alert, and per-process attribution"
+        caption="Grid view — 8 NVIDIA GPUs with real-time monitoring and OOM leak detection alert"
         class="mt-10"
       />
     </div>
@@ -325,27 +325,27 @@ import { Card } from '../components/ui/Card';
 
       <div class="mt-16 grid grid-cols-1 gap-10 md:grid-cols-2 stagger-children fade-in-up">
         <Screenshot
-          src="/screenshots/grid-4gpu.png"
-          alt="gpulse Grid view with 4 NVIDIA GPUs showing VRAM usage bars, GPU utilization, temperature, power draw, and a process table with python training workloads"
-          caption="Grid View — All GPUs at a glance with per-process attribution"
+          src="/screenshots/grid-8gpu.png"
+          alt="gpulse Grid view with 8 NVIDIA GPUs showing VRAM usage bars, GPU utilization, temperature, power draw, OOM alert, and per-process attribution"
+          caption="Grid View — 8 GPUs at a glance with OOM leak alert"
           glow={false}
         />
         <Screenshot
-          src="/screenshots/predict-leak-detected.png"
-          alt="gpulse Predict mode showing a risk overview table with GPU 0 flagged as HIGH risk, linear trend detector output with R-squared 0.98, growth rate, and ETA to OOM"
-          caption="Predict Mode — Memory leak detected, ETA to OOM calculated"
+          src="/screenshots/detail-gpu4-critical.png"
+          alt="gpulse Detail view showing GPU 4 NVIDIA RTX 4090 in critical state with extended metrics, process table, and memory history"
+          caption="Detail View — Deep metrics for a single GPU"
           glow={false}
         />
         <Screenshot
-          src="/screenshots/detail-gpu0-critical.png"
-          alt="gpulse Detail view showing GPU 0 NVIDIA RTX 4090 in critical state with 17.5 of 24 GB VRAM used, full process table with CPU and GPU utilization columns"
-          caption="Detail View — Full metrics for a single GPU"
+          src="/screenshots/topology-v2.png"
+          alt="gpulse Topology view showing GPU interconnect diagram with PCIe/NVLink connections and PRO pill badges"
+          caption="Topology View — GPU interconnect diagram with NVLink"
           glow={false}
         />
         <Screenshot
-          src="/screenshots/compare-4gpu.png"
-          alt="gpulse Compare view showing 4 GPUs in a 2x2 grid with memory bars, utilization percentages, temperature and power side by side"
-          caption="Compare View — Side-by-side across all GPUs"
+          src="/screenshots/fleet-local.png"
+          alt="gpulse Fleet view showing local machine GPU fleet overview with health status indicators and Pro upgrade prompt"
+          caption="Fleet View — Multi-machine monitoring overview"
           glow={false}
         />
       </div>
