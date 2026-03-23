@@ -1,15 +1,93 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+
+const faqItems = [
+  {
+    question: "What GPUs does gpulse support?",
+    answer: "gpulse supports NVIDIA (via NVML, drivers 450.0+), Apple Silicon (via Metal and IOKit, M1/M2/M3/M4), AMD (via ROCm 5.0+), and Intel (via Level Zero, Arc and Data Center GPU Max series). GPU vendor is auto-detected at startup."
+  },
+  {
+    question: "Does gpulse work on Linux?",
+    answer: "gpulse currently supports macOS (both Apple Silicon and Intel). Linux support with NVIDIA and AMD GPUs is actively in development and will be available in a future release."
+  },
+  {
+    question: "How does OOM prediction work?",
+    answer: "gpulse uses three detection algorithms: LinearTrendDetector (least-squares regression on memory usage), SpikeDetector (sudden large memory increases in a sliding window), and CompositeDetector (runs both and returns highest-confidence result). When a leak is detected, it calculates estimated time to OOM."
+  },
+  {
+    question: "What data does gpulse collect?",
+    answer: "None. gpulse monitors your local GPU hardware and does not send any data anywhere. There is no telemetry, no analytics, and no phone-home behavior. All processing happens on your machine."
+  },
+  {
+    question: "Is gpulse open source?",
+    answer: "The free tier is free to use, but the source code is not publicly available. gpulse is distributed as a compiled binary to fund continued development through Pro and Enterprise tiers."
+  },
+  {
+    question: "How is gpulse different from nvidia-smi?",
+    answer: "nvidia-smi is a snapshot tool. gpulse is a real-time monitoring dashboard with continuous updates, 7 view modes, memory leak detection with OOM prediction, multi-vendor support (Apple Silicon, AMD, Intel), 15 color themes, and process management from within the UI."
+  },
+  {
+    question: "Can I monitor multiple GPUs?",
+    answer: "Yes. gpulse automatically detects all GPUs in your system. Grid view tiles all GPUs, Compare view shows them side by side, and you can press 1-8 to jump to a specific GPU."
+  },
+  {
+    question: "Can I try gpulse without a GPU?",
+    answer: "Yes. Demo mode simulates GPUs with realistic workload data: gpulse dashboard --demo nvidia:4. This simulates 4 NVIDIA GPUs with active workloads, temperature fluctuations, and memory leak patterns."
+  },
+  {
+    question: "Does gpulse affect GPU performance?",
+    answer: "gpulse has negligible overhead. It reads metrics through vendor-provided libraries (NVML, Metal, ROCm, Level Zero). Typical usage: less than 1% CPU on a single core, ~20 MB memory, zero GPU impact."
+  },
+  {
+    question: "Can I export metrics to Prometheus or Grafana?",
+    answer: "Yes. gpulse includes a built-in Prometheus metrics endpoint at localhost:9090/metrics. This exposes all GPU metrics in Prometheus format, ready for Grafana dashboards."
+  },
+  {
+    question: "Can I monitor GPUs on remote machines?",
+    answer: "Fleet monitoring for multi-machine setups is coming in the Pro tier. It will support monitoring up to 20 machines via SSH with a unified dashboard."
+  }
+];
 ---
 
 <DocsLayout
   title="FAQ — gpulse"
   description="Frequently asked questions about gpulse GPU monitoring tool. Supported GPUs, Linux support, OOM prediction, data privacy, and more."
 >
+  <!-- JSON-LD FAQ Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqItems.map(item => ({
+      "@type": "Question",
+      "name": item.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answer
+      }
+    }))
+  })} />
+
   <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Frequently Asked Questions</h1>
   <p class="mt-4 text-lg text-muted leading-relaxed">
     Answers to the most common questions about gpulse.
   </p>
+
+  <!-- AEO: details/summary pattern for clear Q&A extraction -->
+  <div class="mt-12 space-y-4">
+    {faqItems.map((item) => (
+      <details class="group rounded-xl border border-border bg-surface transition-colors open:border-cyan/30">
+        <summary class="flex cursor-pointer items-center justify-between px-6 py-5 text-left font-semibold transition-colors hover:text-cyan [&::-webkit-details-marker]:hidden">
+          {item.question}
+          <svg class="w-5 h-5 text-muted transition-transform group-open:rotate-180 shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+        </summary>
+        <div class="px-6 pb-5 text-muted leading-relaxed">
+          {item.answer}
+        </div>
+      </details>
+    ))}
+  </div>
+
+  <!-- Expanded content for the full FAQ page (retained below) -->
 
   <!-- GPU Support -->
   <h2 class="mt-12 text-2xl font-bold">What GPUs are supported?</h2>

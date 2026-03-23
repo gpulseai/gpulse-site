@@ -1,0 +1,81 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+---
+
+<BlogLayout
+  title="Introducing gpulse v2.2: Onboarding, Config System, and Security"
+  description="What's new in gpulse v2.2 — a 4-question onboarding wizard, the gpulse config command, secure file permissions, and atomic writes for config safety."
+  date="2026-03-23"
+  readingTime="3 min read"
+  tags={['Release', 'gpulse', 'v2.2']}
+>
+  <p>
+    gpulse v2.2 is out. This release focuses on the first-run experience and configuration management — making gpulse easier to get started with and safer to configure.
+  </p>
+
+  <h2>Onboarding Wizard</h2>
+
+  <p>
+    The first time you run <code>gpulse dashboard</code>, a 4-question onboarding wizard now walks you through initial setup:
+  </p>
+
+  <ol>
+    <li><strong>Theme</strong> — choose from 15 built-in themes (Monokai is the default). Includes colorblind-safe options.</li>
+    <li><strong>Default view</strong> — pick which view mode to open on launch (Grid, Detail, List, etc.).</li>
+    <li><strong>Refresh rate</strong> — set how frequently metrics update (default: 1 second).</li>
+    <li><strong>Notifications</strong> — configure whether you want desktop notifications for leak detection alerts.</li>
+  </ol>
+
+  <p>
+    Your choices are saved to <code>config.toml</code> and applied automatically on every subsequent launch. No more editing config files manually to change basic preferences.
+  </p>
+
+  <h2>gpulse config Command</h2>
+
+  <p>
+    Want to change your preferences later? The new <code>gpulse config</code> command re-runs the onboarding wizard at any time. It reads your current settings, lets you modify them, and writes the updated <code>config.toml</code>.
+  </p>
+
+  <pre><code>gpulse config</code></pre>
+
+  <p>
+    This is the recommended way to manage your gpulse configuration. It validates inputs, handles default values, and ensures the config file is well-formed. For advanced users, you can still edit <code>config.toml</code> directly — see the <a href="/docs/configuration">configuration documentation</a> for the full reference.
+  </p>
+
+  <h2>Security: 0600 Permissions and Atomic Writes</h2>
+
+  <p>
+    The config file now has stricter security defaults:
+  </p>
+
+  <ul>
+    <li><strong>File permissions</strong> — <code>config.toml</code> is created with 0600 permissions (owner read/write only). Other users on the system cannot read your configuration.</li>
+    <li><strong>Atomic writes</strong> — configuration changes are written to a temporary file first, then atomically renamed to the final path. This prevents corruption if gpulse is interrupted during a write (e.g., by a power failure or kill signal).</li>
+    <li><strong>Safe defaults</strong> — the onboarding wizard sets reasonable defaults for all settings, so you do not need to understand every option to get started.</li>
+  </ul>
+
+  <p>
+    These changes are particularly relevant if you are running gpulse on shared machines or in environments where config file integrity matters.
+  </p>
+
+  <h2>Other Improvements</h2>
+
+  <ul>
+    <li>Left/Right arrow keys now work for GPU cycling in all <a href="/docs/views/grid">view modes</a>, not just Grid.</li>
+    <li>The Detail view title now shows a GPU counter and navigation hint (e.g., "GPU 2/8 — Left/Right to cycle").</li>
+    <li>Default theme changed from Dark to Monokai for a better out-of-the-box experience.</li>
+    <li>Various bug fixes and performance improvements.</li>
+  </ul>
+
+  <h2>Upgrade</h2>
+
+  <p>
+    If you installed via Homebrew:
+  </p>
+
+  <pre><code>brew update && brew upgrade gpulse</code></pre>
+
+  <p>
+    New to gpulse? See the <a href="/docs/getting-started">getting started guide</a>. The install is a single command, and the onboarding wizard will walk you through the rest.
+  </p>
+</BlogLayout>

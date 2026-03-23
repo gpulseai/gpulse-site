@@ -1,0 +1,64 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+---
+
+<BlogLayout
+  title="Why GPU Monitoring Matters for ML Training"
+  description="Lost training runs and wasted compute dollars are preventable. Real-time GPU monitoring is the first line of defense against OOM crashes and wasted resources."
+  date="2025-06-15"
+  readingTime="3 min read"
+  tags={['ML', 'Monitoring', 'GPU']}
+>
+  <p>
+    If you have ever kicked off an overnight training run only to find it crashed at 3 AM from an out-of-memory error, you know the pain. Hours of compute wasted. A model checkpoint from six hours ago. And no clear picture of what went wrong.
+  </p>
+
+  <p>
+    This is not a rare event. In teams running large language models or diffusion models, OOM crashes are the single biggest source of wasted GPU time. And the frustrating part is that most of these crashes are preventable with better visibility.
+  </p>
+
+  <h2>The Cost of Flying Blind</h2>
+
+  <p>
+    Most ML engineers interact with their GPUs through <code>nvidia-smi</code> — a snapshot tool that tells you the current state but nothing about trends. By the time you notice memory climbing, it might be too late. The real cost is not just the failed run itself:
+  </p>
+
+  <ul>
+    <li><strong>Compute cost</strong> — cloud GPU instances are $2-30+/hour. A crashed 12-hour run on an A100 can cost over $300 in wasted compute.</li>
+    <li><strong>Engineering time</strong> — debugging OOM errors after the fact is slow. You are working from logs, not live data.</li>
+    <li><strong>Opportunity cost</strong> — every failed run pushes your project timeline back.</li>
+  </ul>
+
+  <h2>What Real-Time Monitoring Gives You</h2>
+
+  <p>
+    A proper GPU monitoring dashboard changes the game. Instead of periodic snapshots, you get continuous visibility into:
+  </p>
+
+  <ul>
+    <li><strong>VRAM usage trends</strong> — is memory growing linearly? That is probably a leak.</li>
+    <li><strong>Per-process attribution</strong> — which process is consuming the most VRAM? Is it your training script or a zombie process?</li>
+    <li><strong>Temperature and power</strong> — thermal throttling silently slows your training. You might not even notice unless you are watching the metrics.</li>
+    <li><strong>OOM prediction</strong> — if memory is growing at a known rate, you can calculate exactly when it will hit the limit.</li>
+  </ul>
+
+  <h2>Prevention Over Recovery</h2>
+
+  <p>
+    The shift from reactive debugging to proactive monitoring is significant. With tools like <a href="/docs/leak-detection">gpulse's leak detection</a>, you can catch memory leaks within minutes of them starting — not hours later when the process crashes. The three detection algorithms (linear trend, spike detection, composite scoring) run continuously and flag problems early.
+  </p>
+
+  <p>
+    Even without leak detection, simply having a <a href="/docs/views/grid">live dashboard</a> open during training runs gives you situational awareness that <code>nvidia-smi</code> snapshots never can. You see patterns. You catch anomalies. You save runs.
+  </p>
+
+  <h2>Getting Started</h2>
+
+  <p>
+    If you are running ML workloads on GPUs — whether that is a single Mac Studio with an M4 Max or a cluster of A100s — GPU monitoring should be part of your workflow from day one. The install is a single command, and the payoff is immediate.
+  </p>
+
+  <p>
+    Start with the <a href="/docs/getting-started">getting started guide</a> and you will be monitoring in under five minutes.
+  </p>
+</BlogLayout>

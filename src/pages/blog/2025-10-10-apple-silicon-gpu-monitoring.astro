@@ -1,0 +1,81 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+---
+
+<BlogLayout
+  title="Apple Silicon GPU Monitoring: What macOS Doesn't Tell You"
+  description="Activity Monitor barely scratches the surface of Apple Silicon GPU metrics. Here's how to get real GPU data from your M1, M2, M3, or M4 Mac."
+  date="2025-10-10"
+  readingTime="3 min read"
+  tags={['Apple Silicon', 'macOS', 'M4']}
+>
+  <p>
+    If you own a Mac Studio, MacBook Pro, or Mac Pro with Apple Silicon, you have a genuinely capable GPU sitting in your machine. The M4 Max packs up to 128 GB of unified memory and a 40-core GPU that can handle real ML inference and training workloads. But try to monitor it, and you hit a wall.
+  </p>
+
+  <h2>The Activity Monitor Problem</h2>
+
+  <p>
+    macOS Activity Monitor shows you CPU and memory usage, but its GPU information is almost useless for serious work. You get a vague "GPU Usage" percentage with no breakdown of:
+  </p>
+
+  <ul>
+    <li>How much of the unified memory is allocated to the GPU vs. the CPU</li>
+    <li>Per-process GPU memory attribution</li>
+    <li>GPU utilization over time</li>
+    <li>Temperature or thermal state</li>
+    <li>Power consumption</li>
+    <li>Memory allocation trends (is usage growing?)</li>
+  </ul>
+
+  <p>
+    For anyone running ML inference with <code>mlx</code>, CoreML, or even PyTorch with MPS backend, this lack of visibility is a real problem. You are running workloads on a powerful GPU and have no idea what it is actually doing.
+  </p>
+
+  <h2>Why Apple Silicon is Different</h2>
+
+  <p>
+    Apple Silicon uses a unified memory architecture (UMA), meaning the CPU and GPU share the same physical memory pool. This is great for performance — no data copying between CPU and GPU — but it makes monitoring harder. Traditional GPU tools like <code>nvidia-smi</code> or <code>nvitop</code> do not work because Apple uses its own Metal and IOKit APIs instead of NVML or ROCm.
+  </p>
+
+  <p>
+    To get real metrics from Apple Silicon, you need to talk to IOReport — Apple's low-level performance counter framework. This is what gpulse does. It reads directly from IOKit and Metal to extract real GPU utilization, memory allocation, temperature, and power draw data.
+  </p>
+
+  <h2>What gpulse Shows You on Apple Silicon</h2>
+
+  <p>
+    Once you install gpulse, you get immediate access to metrics that macOS does not surface:
+  </p>
+
+  <ul>
+    <li><strong>GPU utilization</strong> — actual compute utilization percentage, updated in real time</li>
+    <li><strong>Memory usage</strong> — how much unified memory the GPU is using, with allocation trends</li>
+    <li><strong>Temperature</strong> — GPU die temperature with color-coded thresholds</li>
+    <li><strong>Power draw</strong> — current GPU power consumption in watts</li>
+    <li><strong>Per-process attribution</strong> — which processes are using the GPU and how much memory each one has allocated</li>
+    <li><strong>Leak detection</strong> — whether GPU memory usage is trending upward over time</li>
+  </ul>
+
+  <p>
+    All of this works through the <a href="/docs/views/grid">Grid view</a>, <a href="/docs/views/detail">Detail view</a>, and the <a href="/docs/views/predict">Predict view</a> for leak analysis.
+  </p>
+
+  <h2>No Other Tool Does This</h2>
+
+  <p>
+    As of today, gpulse is the only terminal-based GPU monitoring tool that supports Apple Silicon with full metrics. nvidia-smi is NVIDIA-only. nvitop requires NVML. btop shows minimal GPU data on macOS. If you have an M1, M2, M3, or M4 chip, gpulse is built for you.
+  </p>
+
+  <h2>Try It</h2>
+
+  <p>
+    Install takes 10 seconds:
+  </p>
+
+  <pre><code>brew tap gpulseai/gpulse && brew install gpulse</code></pre>
+
+  <p>
+    Then launch with <code>gpulse dashboard</code>. No configuration needed — gpulse auto-detects your Apple Silicon GPU at startup. See the <a href="/docs/getting-started">getting started guide</a> for the full walkthrough.
+  </p>
+</BlogLayout>

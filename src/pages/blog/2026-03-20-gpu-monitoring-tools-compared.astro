@@ -1,0 +1,109 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+---
+
+<BlogLayout
+  title="GPU Monitoring Tools Compared: gpulse vs nvitop vs btop vs Datadog"
+  description="An honest comparison of GPU monitoring tools — features, vendor support, leak detection, and pricing side by side for ML engineers and DevOps teams."
+  date="2026-03-20"
+  readingTime="4 min read"
+  tags={['Comparison', 'Tools', 'GPU Monitoring']}
+>
+  <p>
+    Choosing a GPU monitoring tool depends on your hardware, workflow, and team size. This post compares the most common options side by side, including their strengths and real limitations.
+  </p>
+
+  <h2>The Contenders</h2>
+
+  <p>
+    We are comparing five tools that cover different segments of GPU monitoring:
+  </p>
+
+  <ul>
+    <li><strong>gpulse</strong> — Rust TUI, multi-vendor, leak detection</li>
+    <li><strong>nvidia-smi</strong> — NVIDIA's built-in CLI tool</li>
+    <li><strong>nvitop</strong> — Python TUI for NVIDIA GPUs</li>
+    <li><strong>btop</strong> — C++ general system monitor</li>
+    <li><strong>Datadog GPU</strong> — Enterprise cloud monitoring</li>
+  </ul>
+
+  <h2>GPU Vendor Support</h2>
+
+  <p>
+    This is the first filter. If you have Apple Silicon, AMD, or Intel GPUs, most tools drop out immediately:
+  </p>
+
+  <ul>
+    <li><strong>gpulse</strong>: NVIDIA, Apple Silicon, AMD, Intel</li>
+    <li><strong>nvidia-smi</strong>: NVIDIA only</li>
+    <li><strong>nvitop</strong>: NVIDIA only</li>
+    <li><strong>btop</strong>: Limited NVIDIA and AMD, no Apple Silicon GPU metrics</li>
+    <li><strong>Datadog</strong>: NVIDIA, limited AMD</li>
+  </ul>
+
+  <p>
+    For Apple Silicon users running ML workloads on Mac Studio or MacBook Pro, gpulse is currently the only terminal-based option with real GPU metrics.
+  </p>
+
+  <h2>Memory Leak Detection</h2>
+
+  <p>
+    This is where the tools diverge significantly. Only gpulse has built-in leak detection with OOM time prediction. nvidia-smi and nvitop show current memory usage but cannot analyze trends. btop does not track GPU memory at the process level. Datadog can alert on memory thresholds, but you have to configure the rules manually — it does not detect leak patterns automatically.
+  </p>
+
+  <p>
+    If you are running long training jobs, this matters. A leak that grows at 100 MB/minute is invisible in snapshots but will crash your run in a few hours. Read more about the <a href="/docs/leak-detection">detection algorithms</a>.
+  </p>
+
+  <h2>Real-Time Dashboard Quality</h2>
+
+  <p>
+    nvidia-smi is a snapshot tool, not a dashboard. You can loop it with <code>watch</code>, but there is no history, no multiple views, and no interactivity.
+  </p>
+
+  <p>
+    nvitop is a solid TUI with process management, but limited to 3 view modes and NVIDIA only. btop has a polished UI but GPU support is secondary — it is a CPU/memory/disk monitor first.
+  </p>
+
+  <p>
+    gpulse offers 7 purpose-built view modes — <a href="/docs/views/grid">Grid</a>, Detail, List, Predict, Compare, Topology, and Fleet — each accessible with a single keystroke. The <a href="/docs/views/predict">Predict view</a> is unique: it visualizes leak detection output in real time with OOM countdown.
+  </p>
+
+  <p>
+    Datadog provides web dashboards with customizable widgets. Powerful, but requires a browser and cloud connectivity.
+  </p>
+
+  <h2>Pricing</h2>
+
+  <p>
+    gpulse, nvidia-smi, nvitop, and btop are all free for local monitoring. The cost difference shows up at scale:
+  </p>
+
+  <ul>
+    <li><strong>gpulse Pro</strong>: $29/month for fleet monitoring up to 20 machines</li>
+    <li><strong>Datadog</strong>: $23/host/month minimum, often more with add-ons</li>
+    <li><strong>nvidia-smi, nvitop, btop</strong>: No fleet monitoring capability</li>
+  </ul>
+
+  <p>
+    For a 10-node cluster, Datadog costs $230+/month. gpulse Pro covers it for $29/month. The tradeoff is that Datadog provides long-term storage and a web UI, while gpulse is terminal-based with SSH fleet access.
+  </p>
+
+  <h2>Honest Assessment</h2>
+
+  <p>
+    Every tool has a niche where it is the right choice:
+  </p>
+
+  <ul>
+    <li><strong>nvidia-smi</strong> — quick checks, scripting, environments where you cannot install anything</li>
+    <li><strong>nvitop</strong> — NVIDIA users who want htop-style process management</li>
+    <li><strong>btop</strong> — general system monitoring where GPU is secondary</li>
+    <li><strong>Datadog</strong> — enterprise teams already in the Datadog ecosystem</li>
+    <li><strong>gpulse</strong> — ML engineers who need multi-vendor support, leak detection, or Apple Silicon monitoring</li>
+  </ul>
+
+  <p>
+    See the full side-by-side feature matrix on the <a href="/compare-tools">comparison page</a>, or try gpulse with the <a href="/docs/getting-started">getting started guide</a>.
+  </p>
+</BlogLayout>

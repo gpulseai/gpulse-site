@@ -1,0 +1,75 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+---
+
+<BlogLayout
+  title="nvidia-smi Isn't Enough: Why You Need a GPU Dashboard"
+  description="nvidia-smi gives you a snapshot of GPU state. Here's why ML engineers and DevOps teams need a real-time dashboard with history, alerts, and leak detection."
+  date="2025-12-05"
+  readingTime="3 min read"
+  tags={['NVIDIA', 'DevOps', 'Dashboard']}
+>
+  <p>
+    Every NVIDIA GPU user knows <code>nvidia-smi</code>. It ships with the driver, it is always available, and it gives you a quick snapshot of GPU state — memory usage, utilization, temperature, running processes. For a quick check, it works fine.
+  </p>
+
+  <p>
+    But if you are running long training jobs, debugging performance issues, or managing GPU infrastructure, <code>nvidia-smi</code> has real limitations.
+  </p>
+
+  <h2>The Snapshot Problem</h2>
+
+  <p>
+    <code>nvidia-smi</code> shows you the current state at the exact moment you run it. That is useful for answering "what is happening right now?" but useless for answering:
+  </p>
+
+  <ul>
+    <li>Is memory usage growing over time?</li>
+    <li>Did utilization drop 10 minutes ago and recover?</li>
+    <li>Which process started consuming memory 30 minutes into the run?</li>
+    <li>Is there a correlation between temperature spikes and utilization drops?</li>
+  </ul>
+
+  <p>
+    You can loop <code>nvidia-smi</code> with <code>watch -n 1 nvidia-smi</code>, but you still do not get history, trend analysis, or alerts. You are staring at refreshing text, not a dashboard.
+  </p>
+
+  <h2>What a Real Dashboard Gives You</h2>
+
+  <p>
+    A purpose-built GPU dashboard like gpulse provides several things that <code>nvidia-smi</code> cannot:
+  </p>
+
+  <ul>
+    <li><strong>Continuous monitoring</strong> — metrics update automatically. No re-running commands.</li>
+    <li><strong>Multiple views</strong> — <a href="/docs/views/grid">Grid view</a> for fleet overview, <a href="/docs/views/detail">Detail view</a> for deep dives, <a href="/docs/views/predict">Predict view</a> for leak analysis. Seven modes total, each a single keystroke away.</li>
+    <li><strong>Memory trend analysis</strong> — gpulse tracks VRAM usage over time and flags growing patterns. It does not just show you 18 GB used; it tells you memory is growing at 200 MB/minute and will OOM in 30 minutes.</li>
+    <li><strong>Process management</strong> — sort, filter, and kill GPU processes without switching to another terminal.</li>
+    <li><strong>Multi-GPU support</strong> — see all your GPUs simultaneously. On a DGX with 8 A100s, Grid view tiles all eight at once.</li>
+    <li><strong>Themes and accessibility</strong> — 15 color themes including colorblind-safe options. <code>nvidia-smi</code> output is monochrome.</li>
+  </ul>
+
+  <h2>The Leak Detection Gap</h2>
+
+  <p>
+    This is the biggest difference. <code>nvidia-smi</code> has no concept of memory leaks. It reports current usage, period. If your training job is slowly leaking VRAM, you will not know until it crashes.
+  </p>
+
+  <p>
+    gpulse runs three detection algorithms continuously — linear regression, spike detection, and composite scoring. When it detects a leak pattern, it calculates the estimated time to OOM and surfaces it directly in the UI. This alone has saved countless training runs. Read more in the <a href="/docs/leak-detection">leak detection docs</a>.
+  </p>
+
+  <h2>nvidia-smi Still Has Its Place</h2>
+
+  <p>
+    To be clear, <code>nvidia-smi</code> is not a bad tool. It is excellent for quick checks, scripting, and environments where you cannot install additional software. It is also the only way to access certain low-level NVIDIA features like power limit adjustments and clock queries.
+  </p>
+
+  <p>
+    But for day-to-day monitoring during ML training, it is the difference between a thermometer and a weather station. Both measure temperature; only one tells you a storm is coming.
+  </p>
+
+  <p>
+    See the full feature comparison on the <a href="/compare-tools">comparison page</a>, or get started with the <a href="/docs/getting-started">installation guide</a>.
+  </p>
+</BlogLayout>

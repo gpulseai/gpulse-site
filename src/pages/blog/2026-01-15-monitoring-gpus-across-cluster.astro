@@ -1,0 +1,83 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+---
+
+<BlogLayout
+  title="Monitoring GPUs Across Your Training Cluster"
+  description="How to get a unified view of GPU health across multiple machines using SSH-based fleet monitoring for ML training clusters."
+  date="2026-01-15"
+  readingTime="3 min read"
+  tags={['MLOps', 'Fleet', 'Cluster']}
+>
+  <p>
+    When you go from one machine to many, GPU monitoring gets complicated fast. You have 4 nodes, each with 8 GPUs, and suddenly you are managing 32 GPUs across 4 SSH sessions. Which node has a hot GPU? Which one has a memory leak? Is node 3 actually using the GPUs you allocated, or is it sitting idle?
+  </p>
+
+  <p>
+    This is the reality for MLOps teams, platform engineers, and anyone running distributed training. And it is where single-machine tools like <code>nvidia-smi</code> and <code>nvitop</code> break down completely.
+  </p>
+
+  <h2>The Multi-Machine Visibility Problem</h2>
+
+  <p>
+    Without fleet monitoring, you end up doing one of the following:
+  </p>
+
+  <ul>
+    <li><strong>SSH tab hopping</strong> — opening a terminal to each node and running <code>nvidia-smi</code> in a loop. This does not scale past 3-4 machines.</li>
+    <li><strong>Custom scripts</strong> — writing a bash script that SSHes into each node, collects metrics, and aggregates them. Fragile, hard to maintain, and usually missing the metrics you actually need.</li>
+    <li><strong>Heavyweight agents</strong> — deploying Prometheus exporters, Grafana dashboards, and all the infrastructure that comes with them. Works well, but takes days to set up properly and requires ongoing maintenance.</li>
+  </ul>
+
+  <p>
+    None of these give you a real-time, unified view from your terminal.
+  </p>
+
+  <h2>Fleet Monitoring via SSH</h2>
+
+  <p>
+    gpulse's Fleet view (available in Pro) connects to remote machines over SSH and aggregates GPU metrics into a single dashboard. No agents to install on remote machines — gpulse runs locally and pulls metrics over your existing SSH connections.
+  </p>
+
+  <p>
+    This means:
+  </p>
+
+  <ul>
+    <li><strong>No agent deployment</strong> — if you can SSH to a machine, you can monitor it. No installing software on production nodes.</li>
+    <li><strong>Bastion host support</strong> — connects through jump hosts, so it works with secure network topologies.</li>
+    <li><strong>Up to 20 machines</strong> — monitor your entire training cluster from one terminal window.</li>
+    <li><strong>Unified alerting</strong> — get notified when any GPU in the fleet shows a memory leak, thermal throttling, or utilization anomaly.</li>
+  </ul>
+
+  <h2>What Fleet View Shows You</h2>
+
+  <p>
+    The <a href="/docs/views/grid">Fleet view</a> aggregates across machines and shows:
+  </p>
+
+  <ul>
+    <li>Health status for each node (healthy, warning, critical)</li>
+    <li>Per-GPU metrics across the fleet — VRAM, utilization, temperature, power</li>
+    <li>Leak detection alerts flagged per-GPU across all machines</li>
+    <li>Node-level summary statistics (total VRAM, average utilization)</li>
+  </ul>
+
+  <p>
+    You can drill into any node to see its individual <a href="/docs/views/detail">Detail view</a>, then jump back to the fleet overview — all without leaving gpulse.
+  </p>
+
+  <h2>When to Use Fleet vs. Prometheus</h2>
+
+  <p>
+    Fleet monitoring via SSH is ideal for teams with up to 20 machines who want immediate visibility without infrastructure overhead. If you need long-term metric storage, custom dashboards, or integration with existing Prometheus/Grafana stacks, gpulse also exports <a href="/docs/configuration">Prometheus metrics</a> that you can scrape and store.
+  </p>
+
+  <p>
+    The two approaches are complementary, not competing. Use Fleet for real-time awareness, Prometheus for historical analysis and alerting at scale.
+  </p>
+
+  <p>
+    To get started with local monitoring, see the <a href="/docs/getting-started">getting started guide</a>. Fleet features are available in gpulse Pro — <a href="mailto:info@gpulse.ai">join the waitlist</a> to get access.
+  </p>
+</BlogLayout>

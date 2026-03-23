@@ -1,0 +1,73 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+---
+
+<BlogLayout
+  title="The Hidden Cost of GPU Memory Leaks"
+  description="Slow VRAM creep kills overnight training runs. Learn how leak detection algorithms catch GPU memory problems before OOM crashes happen."
+  date="2025-08-20"
+  readingTime="3 min read"
+  tags={['ML', 'Memory Leaks', 'VRAM']}
+>
+  <p>
+    GPU memory leaks are insidious. Unlike a segfault or an exception, a memory leak does not announce itself. VRAM usage creeps up by a few megabytes per minute — slow enough that you do not notice during a quick check, but fast enough to kill an 8-hour training run.
+  </p>
+
+  <p>
+    The worst part? By the time you see the OOM error, you have already lost hours of compute. Your last checkpoint might be from 6 hours ago. And the leak might not even be in your code — it could be in a framework, a data loader, or a third-party library.
+  </p>
+
+  <h2>Where GPU Memory Leaks Come From</h2>
+
+  <p>
+    In ML training, the most common sources of VRAM leaks are:
+  </p>
+
+  <ul>
+    <li><strong>Accumulating tensors</strong> — logging or storing intermediate tensors without detaching them from the computation graph.</li>
+    <li><strong>Data loader workers</strong> — worker processes that allocate GPU memory and do not release it between batches.</li>
+    <li><strong>Framework bugs</strong> — subtle issues in PyTorch, TensorFlow, or JAX that cause memory to be retained longer than expected.</li>
+    <li><strong>Custom CUDA kernels</strong> — manual memory management that misses edge cases.</li>
+    <li><strong>Evaluation loops</strong> — running validation without <code>torch.no_grad()</code> or equivalent, causing gradients to accumulate.</li>
+  </ul>
+
+  <h2>Why Snapshots Miss Leaks</h2>
+
+  <p>
+    Running <code>nvidia-smi</code> every few minutes is not enough. A leak that grows at 50 MB/minute looks normal in any individual snapshot — you see 12 GB used and think "that seems right." But over 4 hours, that is an extra 12 GB. On a 24 GB card, that is the difference between completing your run and crashing.
+  </p>
+
+  <p>
+    You need trend analysis, not snapshots. Specifically, you need algorithms that track memory over time and detect the slope of growth.
+  </p>
+
+  <h2>Three Approaches to Leak Detection</h2>
+
+  <p>
+    gpulse uses three complementary algorithms to catch different types of leaks:
+  </p>
+
+  <ol>
+    <li><strong>Linear Trend Detection</strong> — fits a least-squares regression to VRAM usage over a sliding window. If the slope is consistently positive and the R-squared value is high, it flags a leak and calculates the estimated time until OOM.</li>
+    <li><strong>Spike Detection</strong> — catches sudden, large memory increases within a short time window. This is useful for leaks that are not linear but come in bursts (e.g., a function that allocates and fails to free every N iterations).</li>
+    <li><strong>Composite Scoring</strong> — runs both detectors and returns the highest-confidence result, reducing false positives while catching a wider range of patterns.</li>
+  </ol>
+
+  <p>
+    You can explore these in the <a href="/docs/leak-detection">leak detection documentation</a> and see them in action via the <a href="/docs/views/predict">Predict view</a>.
+  </p>
+
+  <h2>The Dollar Cost</h2>
+
+  <p>
+    A single A100 on AWS costs roughly $30/hour. An 8-hour training run that crashes at hour 7 due to a leak costs $210 in wasted compute — plus the engineering time to debug and rerun. For teams running multiple experiments in parallel, this can add up to thousands per month.
+  </p>
+
+  <p>
+    Catching a leak in the first 15 minutes costs you nothing. Catching it 7 hours later costs you real money.
+  </p>
+
+  <p>
+    Set up monitoring before your next training run. The <a href="/docs/getting-started">getting started guide</a> takes under five minutes.
+  </p>
+</BlogLayout>

@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Card } from '../../components/ui/Card';
+
+const posts = [
+  {
+    slug: '2026-03-23-gpulse-v2-2-release',
+    title: 'Introducing gpulse v2.2: Onboarding, Config System, and Security',
+    description: 'What\'s new in gpulse v2.2 — onboarding wizard, gpulse config command, secure file permissions, and atomic writes.',
+    date: '2026-03-23',
+    tags: ['Release', 'gpulse'],
+    readingTime: '3 min read',
+  },
+  {
+    slug: '2026-03-20-gpu-monitoring-tools-compared',
+    title: 'GPU Monitoring Tools Compared: gpulse vs nvitop vs btop vs Datadog',
+    description: 'An honest comparison of GPU monitoring tools — features, vendor support, leak detection, and pricing side by side.',
+    date: '2026-03-20',
+    tags: ['Comparison', 'Tools'],
+    readingTime: '4 min read',
+  },
+  {
+    slug: '2026-02-10-how-we-detect-gpu-memory-leaks',
+    title: 'How We Detect GPU Memory Leaks Before They Crash Your Run',
+    description: 'A technical deep dive into gpulse\'s three leak detection algorithms: linear regression, spike detection, and composite scoring.',
+    date: '2026-02-10',
+    tags: ['Technical', 'Leak Detection'],
+    readingTime: '4 min read',
+  },
+  {
+    slug: '2026-01-15-monitoring-gpus-across-cluster',
+    title: 'Monitoring GPUs Across Your Training Cluster',
+    description: 'How to get a unified view of GPU health across multiple machines using SSH-based fleet monitoring.',
+    date: '2026-01-15',
+    tags: ['MLOps', 'Fleet'],
+    readingTime: '3 min read',
+  },
+  {
+    slug: '2025-12-05-nvidia-smi-isnt-enough',
+    title: 'nvidia-smi Isn\'t Enough: Why You Need a GPU Dashboard',
+    description: 'nvidia-smi gives you a snapshot. Here\'s why real-time GPU dashboards with history and alerts are the better approach.',
+    date: '2025-12-05',
+    tags: ['NVIDIA', 'DevOps'],
+    readingTime: '3 min read',
+  },
+  {
+    slug: '2025-10-10-apple-silicon-gpu-monitoring',
+    title: 'Apple Silicon GPU Monitoring: What macOS Doesn\'t Tell You',
+    description: 'Activity Monitor barely scratches the surface. Here\'s how to get real GPU metrics from your M1/M2/M3/M4 Mac.',
+    date: '2025-10-10',
+    tags: ['Apple Silicon', 'macOS'],
+    readingTime: '3 min read',
+  },
+  {
+    slug: '2025-08-20-hidden-cost-gpu-memory-leaks',
+    title: 'The Hidden Cost of GPU Memory Leaks',
+    description: 'Slow VRAM creep kills overnight training runs. Learn how leak detection algorithms catch problems before OOM.',
+    date: '2025-08-20',
+    tags: ['ML', 'Memory Leaks'],
+    readingTime: '3 min read',
+  },
+  {
+    slug: '2025-06-15-why-gpu-monitoring-matters',
+    title: 'Why GPU Monitoring Matters for ML Training',
+    description: 'Lost training runs and wasted compute dollars are preventable. Real-time GPU monitoring is the first line of defense.',
+    date: '2025-06-15',
+    tags: ['ML', 'Monitoring'],
+    readingTime: '3 min read',
+  },
+];
+---
+
+<BaseLayout
+  title="Blog — gpulse"
+  description="Technical articles on GPU monitoring, memory leak detection, Apple Silicon metrics, and MLOps best practices from the gpulse team."
+>
+  <section class="relative mx-auto max-w-5xl px-4 pt-36 pb-24 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <p class="text-sm font-mono uppercase tracking-wider text-cyan mb-4">Blog</p>
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">
+        GPU Monitoring Insights
+      </h1>
+      <p class="mt-4 text-lg text-muted max-w-2xl mx-auto">
+        Technical articles on GPU monitoring, memory leak detection, and MLOps best practices.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+      {posts.map((post) => (
+        <a href={`/blog/${post.slug}`} class="group block">
+          <Card client:load>
+            <div class="flex flex-col h-full">
+              <div class="flex flex-wrap gap-2 mb-3">
+                {post.tags.map((tag) => (
+                  <span class="inline-flex items-center rounded-full bg-cyan/10 border border-cyan/20 px-2.5 py-0.5 text-xs font-medium text-cyan">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <h2 class="text-lg font-bold group-hover:text-cyan transition-colors leading-snug">
+                {post.title}
+              </h2>
+              <p class="mt-2 text-sm text-muted leading-relaxed flex-1">
+                {post.description}
+              </p>
+              <div class="mt-4 flex items-center gap-3 text-xs text-muted/60">
+                <time datetime={post.date}>
+                  {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                </time>
+                <span aria-hidden="true">|</span>
+                <span>{post.readingTime}</span>
+              </div>
+            </div>
+          </Card>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

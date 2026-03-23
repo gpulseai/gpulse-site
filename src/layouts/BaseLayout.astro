@@ -47,6 +47,61 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "gpulse",
+      "operatingSystem": "macOS",
+      "applicationCategory": "DeveloperApplication",
+      "description": "Real-time GPU monitoring with predictive memory leak detection. Supports Apple Silicon, NVIDIA, AMD, and Intel GPUs.",
+      "url": "https://gpulse.ai",
+      "downloadUrl": "https://gpulse.ai/download",
+      "softwareVersion": "2.2.0",
+      "offers": [
+        {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "name": "Free",
+          "description": "Local GPU monitoring with OOM prediction, 15 themes, 7 view modes"
+        },
+        {
+          "@type": "Offer",
+          "price": "29",
+          "priceCurrency": "USD",
+          "name": "Pro",
+          "description": "Fleet SSH monitoring up to 20 machines, alerts, web dashboard"
+        }
+      ],
+      "featureList": [
+        "Real-time GPU monitoring",
+        "OOM prediction and memory leak detection",
+        "Apple Silicon, NVIDIA, AMD, Intel support",
+        "7 dashboard view modes",
+        "15 color themes",
+        "Prometheus metrics endpoint",
+        "Per-process GPU attribution",
+        "Fleet monitoring via SSH"
+      ]
+    })} />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "gpulse",
+      "url": "https://gpulse.ai",
+      "logo": "https://gpulse.ai/favicon.svg",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "info@gpulse.ai",
+        "contactType": "customer support"
+      },
+      "sameAs": [
+        "https://github.com/gpulseai/gpulse",
+        "https://x.com/datakarthik"
+      ]
+    })} />
+
     <!-- Fonts: Inter + JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

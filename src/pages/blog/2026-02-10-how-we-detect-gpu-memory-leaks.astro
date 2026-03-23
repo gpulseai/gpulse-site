@@ -1,0 +1,107 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+---
+
+<BlogLayout
+  title="How We Detect GPU Memory Leaks Before They Crash Your Run"
+  description="A technical deep dive into gpulse's three leak detection algorithms: linear regression, spike detection, and composite scoring for OOM prediction."
+  date="2026-02-10"
+  readingTime="4 min read"
+  tags={['Technical', 'Leak Detection', 'Algorithms']}
+>
+  <p>
+    Detecting GPU memory leaks in real time is a surprisingly hard problem. Memory usage during ML training is naturally noisy — allocation patterns vary with batch size, model architecture, and training phase. A naive "memory went up" check would produce constant false positives. You need algorithms that distinguish between normal allocation patterns and genuine leaks.
+  </p>
+
+  <p>
+    This post explains the three detection approaches we use in gpulse, why each one exists, and how they complement each other.
+  </p>
+
+  <h2>Algorithm 1: Linear Trend Detection</h2>
+
+  <p>
+    The core idea is simple: if GPU memory usage is growing at a consistent rate over time, something is probably leaking. We use ordinary least-squares (OLS) linear regression on a sliding window of memory samples.
+  </p>
+
+  <p>
+    For each GPU, gpulse maintains a ring buffer of recent memory readings (timestamped). Every update cycle, we fit a line to the data and extract two values:
+  </p>
+
+  <ul>
+    <li><strong>Slope</strong> — the rate of memory growth in MB/second. A positive slope means memory is increasing.</li>
+    <li><strong>R-squared (R2)</strong> — how well the linear model fits the data. A high R2 (say, above 0.85) means the growth is consistent and linear, not just noise.</li>
+  </ul>
+
+  <p>
+    If the slope is positive and R2 exceeds a configurable threshold, we flag a leak. The estimated time to OOM is calculated as:
+  </p>
+
+  <pre><code>time_to_oom = (total_vram - current_usage) / slope</code></pre>
+
+  <p>
+    This works well for the most common type of leak: steady, continuous memory growth from accumulating tensors, unreleased buffers, or framework bugs.
+  </p>
+
+  <h2>Algorithm 2: Spike Detection</h2>
+
+  <p>
+    Not all leaks are linear. Some manifest as periodic large allocations that are never freed — for example, a validation loop that allocates 500 MB every epoch and does not release it. Over 20 epochs, that is 10 GB.
+  </p>
+
+  <p>
+    The spike detector watches for sudden, large increases in memory within a sliding time window. When the magnitude of an increase exceeds a threshold relative to the recent baseline, it is flagged. The detector tracks:
+  </p>
+
+  <ul>
+    <li>The size of each spike (delta from the previous stable baseline)</li>
+    <li>The frequency of spikes (how many spikes per time window)</li>
+    <li>Whether memory returns to baseline after each spike (normal) or stays elevated (leak)</li>
+  </ul>
+
+  <p>
+    If memory stays elevated after repeated spikes, the detector flags a step-function leak pattern. This catches issues that the linear detector would miss because the growth is not smooth.
+  </p>
+
+  <h2>Algorithm 3: Composite Scoring</h2>
+
+  <p>
+    Running two detectors independently gives you broader coverage but introduces the question: what do you do when they disagree? The composite detector resolves this by combining the confidence scores from both algorithms.
+  </p>
+
+  <p>
+    The logic:
+  </p>
+
+  <ul>
+    <li>If both detectors flag a leak, confidence is high and the highest estimated severity is reported.</li>
+    <li>If only the linear detector flags, but with high R2, we trust it — linear leaks are the most common pattern.</li>
+    <li>If only the spike detector flags, we report it but with lower confidence, since spikes can sometimes be normal allocation patterns.</li>
+    <li>If neither flags, the GPU is considered healthy.</li>
+  </ul>
+
+  <p>
+    The composite approach reduces false positives while catching a wider range of leak patterns than either detector alone. In practice, it produces very few false alarms while catching real leaks within minutes of onset.
+  </p>
+
+  <h2>Seeing It in Action</h2>
+
+  <p>
+    The <a href="/docs/views/predict">Predict view</a> in gpulse visualizes the output of all three detectors in real time. You can see the regression line overlaid on the memory graph, the spike markers, and the composite confidence score. When a leak is detected, the estimated time to OOM is displayed prominently.
+  </p>
+
+  <p>
+    You can also test the detection system using demo mode with simulated leak patterns:
+  </p>
+
+  <pre><code>gpulse dashboard --demo nvidia:4</code></pre>
+
+  <p>
+    The demo includes GPUs with active leak patterns so you can see the detection in action without risking real hardware. Explore the full <a href="/docs/leak-detection">leak detection documentation</a> for configuration details and threshold tuning.
+  </p>
+
+  <h2>What's Next</h2>
+
+  <p>
+    We are exploring additional detection methods including periodic pattern analysis and anomaly detection using moving averages. The goal is always the same: catch leaks early, minimize false positives, and give you enough time to act before OOM.
+  </p>
+</BlogLayout>
