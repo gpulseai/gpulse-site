@@ -1,0 +1,292 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+---
+
+<DocsLayout
+  title="Performance Tuning — gpulse"
+  description="Optimize gpulse for different workloads with monitoring interval tuning, history size, database settings, leak detection sensitivity, and scenario-based configurations."
+>
+  <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Performance Tuning</h1>
+  <p class="mt-4 text-lg text-muted leading-relaxed">
+    Optimize gpulse for your workload and system configuration with these tuning recommendations.
+  </p>
+
+  <!-- Performance Goals -->
+  <h2 class="mt-12 text-2xl font-bold">Performance Goals</h2>
+  <p class="mt-4 text-muted">gpulse is designed to meet these targets:</p>
+  <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold">Metric</th>
+          <th class="px-4 py-3 text-left font-semibold">Target</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3 text-muted">GPU Overhead</td>
+          <td class="px-4 py-3 text-muted">&lt; 1% impact on GPU workloads</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">Memory Usage</td>
+          <td class="px-4 py-3 text-muted">&lt; 50 MB (single GPU), &lt; 150 MB (32 GPUs)</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">Response Time</td>
+          <td class="px-4 py-3 text-muted">&lt; 2s for CLI commands, &lt; 100ms for analysis</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">Reliability</td>
+          <td class="px-4 py-3 text-muted">99.9% uptime in daemon mode</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Monitoring Interval -->
+  <h2 class="mt-12 text-2xl font-bold">Monitoring Interval Tuning</h2>
+  <p class="mt-4 text-muted">
+    The monitoring interval is the most impactful performance setting.
+  </p>
+  <div class="mt-4">
+    <CodeBlock code={`[monitoring]
+# Default: 30 seconds
+# Low overhead: 60-120 seconds
+# High frequency: 5-15 seconds
+interval-seconds = 30`} language="toml" />
+  </div>
+
+  <div class="mt-6 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold">Scenario</th>
+          <th class="px-4 py-3 text-left font-semibold">Interval</th>
+          <th class="px-4 py-3 text-left font-semibold">CPU Impact</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3 text-muted">Development / Testing</td>
+          <td class="px-4 py-3 text-muted">5-10 seconds</td>
+          <td class="px-4 py-3 text-muted">~3-5%</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">Production (normal)</td>
+          <td class="px-4 py-3 text-muted">30-60 seconds</td>
+          <td class="px-4 py-3 text-muted">~1-2%</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">Production (low-impact)</td>
+          <td class="px-4 py-3 text-muted">120 seconds</td>
+          <td class="px-4 py-3 text-muted">&lt; 1%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- History Size -->
+  <h2 class="mt-12 text-2xl font-bold">History Size</h2>
+  <div class="mt-4">
+    <CodeBlock code={`[monitoring]
+# Default: 1000 snapshots
+# Low memory: 500
+# Extended analysis: 2000-5000
+history-size = 1000`} language="toml" />
+  </div>
+
+  <div class="mt-6 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold">GPU Count</th>
+          <th class="px-4 py-3 text-left font-semibold">Recommended Snapshots</th>
+          <th class="px-4 py-3 text-left font-semibold">RAM Impact</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3 text-muted">Single GPU</td>
+          <td class="px-4 py-3 text-muted">1000-2000</td>
+          <td class="px-4 py-3 text-muted">~20-40 MB</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">4-8 GPUs</td>
+          <td class="px-4 py-3 text-muted">500-1000</td>
+          <td class="px-4 py-3 text-muted">~10-20 MB</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">16+ GPUs</td>
+          <td class="px-4 py-3 text-muted">300-500</td>
+          <td class="px-4 py-3 text-muted">~6-10 MB</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">Memory-constrained</td>
+          <td class="px-4 py-3 text-muted">200-300</td>
+          <td class="px-4 py-3 text-muted">~4-6 MB</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Database Performance -->
+  <h2 class="mt-12 text-2xl font-bold">Database Performance</h2>
+
+  <h3 class="mt-8 text-lg font-semibold">Enable WAL Mode</h3>
+  <p class="mt-3 text-muted">Write-Ahead Logging significantly improves concurrent access — 2-3x write throughput and reduced lock contention.</p>
+  <div class="mt-4">
+    <CodeBlock code={`[storage]
+wal-mode = true`} language="toml" />
+  </div>
+
+  <h3 class="mt-8 text-lg font-semibold">Cache Size</h3>
+  <div class="mt-4">
+    <CodeBlock code={`[storage]
+# Default: 20000 KB (20 MB)
+# High throughput: 50000-100000 KB
+# Memory-constrained: 10000 KB
+cache-size-kb = 20000`} language="toml" />
+  </div>
+
+  <h3 class="mt-8 text-lg font-semibold">Database Location</h3>
+  <p class="mt-3 text-muted">Place the database on fast storage for best results.</p>
+  <div class="mt-4">
+    <CodeBlock code={`[storage]
+# NVMe SSD recommended; avoid HDD
+database-path = "/fast/ssd/gpu_monitoring.db"`} language="toml" />
+  </div>
+
+  <!-- Leak Detection Optimization -->
+  <h2 class="mt-12 text-2xl font-bold">Leak Detection Tuning</h2>
+
+  <h3 class="mt-8 text-lg font-semibold">Minimum Samples</h3>
+  <p class="mt-3 text-muted">
+    Fewer samples means faster detection but more false positives. More samples means slower but more accurate detection.
+  </p>
+  <div class="mt-4">
+    <CodeBlock code={`[detection]
+# Fast detection: 10-15
+# Balanced (default): 20
+# Accurate: 30-50
+minimum-samples = 20`} language="toml" />
+  </div>
+
+  <h3 class="mt-8 text-lg font-semibold">Analysis Window</h3>
+  <div class="mt-4">
+    <CodeBlock code={`[detection]
+# Quick detection: 0.5 hours
+# Default: 1.0 hours
+# Conservative: 2-4 hours
+analysis-window-hours = 1.0`} language="toml" />
+  </div>
+
+  <!-- Scenario-Based Tuning -->
+  <h2 class="mt-12 text-2xl font-bold">Scenario-Based Configurations</h2>
+
+  <h3 class="mt-8 text-lg font-semibold">Development Environment</h3>
+  <p class="mt-2 text-sm text-muted">Goal: Quick feedback, maximum detail</p>
+  <div class="mt-4">
+    <CodeBlock code={`[monitoring]
+interval-seconds = 5
+history-size = 2000
+enable-process-attribution = true
+
+[detection]
+minimum-samples = 15
+confidence-threshold = 0.7
+analysis-window-hours = 0.5`} language="toml" />
+  </div>
+
+  <h3 class="mt-8 text-lg font-semibold">Production ML Training</h3>
+  <p class="mt-2 text-sm text-muted">Goal: Minimal overhead, accurate long-term detection</p>
+  <div class="mt-4">
+    <CodeBlock code={`[monitoring]
+interval-seconds = 120
+history-size = 500
+enable-process-attribution = false
+
+[detection]
+minimum-samples = 30
+confidence-threshold = 0.85
+analysis-window-hours = 4.0
+
+[storage]
+wal-mode = true
+cache-size-kb = 50000`} language="toml" />
+  </div>
+
+  <h3 class="mt-8 text-lg font-semibold">Multi-GPU Server (32 GPUs)</h3>
+  <p class="mt-2 text-sm text-muted">Goal: Monitor many GPUs efficiently</p>
+  <div class="mt-4">
+    <CodeBlock code={`[monitoring]
+interval-seconds = 60
+history-size = 300
+enable-process-attribution = false
+batch-insert-size = 1000
+
+[storage]
+wal-mode = true
+cache-size-kb = 100000
+connection-pool-size = 50
+
+[detection]
+minimum-samples = 50
+analysis-window-hours = 12.0`} language="toml" />
+  </div>
+
+  <h3 class="mt-8 text-lg font-semibold">Real-Time Leak Detection</h3>
+  <p class="mt-2 text-sm text-muted">Goal: Fastest possible leak detection</p>
+  <div class="mt-4">
+    <CodeBlock code={`[monitoring]
+interval-seconds = 5
+history-size = 5000
+enable-process-attribution = true
+
+[detection]
+minimum-samples = 10
+confidence-threshold = 0.7
+analysis-window-hours = 0.25
+enable-multiple-strategies = true
+
+[storage]
+wal-mode = true
+cache-size-kb = 100000`} language="toml" />
+  </div>
+
+  <!-- Best Practices -->
+  <h2 class="mt-12 text-2xl font-bold">Best Practices</h2>
+  <ol class="mt-4 space-y-3 text-muted list-decimal list-inside">
+    <li><strong>Start with defaults</strong> — tune only when needed</li>
+    <li><strong>Monitor before and after</strong> — measure the impact of each change</li>
+    <li><strong>Tune one parameter at a time</strong> — isolate effects</li>
+    <li><strong>Document changes</strong> — track what you changed and why</li>
+    <li><strong>Test under load</strong> — verify performance under realistic conditions</li>
+    <li><strong>Use profiling tools</strong> — don't guess, measure</li>
+    <li><strong>Review regularly</strong> — performance needs change over time</li>
+  </ol>
+
+  <!-- Troubleshooting -->
+  <h2 class="mt-12 text-2xl font-bold">Troubleshooting</h2>
+
+  <div class="mt-6 space-y-4">
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">High CPU Usage</h3>
+      <p class="mt-1 text-sm text-muted">
+        Increase <code class="font-mono text-xs text-cyan bg-dark px-1 py-0.5 rounded">interval-seconds</code>, disable <code class="font-mono text-xs text-cyan bg-dark px-1 py-0.5 rounded">enable-process-attribution</code>, or reduce <code class="font-mono text-xs text-cyan bg-dark px-1 py-0.5 rounded">history-size</code>.
+      </p>
+    </div>
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">High Memory Usage</h3>
+      <p class="mt-1 text-sm text-muted">
+        Reduce <code class="font-mono text-xs text-cyan bg-dark px-1 py-0.5 rounded">history-size</code>, enable <code class="font-mono text-xs text-cyan bg-dark px-1 py-0.5 rounded">snapshot-retention-days</code>, or reduce <code class="font-mono text-xs text-cyan bg-dark px-1 py-0.5 rounded">cache-size-kb</code>.
+      </p>
+    </div>
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">Slow Database Queries</h3>
+      <p class="mt-1 text-sm text-muted">
+        Enable WAL mode, run <code class="font-mono text-xs text-cyan bg-dark px-1 py-0.5 rounded">VACUUM</code>, increase <code class="font-mono text-xs text-cyan bg-dark px-1 py-0.5 rounded">cache-size-kb</code>, or apply retention policies.
+      </p>
+    </div>
+  </div>
+</DocsLayout>

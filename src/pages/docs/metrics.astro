@@ -1,0 +1,178 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout
+  title="Understanding GPU Metrics — gpulse"
+  description="Learn what each GPU metric means in gpulse — memory, utilization, temperature, power, process table, and ECC errors — with normal ranges and warning thresholds."
+>
+  <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Understanding GPU Metrics</h1>
+  <p class="mt-4 text-lg text-muted leading-relaxed">
+    gpulse surfaces a wide range of GPU metrics across its views. This guide explains what each metric measures, what normal values look like, and when to be concerned.
+  </p>
+
+  <!-- Memory -->
+  <h2 class="mt-12 text-2xl font-bold">Memory</h2>
+
+  <h3 class="mt-8 text-lg font-semibold">Used / Total / Free</h3>
+  <p class="mt-3 text-muted">
+    GPU memory (VRAM) is separate from system RAM. gpulse reports three values:
+  </p>
+  <ul class="mt-3 space-y-2 text-muted list-disc list-inside">
+    <li><strong>Used</strong>: bytes currently allocated by all processes on that GPU</li>
+    <li><strong>Total</strong>: the physical VRAM capacity (e.g., 24 GiB for an RTX 4090)</li>
+    <li><strong>Free</strong>: <code class="font-mono text-sm text-cyan bg-surface px-1.5 py-0.5 rounded">total - used</code> — headroom before the next allocation may fail</li>
+  </ul>
+  <p class="mt-3 text-sm text-muted">
+    Memory is shown both as an absolute value (e.g., <code class="font-mono text-sm text-cyan bg-surface px-1.5 py-0.5 rounded">18.4 GiB / 24.0 GiB</code>) and as a percentage bar.
+  </p>
+
+  <h3 class="mt-8 text-lg font-semibold">Out-of-Memory (OOM) Risk</h3>
+  <p class="mt-3 text-muted">
+    When free memory falls below a safe threshold, the CUDA runtime raises a <code class="font-mono text-sm text-cyan bg-surface px-1.5 py-0.5 rounded">cudaErrorMemoryAllocation</code> that typically crashes the calling process. There is no automatic swap for GPU memory — the process dies.
+  </p>
+  <p class="mt-3 text-muted">
+    gpulse's <a href="/docs/views/predict" class="text-cyan underline underline-offset-4 hover:text-cyan-dark transition-colors">Predict view</a> forecasts time-to-OOM based on the current growth rate, giving you time to intervene before a crash.
+  </p>
+
+  <!-- GPU Utilization -->
+  <h2 class="mt-12 text-2xl font-bold">GPU Utilization (SM Occupancy)</h2>
+  <p class="mt-4 text-muted">
+    Measures what fraction of the GPU's Streaming Multiprocessors (SMs) were executing at least one warp during the sampling window. Expressed as 0-100%.
+  </p>
+  <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold">Range</th>
+          <th class="px-4 py-3 text-left font-semibold">Meaning</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3 text-muted">0-5%</td>
+          <td class="px-4 py-3 text-muted">Idle or very light load</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">5-50%</td>
+          <td class="px-4 py-3 text-muted">Moderate workload, data-pipeline bottleneck likely</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">50-95%</td>
+          <td class="px-4 py-3 text-muted">Healthy compute-bound workload</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">95-100%</td>
+          <td class="px-4 py-3 text-muted">Fully saturated; expected for training runs</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="mt-3 text-sm text-muted">
+    A process with high memory usage but low utilization is often stalled on I/O or CPU preprocessing, not actively computing.
+  </p>
+
+  <!-- Temperature -->
+  <h2 class="mt-12 text-2xl font-bold">Temperature</h2>
+  <p class="mt-4 text-muted">
+    GPU core temperature in degrees Celsius, read from the onboard thermal sensor.
+  </p>
+  <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold">Range</th>
+          <th class="px-4 py-3 text-left font-semibold">Status</th>
+          <th class="px-4 py-3 text-left font-semibold">Color in gpulse</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3 text-muted">&lt; 70 C</td>
+          <td class="px-4 py-3 text-muted">Normal</td>
+          <td class="px-4 py-3 text-green-400 font-semibold">Green</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">70-85 C</td>
+          <td class="px-4 py-3 text-muted">Warm — monitor closely</td>
+          <td class="px-4 py-3 text-yellow-400 font-semibold">Yellow</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">&gt; 85 C</td>
+          <td class="px-4 py-3 text-muted">Hot — thermal throttling likely</td>
+          <td class="px-4 py-3 text-red-400 font-semibold">Red</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="mt-8 text-lg font-semibold">Thermal Throttling</h3>
+  <p class="mt-3 text-muted">
+    When the GPU exceeds its thermal threshold (usually 83-87 C), the driver reduces the core clock to bring temperature down. This appears as a sudden drop in utilization and throughput. If you see unexplained performance degradation alongside a red temperature reading, throttling is the likely cause.
+  </p>
+  <p class="mt-3 text-sm text-muted">
+    <strong>Actions:</strong> improve chassis airflow, check that fans are spinning, reduce batch size, or increase scheduling gaps between runs.
+  </p>
+
+  <!-- Power -->
+  <h2 class="mt-12 text-2xl font-bold">Power</h2>
+
+  <h3 class="mt-8 text-lg font-semibold">Power Draw vs. Power Limit</h3>
+  <ul class="mt-3 space-y-2 text-muted list-disc list-inside">
+    <li><strong>Draw</strong>: current instantaneous power consumption in watts</li>
+    <li><strong>Limit</strong>: the TDP cap configured for the device (factory TDP or a manually set limit via <code class="font-mono text-sm text-cyan bg-surface px-1.5 py-0.5 rounded">nvidia-smi -pl</code>)</li>
+  </ul>
+  <p class="mt-3 text-muted">
+    When draw approaches the limit, the driver enforces the cap by reducing clocks — called <strong>power-limit throttling</strong>. This is normal on high-density servers where multiple GPUs share a power budget. gpulse shows both values so you can see headroom before throttling kicks in.
+  </p>
+
+  <!-- Process Table -->
+  <h2 class="mt-12 text-2xl font-bold">Process Table</h2>
+  <p class="mt-4 text-muted">
+    The process table (visible in Detail and List views) shows every process holding GPU memory:
+  </p>
+  <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold">Column</th>
+          <th class="px-4 py-3 text-left font-semibold">Description</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3 text-muted">PID</td>
+          <td class="px-4 py-3 text-muted">Process identifier</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">Name</td>
+          <td class="px-4 py-3 text-muted">Executable name</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">Memory</td>
+          <td class="px-4 py-3 text-muted">VRAM allocated by this process</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">User</td>
+          <td class="px-4 py-3 text-muted">OS user owning the process</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="mt-3 text-sm text-muted">
+    Use this to attribute memory to specific training jobs, inference servers, or notebooks. It is the starting point for leak investigation — see <a href="/docs/leak-detection" class="text-cyan underline underline-offset-4 hover:text-cyan-dark transition-colors">Leak Detection</a>.
+  </p>
+
+  <!-- ECC Memory -->
+  <h2 class="mt-12 text-2xl font-bold">ECC (Error-Correcting Code) Memory</h2>
+  <p class="mt-4 text-muted">
+    Enterprise and data-centre GPUs (A100, H100, V100, etc.) include ECC hardware. gpulse reports:
+  </p>
+  <ul class="mt-3 space-y-2 text-muted list-disc list-inside">
+    <li><strong>Corrected errors</strong>: single-bit errors fixed automatically. A low, steady count is normal. A rising count may indicate aging VRAM.</li>
+    <li><strong>Uncorrected errors</strong>: double-bit errors ECC could not fix. Any uncorrected error is serious — typically crashes the affected process with a hardware error. Persistent occurrences warrant an RMA.</li>
+  </ul>
+  <p class="mt-3 text-sm text-muted">
+    ECC metrics are only populated on hardware that supports them. Consumer GPUs (RTX series) do not expose ECC counts.
+  </p>
+</DocsLayout>

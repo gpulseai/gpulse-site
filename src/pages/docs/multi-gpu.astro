@@ -1,0 +1,183 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+---
+
+<DocsLayout
+  title="Multi-GPU Monitoring — gpulse"
+  description="Learn how to monitor multiple GPUs simultaneously with gpulse. Covers Grid view, sorting, Detail deep-dive, Compare view, Topology, and 16+ GPU pagination."
+>
+  <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Multi-GPU Monitoring</h1>
+  <p class="mt-4 text-lg text-muted leading-relaxed">
+    gpulse is built for systems with multiple GPUs. This guide covers the views and workflows for monitoring two or more devices simultaneously.
+  </p>
+
+  <!-- Grid View Overview -->
+  <h2 class="mt-12 text-2xl font-bold">Grid View Overview</h2>
+  <p class="mt-4 text-muted">
+    Grid view is the default and the best starting point for any multi-GPU system. Press <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">g</kbd> to switch to it from any other view.
+  </p>
+  <p class="mt-3 text-muted">Each GPU tile shows:</p>
+  <ul class="mt-3 space-y-2 text-muted list-disc list-inside">
+    <li>GPU index and model name</li>
+    <li>Memory bar: used / total with percentage</li>
+    <li>Utilization bar: current SM occupancy</li>
+    <li>Temperature and power draw</li>
+    <li>A colour-coded health indicator</li>
+  </ul>
+
+  <h3 class="mt-8 text-lg font-semibold">Colour-Coded Health</h3>
+  <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold">Colour</th>
+          <th class="px-4 py-3 text-left font-semibold">Meaning</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3 text-green-400 font-semibold">Green</td>
+          <td class="px-4 py-3 text-muted">All metrics within normal ranges</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-yellow-400 font-semibold">Yellow</td>
+          <td class="px-4 py-3 text-muted">At least one metric in the warning range (e.g., temperature 70-85 C, memory &gt; 80%)</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-red-400 font-semibold">Red</td>
+          <td class="px-4 py-3 text-muted">At least one metric critical (e.g., temperature &gt; 85 C, memory &gt; 95%, ECC uncorrected error)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="mt-3 text-sm text-muted">
+    Scanning the grid top-to-bottom lets you spot an outlier GPU at a glance without reading every number.
+  </p>
+
+  <!-- Sorting -->
+  <h2 class="mt-12 text-2xl font-bold">Sorting</h2>
+  <p class="mt-4 text-muted">
+    In Grid and List views, press <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">o</kbd> to cycle through sort orders:
+  </p>
+  <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold">Sort Order</th>
+          <th class="px-4 py-3 text-left font-semibold">Description</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3 text-muted">Index</td>
+          <td class="px-4 py-3 text-muted">GPU 0, 1, 2... (default)</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">Memory Used</td>
+          <td class="px-4 py-3 text-muted">Highest memory consumer first</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">Utilization</td>
+          <td class="px-4 py-3 text-muted">Highest compute load first</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">Temperature</td>
+          <td class="px-4 py-3 text-muted">Hottest GPU first</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3 text-muted">Name</td>
+          <td class="px-4 py-3 text-muted">Alphabetical by model name</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Detail Deep-Dive -->
+  <h2 class="mt-12 text-2xl font-bold">Detail Deep-Dive</h2>
+  <p class="mt-4 text-muted">To investigate a single GPU:</p>
+  <ol class="mt-3 space-y-2 text-muted list-decimal list-inside">
+    <li>In Grid or List view, use <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">Up</kbd> / <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">Down</kbd> to highlight the GPU</li>
+    <li>Press <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">Enter</kbd> to select it, then <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">d</kbd> for Detail view</li>
+  </ol>
+
+  <p class="mt-4 text-muted">Detail view divides the screen into four quadrants:</p>
+  <div class="mt-4 space-y-3">
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">Top-left</h3>
+      <p class="mt-1 text-sm text-muted">Memory utilization timeline (last N seconds of history)</p>
+    </div>
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">Top-right</h3>
+      <p class="mt-1 text-sm text-muted">GPU compute utilization timeline</p>
+    </div>
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">Bottom-left</h3>
+      <p class="mt-1 text-sm text-muted">Temperature and power readings with sparklines</p>
+    </div>
+    <div class="rounded-xl border border-border bg-surface p-4">
+      <h3 class="font-semibold">Bottom-right</h3>
+      <p class="mt-1 text-sm text-muted">Live process table — PID, name, memory, and user</p>
+    </div>
+  </div>
+  <p class="mt-4 text-sm text-muted">
+    Press <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">g</kbd> or <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">v</kbd> to return to the multi-GPU overview.
+  </p>
+
+  <!-- Compare View -->
+  <h2 class="mt-12 text-2xl font-bold">Compare View</h2>
+  <p class="mt-4 text-muted">
+    Compare view places two or more GPUs side-by-side with matching metric rows so you can spot imbalances in a distributed training job. Press <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">c</kbd> to open it.
+  </p>
+  <p class="mt-3 text-muted">Typical use cases:</p>
+  <ul class="mt-3 space-y-2 text-muted list-disc list-inside">
+    <li>Verifying all GPUs in a data-parallel training run consume similar memory and compute</li>
+    <li>Identifying a "slow GPU" causing others to block at synchronisation barriers</li>
+    <li>Checking tensor-parallel model layer splits across devices</li>
+  </ul>
+  <p class="mt-3 text-sm text-muted">
+    Use <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">Left</kbd> / <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">Right</kbd> to change the comparison target.
+  </p>
+
+  <!-- Topology View -->
+  <h2 class="mt-12 text-2xl font-bold">Topology View</h2>
+  <p class="mt-4 text-muted">
+    Press <kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">t</kbd> to open Topology view. It renders a diagram of the physical interconnect between GPUs, including:
+  </p>
+  <ul class="mt-3 space-y-2 text-muted list-disc list-inside">
+    <li><strong>PCIe links</strong>: bandwidth class (x8, x16) and CPU socket attachment</li>
+    <li><strong>NVLink bridges</strong>: direct GPU-to-GPU links and negotiated bandwidth</li>
+  </ul>
+  <p class="mt-3 text-sm text-muted">
+    Two GPUs connected via NVLink can exchange tensors at 600 GB/s (NVLink 4.0), while GPUs on opposite NUMA nodes over PCIe may see 10-20x lower effective bandwidth. If distributed training is unexpectedly slow, check Topology view for the interconnect path.
+  </p>
+
+  <!-- 16+ GPU Pagination -->
+  <h2 class="mt-12 text-2xl font-bold">16+ GPU Systems (Pagination)</h2>
+  <p class="mt-4 text-muted">
+    On systems with more than 8 GPUs, Grid view paginates automatically.
+  </p>
+  <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-border bg-surface">
+          <th class="px-4 py-3 text-left font-semibold">Key</th>
+          <th class="px-4 py-3 text-left font-semibold">Action</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">PgDn</kbd></td>
+          <td class="px-4 py-3 text-muted">Next page of GPUs</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">PgUp</kbd></td>
+          <td class="px-4 py-3 text-muted">Previous page of GPUs</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="mt-3 text-sm text-muted">
+    The status bar shows the current page (e.g., <code class="font-mono text-sm text-cyan bg-surface px-1.5 py-0.5 rounded">GPUs 9-16 of 64</code>). All metrics continue updating for off-screen GPUs. For 16+ GPU systems, consider List view (<kbd class="rounded border border-border bg-surface px-2 py-0.5 font-mono text-xs text-cyan">v</kbd>) as a denser alternative.
+  </p>
+</DocsLayout>
