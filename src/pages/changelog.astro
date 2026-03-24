@@ -37,13 +37,103 @@ import { Badge } from '../components/ui/Badge';
   <section class="py-24 md:py-32" aria-label="Release history">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
 
+      <!-- v2.2.0 -->
+      <article class="relative" aria-labelledby="v2-2-0">
+        <!-- Version header -->
+        <div class="flex items-center gap-4 mb-8">
+          <Badge variant="green" client:load>v2.2.0</Badge>
+          <time datetime="2026-03-23" class="text-sm text-muted font-mono">March 23, 2026</time>
+          <Badge variant="cyan" client:load>Latest</Badge>
+        </div>
+
+        <!-- Added -->
+        <div class="mb-10">
+          <h3 class="text-lg font-bold flex items-center gap-3 mb-5">
+            <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-green/10 text-green text-xs font-mono">+</span>
+            Added
+          </h3>
+          <ul class="space-y-3" role="list">
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-green mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span><strong class="text-white">Onboarding wizard</strong>: First-run setup with 4 questions &mdash; workload type, preferred view, leak detection, fleet interest. Preferences saved to config automatically.</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-green mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span><strong class="text-white">Unified config system</strong>: <code class="font-mono text-xs bg-dark/80 border border-border rounded px-1.5 py-0.5">~/.config/gpulse/config.toml</code> with <code class="font-mono text-xs bg-dark/80 border border-border rounded px-1.5 py-0.5">gpulse config show/set/reset/path</code> CLI commands</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-green mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span><strong class="text-white">Theme persistence</strong>: Theme changes via <kbd class="font-mono text-cyan">t</kbd> key are saved to config automatically</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-green mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span><strong class="text-white">Non-interactive mode</strong>: <code class="font-mono text-xs bg-dark/80 border border-border rounded px-1.5 py-0.5">GPULSE_NO_ONBOARD</code> env, <code class="font-mono text-xs bg-dark/80 border border-border rounded px-1.5 py-0.5">--no-onboarding</code> flag, auto-detect non-TTY</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-green mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span><strong class="text-white">Compare view dynamic sizing</strong>: Removed 6-GPU cap, adapts to terminal height</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-green mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span><strong class="text-white">Topology view scrolling</strong>: Up/Down/PgUp/PgDn with overflow indicators</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Fixed -->
+        <div class="mb-10">
+          <h3 class="text-lg font-bold flex items-center gap-3 mb-5">
+            <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-yellow/10 text-yellow text-xs font-mono">~</span>
+            Fixed
+          </h3>
+          <ul class="space-y-3" role="list">
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-yellow mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span>Onboarding wizard skipped when old directory existed without config files</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-yellow mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span>Summary display with pause after wizard before dashboard launches</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Security -->
+        <div class="mb-10">
+          <h3 class="text-lg font-bold flex items-center gap-3 mb-5">
+            <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-red/10 text-red text-xs font-mono">!</span>
+            Security
+          </h3>
+          <ul class="space-y-3" role="list">
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-red mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span>SSH credentials masked in Debug/Serialize output</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-red mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span><code class="font-mono text-xs bg-dark/80 border border-border rounded px-1.5 py-0.5">GPULSE_TIER</code> env bypass restricted to debug builds only</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-red mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span>Config files written atomically with 0600 permissions, directory 0700</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-muted leading-relaxed">
+              <span class="text-red mt-1 shrink-0" aria-hidden="true">&bull;</span>
+              <span>TOCTOU race condition removed from config loading</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Divider -->
+        <div class="h-px bg-gradient-to-r from-transparent via-border to-transparent my-16" aria-hidden="true"></div>
+      </article>
+
       <!-- v2.0.0 -->
       <article class="relative" aria-labelledby="v2-0-0">
         <!-- Version header -->
         <div class="flex items-center gap-4 mb-8">
           <Badge variant="green" client:load>v2.0.0</Badge>
           <time datetime="2026-03-21" class="text-sm text-muted font-mono">March 21, 2026</time>
-          <Badge variant="cyan" client:load>Latest</Badge>
         </div>
 
         <!-- Added -->

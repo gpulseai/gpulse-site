@@ -586,7 +586,7 @@ import { Card } from '../components/ui/Card';
               </li>
             </ul>
             <div class="mt-8">
-              <Button variant="secondary" size="lg" href="mailto:info@gpulse.ai" className="w-full" client:load>
+              <Button variant="secondary" size="lg" href="mailto:info@gpulse.ai?subject=gpulse%20Enterprise%20Inquiry" className="w-full" client:load>
                 Contact Us
               </Button>
             </div>
@@ -663,10 +663,118 @@ import { Card } from '../components/ui/Card';
             <svg class="w-5 h-5 text-muted transition-transform group-open:rotate-180 shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
           </summary>
           <div class="px-6 pb-5 text-muted leading-relaxed">
-            Email us at <a href="mailto:info@gpulse.ai" class="text-cyan underline underline-offset-4 hover:text-cyan-dark transition-colors">info@gpulse.ai</a> or use the feedback form on this website. We read every message.
+            Email us at <a href="mailto:info@gpulse.ai" class="text-cyan underline underline-offset-4 hover:text-cyan-dark transition-colors">info@gpulse.ai</a>, <a href="#feedback" class="text-cyan underline underline-offset-4 hover:text-cyan-dark transition-colors">submit feedback below</a>, or join our <a href="https://discord.gg/nnU28awf" class="text-cyan underline underline-offset-4 hover:text-cyan-dark transition-colors" target="_blank" rel="noopener noreferrer">Discord</a>. We read every message.
           </div>
         </details>
       </div>
+    </div>
+  </section>
+
+  <!-- ─── Waitlist Section ─── -->
+  <section id="waitlist" class="py-24 md:py-32 bg-surface section-gradient-top" aria-labelledby="waitlist-heading">
+    <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8 text-center">
+      <div class="fade-in-up">
+        <div class="inline-flex items-center gap-2 rounded-full border border-cyan/20 bg-cyan/10 px-4 py-1.5 mb-6">
+          <span class="h-2 w-2 rounded-full bg-cyan animate-pulse" aria-hidden="true"></span>
+          <span class="text-sm font-mono text-cyan">Pro Beta</span>
+        </div>
+        <h2 id="waitlist-heading" class="text-3xl md:text-4xl font-bold">
+          Join the Pro waitlist
+        </h2>
+        <p class="text-lg text-muted mt-4 max-w-xl mx-auto leading-relaxed">
+          Be first in line for fleet SSH monitoring, alerts, and the web dashboard.
+        </p>
+
+        <form id="waitlist-form" class="mt-8 max-w-md mx-auto" novalidate>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <label for="waitlist-email" class="sr-only">Email address</label>
+            <input
+              type="email"
+              id="waitlist-email"
+              name="email"
+              placeholder="you@company.com"
+              required
+              autocomplete="email"
+              class="flex-1 rounded-xl border border-border bg-dark px-4 py-3 text-white placeholder:text-muted/50 focus:border-cyan focus:ring-1 focus:ring-cyan focus:outline-none transition-colors"
+            />
+            <button type="submit" class="rounded-xl bg-cyan px-6 py-3 font-semibold text-dark transition-all hover:bg-cyan-dark hover:scale-105 active:scale-95 whitespace-nowrap">
+              Join Waitlist
+            </button>
+          </div>
+          <div id="waitlist-msg" class="mt-4 text-sm hidden" aria-live="polite"></div>
+        </form>
+
+        <p class="text-muted/50 text-xs mt-4">No spam. We only email about gpulse updates.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Feedback Section ─── -->
+  <section id="feedback" class="py-24 md:py-32" aria-labelledby="feedback-heading">
+    <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12 fade-in-up">
+        <SectionHeader
+          eyebrow="FEEDBACK"
+          title="Bug reports & feature requests"
+          subtitle="Found a bug or have an idea? Let us know — we read every message."
+        />
+      </div>
+
+      <form id="feedback-form" class="fade-in-up space-y-6" novalidate>
+        <fieldset>
+          <legend class="text-sm font-semibold text-muted mb-3">Type</legend>
+          <div class="flex gap-6">
+            <label class="flex items-center gap-2.5 cursor-pointer group">
+              <input type="radio" name="feedback-type" value="bug" required
+                class="w-4 h-4 accent-cyan" />
+              <span class="text-sm text-muted group-hover:text-white transition-colors">Bug Report</span>
+            </label>
+            <label class="flex items-center gap-2.5 cursor-pointer group">
+              <input type="radio" name="feedback-type" value="feature"
+                class="w-4 h-4 accent-cyan" />
+              <span class="text-sm text-muted group-hover:text-white transition-colors">Feature Request</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div>
+          <label for="feedback-description" class="block text-sm font-semibold text-muted mb-2">Description</label>
+          <textarea
+            id="feedback-description"
+            name="description"
+            required
+            minlength="10"
+            maxlength="2000"
+            rows="5"
+            placeholder="Describe the bug or feature..."
+            class="w-full rounded-xl border border-border bg-dark px-4 py-3 text-white placeholder:text-muted/50 focus:border-cyan focus:ring-1 focus:ring-cyan focus:outline-none transition-colors resize-y"
+          ></textarea>
+        </div>
+
+        <div>
+          <label for="feedback-email" class="block text-sm font-semibold text-muted mb-2">
+            Email <span class="text-muted/50">(optional — for follow-up)</span>
+          </label>
+          <input
+            type="email"
+            id="feedback-email"
+            name="email"
+            placeholder="you@company.com"
+            autocomplete="email"
+            class="w-full rounded-xl border border-border bg-dark px-4 py-3 text-white placeholder:text-muted/50 focus:border-cyan focus:ring-1 focus:ring-cyan focus:outline-none transition-colors"
+          />
+        </div>
+
+        <button type="submit" class="w-full rounded-xl bg-cyan px-6 py-3 font-semibold text-dark transition-all hover:bg-cyan-dark hover:scale-[1.02] active:scale-[0.98]">
+          Submit Feedback
+        </button>
+
+        <div id="feedback-msg" class="text-sm hidden" aria-live="polite"></div>
+      </form>
+
+      <p class="text-center text-muted/50 text-xs mt-6">
+        You can also reach us on <a href="https://discord.gg/nnU28awf" class="text-cyan/70 hover:text-cyan transition-colors" target="_blank" rel="noopener noreferrer">Discord</a> or via email at <a href="mailto:info@gpulse.ai" class="text-cyan/70 hover:text-cyan transition-colors">info@gpulse.ai</a>.
+      </p>
     </div>
   </section>
 
@@ -687,14 +795,136 @@ import { Card } from '../components/ui/Card';
       />
 
       <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-        <Button variant="primary" size="lg" href="#download" client:load>
+        <Button variant="primary" size="lg" href="/download" client:load>
           Download Free
         </Button>
-        <Button variant="secondary" size="lg" href="mailto:info@gpulse.ai" client:load>
-          Contact Us
+        <Button variant="secondary" size="lg" href="#feedback" client:load>
+          Send Feedback
         </Button>
       </div>
     </div>
   </section>
+
+  <script>
+    // ── Form Endpoints ──
+    // Replace with your Cloudflare Worker or Formspree endpoint when ready.
+    // Formspree example: 'https://formspree.io/f/YOUR_FORM_ID'
+    // Worker example: 'https://gpulse-api.your-subdomain.workers.dev/api/waitlist'
+    const WAITLIST_ENDPOINT = 'https://formspree.io/f/mdawqlow';
+    const FEEDBACK_ENDPOINT = 'https://formspree.io/f/xqeyrdkw';
+
+    function isValidEmail(email: string): boolean {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+    }
+
+    function showMsg(el: HTMLElement, message: string, type: 'success' | 'error') {
+      el.textContent = message;
+      el.className = `mt-4 text-sm ${type === 'success' ? 'text-green' : 'text-red'}`;
+      if (type === 'success') {
+        setTimeout(() => { el.className = 'mt-4 text-sm hidden'; }, 8000);
+      }
+    }
+
+    // Waitlist form
+    const wForm = document.getElementById('waitlist-form') as HTMLFormElement | null;
+    const wMsg = document.getElementById('waitlist-msg');
+    if (wForm && wMsg) {
+      wForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const input = document.getElementById('waitlist-email') as HTMLInputElement;
+        const email = input.value.trim();
+
+        if (!email || !isValidEmail(email)) {
+          showMsg(wMsg, 'Please enter a valid email address.', 'error');
+          input.focus();
+          return;
+        }
+
+        const btn = wForm.querySelector('button[type="submit"]') as HTMLButtonElement;
+        const orig = btn.textContent || '';
+        btn.textContent = 'Submitting\u2026';
+        btn.disabled = true;
+
+        try {
+          if (WAITLIST_ENDPOINT) {
+            await fetch(WAITLIST_ENDPOINT, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email }),
+            });
+          } else {
+            await new Promise(r => setTimeout(r, 600));
+          }
+          showMsg(wMsg, "You\u2019re on the list! We\u2019ll notify you when Pro launches.", 'success');
+          input.value = '';
+        } catch {
+          showMsg(wMsg, 'Something went wrong. Please email info@gpulse.ai instead.', 'error');
+        } finally {
+          btn.textContent = orig;
+          btn.disabled = false;
+        }
+      });
+    }
+
+    // Feedback form
+    const fForm = document.getElementById('feedback-form') as HTMLFormElement | null;
+    const fMsg = document.getElementById('feedback-msg');
+    if (fForm && fMsg) {
+      fForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const typeRadio = fForm.querySelector('input[name="feedback-type"]:checked') as HTMLInputElement | null;
+        const descEl = document.getElementById('feedback-description') as HTMLTextAreaElement;
+        const emailEl = document.getElementById('feedback-email') as HTMLInputElement;
+
+        if (!typeRadio) {
+          showMsg(fMsg, 'Please select Bug Report or Feature Request.', 'error');
+          return;
+        }
+
+        const description = descEl.value.trim();
+        if (!description || description.length < 10) {
+          showMsg(fMsg, 'Please provide a description (at least 10 characters).', 'error');
+          descEl.focus();
+          return;
+        }
+
+        const email = emailEl.value.trim();
+        if (email && !isValidEmail(email)) {
+          showMsg(fMsg, 'Please enter a valid email address.', 'error');
+          emailEl.focus();
+          return;
+        }
+
+        const btn = fForm.querySelector('button[type="submit"]') as HTMLButtonElement;
+        const orig = btn.textContent || '';
+        btn.textContent = 'Submitting\u2026';
+        btn.disabled = true;
+
+        try {
+          if (FEEDBACK_ENDPOINT) {
+            await fetch(FEEDBACK_ENDPOINT, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                type: typeRadio.value,
+                description,
+                email: email || undefined,
+              }),
+            });
+          } else {
+            await new Promise(r => setTimeout(r, 600));
+          }
+          const label = typeRadio.value === 'bug' ? 'Bug report' : 'Feature request';
+          showMsg(fMsg, `${label} submitted. Thank you!`, 'success');
+          fForm.reset();
+        } catch {
+          showMsg(fMsg, 'Something went wrong. Please email info@gpulse.ai instead.', 'error');
+        } finally {
+          btn.textContent = orig;
+          btn.disabled = false;
+        }
+      });
+    }
+  </script>
 
 </BaseLayout>

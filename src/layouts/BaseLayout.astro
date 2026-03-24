@@ -111,6 +111,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     />
   </head>
   <body class="bg-dark text-white">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-lg focus:bg-cyan focus:px-4 focus:py-2 focus:text-dark focus:font-semibold focus:outline-none">
+      Skip to content
+    </a>
     <Nav />
     <main id="main-content">
       <slot />
