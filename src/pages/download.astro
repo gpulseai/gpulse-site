@@ -25,7 +25,7 @@ import { Card } from '../components/ui/Card';
     </div>
 
     <div class="relative z-10 flex flex-col items-center text-center">
-      <Badge variant="cyan" client:load>Free forever</Badge>
+      <Badge variant="cyan" client:load>Pro FREE through June 30</Badge>
 
       <h1
         id="download-heading"
@@ -35,7 +35,7 @@ import { Card } from '../components/ui/Card';
       </h1>
 
       <p class="text-lg md:text-xl text-muted mt-6 max-w-2xl leading-relaxed">
-        Free forever for local GPU monitoring. No account required, no credit card, no telemetry.
+        All Pro features unlocked free through June 30. No account required, no credit card, no telemetry.
       </p>
     </div>
   </section>
@@ -168,13 +168,19 @@ import { Card } from '../components/ui/Card';
     </div>
   </section>
 
-  <!-- Pro upgrade note -->
+  <!-- Pro activation -->
   <section class="pb-8 px-4">
     <div class="mx-auto max-w-3xl">
-      <div class="rounded-xl border border-border bg-surface px-6 py-4 text-center">
-        <p class="text-sm text-muted leading-relaxed">
-          gpulse Free includes local GPU monitoring with all features &mdash; OOM prediction, 15 themes, 7 view modes, and Prometheus endpoint.
-          <a href="/pricing" class="text-cyan underline underline-offset-4 hover:text-cyan-dark transition-colors font-medium">Upgrade to Pro</a> for fleet monitoring across up to 20 machines.
+      <div class="rounded-xl border border-cyan/20 bg-cyan/5 px-6 py-6">
+        <h3 class="font-bold text-lg text-center mb-4">Activate Pro <span class="text-cyan">(free through June 30)</span></h3>
+        <p class="text-sm text-muted text-center mb-4 leading-relaxed">
+          After installing gpulse, run this command to unlock all Pro features:
+        </p>
+        <div class="rounded-lg border border-border bg-dark/80 px-4 py-3 font-mono text-sm text-muted overflow-x-auto">
+          mkdir -p ~/Library/Application\ Support/gpulse && echo "gpulse-pro-launch2026" > ~/Library/Application\ Support/gpulse/license.key
+        </div>
+        <p class="text-xs text-muted/60 text-center mt-3">
+          Promotional license valid through June 30, 2026. No credit card. No account. See <a href="/pricing" class="text-cyan underline underline-offset-4 hover:text-cyan-dark transition-colors">pricing</a> for details.
         </p>
       </div>
     </div>
